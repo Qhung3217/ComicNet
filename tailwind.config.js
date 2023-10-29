@@ -4,7 +4,11 @@ module.exports = {
   purge: ["./src/app/**/*.{ts,html}"],
   content: ["./src/**/*.{html,ts}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: "#6a12cb",
+      },
+    },
   },
   plugins: [],
 };

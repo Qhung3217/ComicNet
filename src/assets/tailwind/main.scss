@@ -1,0 +1,10 @@
+/* ----------------- TAILWIND ----------------- */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------- BASE ------------------- */
+@import "./base/base";
+
+/* -------------------- CDN ------------------- */
+@import "./cdn/cdn";
