@@ -1,0 +1,6 @@
+.show-menu-mobile {
+  @apply visible opacity-100 pointer-events-auto;
+  & .slide-menu-mobile-in {
+    @apply w-11/12;
+  }
+}
