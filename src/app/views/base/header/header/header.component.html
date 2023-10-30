@@ -1,0 +1,59 @@
+<header class="bg-white border-b border-b-slate-200">
+  <nav class="flex justify-between items-center max-w-7xl m-auto h-14 p-3">
+    <div class="flex items-center gap-x-8">
+      <a routerLink="/" class="flex items-center gap-x-2">
+        <img
+          src="assets/logo/logo-symbol.png"
+          class="h-10 w-10"
+          alt="ComicNet's logo symbol"
+        />
+        <img
+          src="assets/logo/logo-name.png"
+          class="h-6"
+          alt="ComicNet's logo name"
+        />
+      </a>
+      <app-header-menu class="lg:block hidden"></app-header-menu>
+    </div>
+
+    <div
+      class="items-center lg:gap-x-7 flex"
+      [appClickToggleClass]="{
+        classToggle: ['show-menu-mobile'],
+        idElementToggle: 'menu'
+      }"
+    >
+      <app-menu-icon class="block lg:hidden w-8 h-8"></app-menu-icon>
+
+      <abbr title="Xem gần đây">
+        <app-history-icon
+          class="w-[30px] h-[30px] text-blue-500 cursor-pointer hidden lg:block"
+        ></app-history-icon>
+      </abbr>
+      <app-header-search class="hidden lg:block"></app-header-search>
+    </div>
+
+    <div
+      id="menu"
+      class="invisible opacity-0 pointer-events-none fixed inset-0 bg-[rgba(0,0,0,.85)] z-50 lg:hidden transition-all"
+      [appClickToggleClass]="{
+        classToggle: ['show-menu-mobile'],
+        idElementToggle: 'menu'
+      }"
+    >
+      <div
+        class="absolute right-0 top-0 bottom-0 z-10 max-w-sm w-0 bg-white px-5 pt-3 pb-5 overflow-scroll slide-menu-mobile-in transition-all duration-150"
+      >
+        <app-x-icon
+          class="block w-6 h-6 mb-3 ml-auto"
+          [appClickToggleClass]="{
+            classToggle: ['show-menu-mobile'],
+            idElementToggle: 'menu'
+          }"
+        ></app-x-icon>
+        <app-header-search></app-header-search>
+        <app-header-menu></app-header-menu>
+      </div>
+    </div>
+  </nav>
+</header>
