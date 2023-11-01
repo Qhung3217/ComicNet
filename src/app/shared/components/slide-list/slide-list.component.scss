@@ -1,0 +1,11 @@
+:host ::ng-deep {
+  div.swiper-button-prev,
+  div.swiper-button-next {
+    @apply bg-primary rounded-full w-9 h-9 text-white;
+    &:after {
+      @apply text-base font-bold;
+    }
+  }
+  div.swiper-button-next {
+  }
+}

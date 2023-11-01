@@ -1,2 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 @import "./assets/tailwind/main";
+
+/* ------------------ SWIPER ------------------ */
+@import "swiper/scss";
+@import "swiper/css/lazy";
+@import "swiper/css/grid";
+@import "swiper/css/navigation";
+@import "swiper/css/autoplay";
