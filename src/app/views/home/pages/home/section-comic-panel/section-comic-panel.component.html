@@ -1,0 +1,17 @@
+<section>
+  <div class="flex items-center justify-between mt-6 mb-4">
+    <hgroup class="text-primary flex items-center gap-x-2">
+      <div class="w-9 h-9">
+        <ng-content></ng-content>
+      </div>
+
+      <h1 [title]="title" class="text-xl font-bold">{{ title }}</h1>
+    </hgroup>
+    <a
+      routerLink=""
+      class="border border-primary text-primary px-3 py-0.5 text-center text-sm font-medium rounded-full"
+      >Xem thêm</a
+    >
+  </div>
+  <app-slide-list></app-slide-list>
+</section>
