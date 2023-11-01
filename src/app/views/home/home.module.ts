@@ -15,6 +15,8 @@ import { GenrePageComponent } from './pages/genre-page/genre-page.component';
 import { NewPageComponent } from './pages/new-page/new-page.component';
 import { TopPageComponent } from './pages/top-page/top-page.component';
 import { ListComponent } from 'src/app/shared/components/list/list.component';
+import { CategoryIconComponent } from 'src/app/shared/icons/category-icon/category-icon.component';
+import { InformationIconComponent } from 'src/app/shared/icons/information-icon/information-icon.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { ListComponent } from 'src/app/shared/components/list/list.component';
     UpdateIconComponent,
     MaleIconComponent,
     FemaleIconComponent,
+    CategoryIconComponent,
+    InformationIconComponent,
   ],
 })
 export class HomeModule {}
