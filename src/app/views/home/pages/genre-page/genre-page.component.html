@@ -8,61 +8,20 @@
     Thể Loại
   </h1>
   <ul class="flex flex-wrap items-center w-full border">
-    <li>
+    <li *ngFor="let genre of genres">
       <a
-        routerLink=""
-        class="px-5 py-3 w-max text-base bg-primary text-white block"
-        >Tất cả</a
+        [routerLink]="['/the-loai', genre.id]"
+        routerLinkActive="genre-active"
+        class="px-5 py-3 w-max text-base block"
+        >{{ genre.name }}</a
       >
-    </li>
-    <li>
-      <a routerLink="" class="px-5 py-3 w-max text-base block">Tất cả</a>
-    </li>
-    <li>
-      <a routerLink="" class="px-5 py-3 w-max text-base block">Tất cả</a>
-    </li>
-    <li>
-      <a routerLink="" class="px-5 py-3 w-max text-base block">Tất cả</a>
-    </li>
-    <li>
-      <a routerLink="" class="px-5 py-3 w-max text-base block">Tất cả</a>
-    </li>
-    <li>
-      <a routerLink="" class="px-5 py-3 w-max text-base block">Tất cả</a>
-    </li>
-    <li>
-      <a routerLink="" class="px-5 py-3 w-max text-base block">Tất cả</a>
-    </li>
-    <li>
-      <a routerLink="" class="px-5 py-3 w-max text-base block">Tất cả</a>
-    </li>
-    <li>
-      <a routerLink="" class="px-5 py-3 w-max text-base block">Tất cả</a>
-    </li>
-    <li>
-      <a routerLink="" class="px-5 py-3 w-max text-base block">Tất cả</a>
-    </li>
-    <li>
-      <a routerLink="" class="px-5 py-3 w-max text-base block">Tất cả</a>
-    </li>
-    <li>
-      <a routerLink="" class="px-5 py-3 w-max text-base block">Tất cả</a>
-    </li>
-    <li>
-      <a routerLink="" class="px-5 py-3 w-max text-base block">Tất cả</a>
-    </li>
-    <li>
-      <a routerLink="" class="px-5 py-3 w-max text-base block">Tất cả</a>
-    </li>
-    <li>
-      <a routerLink="" class="px-5 py-3 w-max text-base block">Tất cả</a>
     </li>
   </ul>
   <aside
     class="px-4 py-2 text-white flex items-center gap-x-2 bg-sky-500 rounded mt-3 mb-5"
   >
     <app-information-icon class="w-[30px] aspect-square"></app-information-icon>
-    Miêu tả về thể loại đang chọn
+    {{ genreSelected?.description }}
   </aside>
   <app-list></app-list>
 </main>
