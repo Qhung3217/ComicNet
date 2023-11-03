@@ -42,8 +42,8 @@ export class GenrePageComponent implements OnInit, OnDestroy {
   private setGenreSelected(genres: GenreDetail[]) {
     this.subcriptions.push(
       this.route.params.subscribe((params: Params) => {
-        let genreId = params['genre'];
-        console.log('genreId', genreId);
+        let genreId = Object.values(params)[0];
+        console.log('genreId', genreId, params);
         this.genreSelected = genres.find((genre) => genre.id === genreId);
       })
     );
