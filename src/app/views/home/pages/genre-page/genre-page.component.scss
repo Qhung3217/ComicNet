@@ -1,0 +1,9 @@
+.genre-active {
+  @apply bg-primary text-white;
+}
+.show-genres-panel #genresPanel {
+  @apply max-h-screen visible overflow-y-auto pointer-events-auto;
+}
+.show-genres-panel #arrowIcon {
+  @apply -rotate-90;
+}

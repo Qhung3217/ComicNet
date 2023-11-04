@@ -7,7 +7,7 @@ import { TopPageComponent } from './pages/top-page/top-page.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'the-loai', component: GenrePageComponent },
+  { path: 'the-loai/:genre?status=all', component: GenrePageComponent },
   { path: 'truyen-moi', component: NewPageComponent },
   { path: 'top', component: TopPageComponent },
 ];

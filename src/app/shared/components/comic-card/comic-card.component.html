@@ -1,11 +1,14 @@
 <div
   class="relative rounded-md overflow-hidden border lg:hover:border-primary transition-colors"
 >
-  <a routerLink="" class="">
+  <a [routerLink]="[comic?.id]" class="relative w-full aspect-[2/3] block">
     <img
-      src="https://picsum.photos/200/300?random"
-      alt=""
+      [ngSrc]="thumbnail"
+      [alt]="comic ? comic.title : 'Default image'"
       class="w-full aspect-[2/3] object-cover object-center"
+      fill
+      [priority]="!lazy"
+      (error)="loadDefaultImage()"
     />
   </a>
   <div
@@ -13,23 +16,25 @@
   >
     <a routerLink="" [class]="{ 'mb-2': isSimpleCard }"
       ><abbr
-        title="Toàn trí đọc giả"
+        [title]="comic?.title"
         class="no-underline capitalize text-white text-lg font-bold lg:hover:underline decoration-solid lg:hover:text-[#a671e0] line-clamp-2 transition-colors duration-100 ease-linear"
-        >Toàn trí đọc giả
+        >{{ comic?.title }}
       </abbr></a
     >
     <div class="border-t mt-3 pt-2 border-gray-500" *ngIf="!isSimpleCard">
       <aside class="capitalize text-sm font-semibold text-gray-300 truncate">
-        Action | Truyện màu Action | Truyện màu
+        {{ comic && (comic.genres | genresToString) }}
       </aside>
       <aside
         class="flex items-center gap-x-2 text-primary pt-1.5 pb-1 justify-center text-xs"
       >
         <span class="flex items-center gap-x-1 bg-white/80 px-1 rounded"
-          ><app-eye-icon class="w-3 h-3"></app-eye-icon>12k</span
+          ><app-eye-icon class="w-3 h-3"></app-eye-icon
+          >{{ comic?.total_views | number : "1.0-0" }}</span
         >
         <span class="flex items-center gap-x-1 bg-white/80 px-1 rounded"
-          ><app-heart-icon class="w-3 h-3"></app-heart-icon>29</span
+          ><app-heart-icon class="w-3 h-3"></app-heart-icon
+          >{{ comic?.followers | number : "1.0-0" }}</span
         >
       </aside>
     </div>
@@ -37,8 +42,14 @@
   <div
     class="absolute top-0 left-0 flex gap-1 font-semibold text-white text-xs pointer-events-none"
   >
-    <span class="capitalize py-1 px-2 bg-rose-500">Hot</span>
-    <span class="capitalize py-1 px-2 bg-yellow-500">Up</span>
-    <span class="capitalize py-1 px-2 bg-green-500">end</span>
+    <span class="capitalize py-1 px-2 bg-rose-500" *ngIf="comic?.is_trending"
+      >Hot</span
+    >
+    <span class="capitalize py-1 px-2 bg-yellow-500" *ngIf="isUp()">Up</span>
+    <span
+      class="capitalize py-1 px-2 bg-green-500"
+      *ngIf="comic?.status === 'completed'"
+      >end</span
+    >
   </div>
 </div>

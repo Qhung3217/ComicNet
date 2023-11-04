@@ -15,6 +15,13 @@ import { GenrePageComponent } from './pages/genre-page/genre-page.component';
 import { NewPageComponent } from './pages/new-page/new-page.component';
 import { TopPageComponent } from './pages/top-page/top-page.component';
 import { ListComponent } from 'src/app/shared/components/list/list.component';
+import { CategoryIconComponent } from 'src/app/shared/icons/category-icon/category-icon.component';
+import { InformationIconComponent } from 'src/app/shared/icons/information-icon/information-icon.component';
+import { UnknowIconComponent } from 'src/app/shared/icons/unknow-icon/unknow-icon.component';
+import { ArrowLeftIconComponent } from 'src/app/shared/icons/arrow-left-icon/arrow-left-icon.component';
+import { LoadingSpinnerComponent } from 'src/app/shared/components/loading-spinner/loading-spinner.component';
+import { ClickToggleClassDirective } from 'src/app/shared/directives/dropdown/click-toggle-class/click-toggle-class.directive';
+import { ClickRemoveClassDirective } from 'src/app/shared/directives/dropdown/click-remove-class/click-remove-class.directive';
 
 @NgModule({
   declarations: [
@@ -27,14 +34,29 @@ import { ListComponent } from 'src/app/shared/components/list/list.component';
   ],
   imports: [
     CommonModule,
+
+    /* ---------------- app modules --------------- */
     HomeRoutingModule,
     SlideListComponent,
     ListComponent,
+    LoadingSpinnerComponent,
+
+    /* ----------------- directive ---------------- */
+    //use to toggle class of specific element when this component and this component's children is clicked
+    ClickToggleClassDirective,
+    //use to remove class of specific element when this component and this component's children are clicked
+    ClickRemoveClassDirective,
+
+    /* --------------- icons -------------- */
     HotIconComponent,
     CheckWavyIconComponent,
     UpdateIconComponent,
     MaleIconComponent,
     FemaleIconComponent,
+    CategoryIconComponent,
+    InformationIconComponent,
+    UnknowIconComponent,
+    ArrowLeftIconComponent,
   ],
 })
 export class HomeModule {}

@@ -17,7 +17,7 @@ import { HistoryIconComponent } from 'src/app/shared/icons/history-icon/history-
 import { UpdateIconComponent } from 'src/app/shared/icons/update-icon/update-icon.component';
 import { FemaleIconComponent } from 'src/app/shared/icons/female-icon/female-icon.component';
 import { MaleIconComponent } from 'src/app/shared/icons/male-icon/male-icon.component';
-import { ClickToggleClassDirective } from 'src/app/shared/directives/click-toggle-class/click-toggle-class.directive';
+import { ClickToggleClassDirective } from 'src/app/shared/directives/dropdown/click-toggle-class/click-toggle-class.directive';
 
 @NgModule({
   declarations: [HeaderComponent, HeaderSearchComponent, HeaderMenuComponent],
@@ -25,8 +25,10 @@ import { ClickToggleClassDirective } from 'src/app/shared/directives/click-toggl
     CommonModule,
     RouterModule,
 
+    /* ----------------- directive ---------------- */
     ClickToggleClassDirective,
 
+    /* ------------------- Icons ------------------ */
     HistoryIconComponent,
     SearchIconComponent,
     MenuIconComponent,

@@ -1,3 +1,126 @@
 <main class="max-w-7xl m-auto px-3 py-5">
-  <app-list></app-list>
+  <hgroup class="text-center text-4xl mb-5">
+    <h1 class="font-bold" *ngIf="!genreSelected || genreSelected.id === 'all'">
+      Tìm truyện tranh
+    </h1>
+    <h1 *ngIf="genreSelected && genreSelected.id !== 'all'">
+      Truyện thể loại <span class="font-bold">{{ genreSelected.name }}</span>
+    </h1>
+    <aside
+      *ngIf="!!genres"
+      class="text-xs sm:text-sm lg:text-base px-3 py-1 text-white flex items-center gap-x-2 w-fit mx-auto bg-sky-500 rounded mt-3 xl:hidden"
+    >
+      <app-information-icon
+        class="h-[24px] aspect-square"
+      ></app-information-icon>
+      {{ genreSelected?.description }}
+    </aside>
+  </hgroup>
+  <div class="relative">
+    <app-loading-spinner *ngIf="!genres"></app-loading-spinner>
+    <div class="relative mb-3 xl:mb-5" id="genresGroup">
+      <h3
+        class="flex items-center text-xl font-medium xl:font-semibold xl:mb-4 sm:text-2xl md:text-3xl"
+        [appClickToggleClass]="{
+          classToggle: ['show-genres-panel'],
+          idElementToggle: 'genresGroup'
+        }"
+        [enableInMaxScreen]="1280"
+      >
+        <app-category-icon
+          class="w-9 aspect-square text-primary mr-2"
+        ></app-category-icon>
+        <span>
+          Thể loại<span class="xl:hidden"
+            >:
+            <span class="font-bold text-primary">{{
+              genreSelected?.name
+            }}</span></span
+          >
+        </span>
+        <app-arrow-left-icon
+          id="arrowIcon"
+          class="w-6 sm:w-7 md:w-8 aspect-square transition-transform xl:hidden -ml-1"
+        ></app-arrow-left-icon>
+      </h3>
+      <ul
+        id="genresPanel"
+        class="absolute top-100 inset-x-0 max-h-0 overflow-hidden invisible pointer-events-none bg-white shadow-lg z-10 flex flex-wrap items-center w-full border xl:static xl:shadow-none xl:max-h-full xl:visible xl:pointer-events-auto transition-all ease-out duration-200"
+        [appClickRemoveClass]="{
+          classes: ['show-genres-panel'],
+          idElement: 'genresGroup'
+        }"
+      >
+        <li *ngFor="let genre of genres">
+          <a
+            [routerLink]="['/the-loai', genre.id]"
+            routerLinkActive="genre-active"
+            class="px-5 py-3 w-max text-base block rounded"
+            queryParamsHandling="preserve"
+            >{{ genre.name }}</a
+          >
+        </li>
+      </ul>
+      <aside
+        class="px-4 py-2 text-white hidden items-center gap-x-2 bg-sky-500 rounded mt-3 xl:flex"
+      >
+        <app-information-icon
+          class="w-[30px] aspect-square"
+        ></app-information-icon>
+        {{ genreSelected?.description }}
+      </aside>
+    </div>
+    <div class="relative mb-5 sm:flex items-center gap-x-2">
+      <h3
+        class="flex items-center gap-x-2 text-xl font-medium xl:font-semibold mb-2 sm:mb-0 sm:text-2xl md:text-3xl"
+      >
+        <app-unknow-icon
+          class="w-9 aspect-square text-primary"
+        ></app-unknow-icon>
+        Tiến độ
+      </h3>
+      <ul class="flex flex-wrap items-center max-w-full w-fit border">
+        <li>
+          <a
+            routerLink="."
+            [queryParams]="{ status: 'all' }"
+            [routerLinkActiveOptions]="{ exact: true }"
+            routerLinkActive="genre-active"
+            class="px-3 py-2 text-xs w-max sm:text-base block rounded"
+            >Tất cả</a
+          >
+        </li>
+        <li>
+          <a
+            routerLink="."
+            [queryParams]="{ status: 'completed' }"
+            routerLinkActive="genre-active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            class="px-3 py-2 text-xs w-max sm:text-base block rounded"
+            >Hoàn thành</a
+          >
+        </li>
+        <li>
+          <a
+            routerLink="."
+            [queryParams]="{ status: 'ongoing' }"
+            routerLinkActive="genre-active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            class="px-3 py-2 text-xs w-max sm:text-base block rounded"
+            >Đang tiến hành</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="relative">
+    <app-loading-spinner *ngIf="!comicsByGenreId"></app-loading-spinner>
+    <!-- todo: add loading while load new page -->
+    <app-list
+      [list]="comicsByGenreId ? comicsByGenreId.comics : []"
+      [currentPage]="comicsByGenreId ? comicsByGenreId.currentPage : 0"
+      [totalPages]="comicsByGenreId ? comicsByGenreId.totalPages : 0"
+      (pageChanged)="onPageChanged($event)"
+    ></app-list>
+  </div>
 </main>
