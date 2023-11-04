@@ -34,8 +34,9 @@ import { ClickRemoveClassDirective } from 'src/app/shared/directives/dropdown/cl
   ],
   imports: [
     CommonModule,
-    HomeRoutingModule,
 
+    /* ---------------- app modules --------------- */
+    HomeRoutingModule,
     SlideListComponent,
     ListComponent,
     LoadingSpinnerComponent,

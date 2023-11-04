@@ -1,15 +1,17 @@
-import { GenresAction, SET_GENRES } from '../genres';
+import { GenresAction, SET_GENRES, SET_GENRES_SELECTED } from '../genres';
 import { GenreDetail } from 'src/app/core/interfaces/base/genre-detail.interface';
-export interface State {
+export interface GenreState {
   genres: GenreDetail[];
+  genreSelected: GenreDetail | null;
 }
 
-const initialState: State = {
+const initialState: GenreState = {
   genres: [],
+  genreSelected: null,
 };
 
 export function genresReducer(
-  state: State = initialState,
+  state: GenreState = initialState,
   action: GenresAction
 ) {
   switch (action.type) {
@@ -17,6 +19,11 @@ export function genresReducer(
       return {
         ...state,
         genres: [...action.payload],
+      };
+    case SET_GENRES_SELECTED:
+      return {
+        ...state,
+        genreSelected: { ...action.payload },
       };
     default:
       return state;

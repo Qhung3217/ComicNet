@@ -1,3 +1,4 @@
-import { GenresEffects } from '../home/genres/genres.effects';
+import { ComicEffects } from '../home/comic';
+import { GenresEffects } from '../home/genres';
 
-export const appEffects = [GenresEffects];
+export const appEffects = [GenresEffects, ComicEffects];

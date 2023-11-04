@@ -113,5 +113,14 @@
       </ul>
     </div>
   </div>
-  <app-list></app-list>
+  <div class="relative">
+    <app-loading-spinner *ngIf="!comicsByGenreId"></app-loading-spinner>
+    <!-- todo: add loading while load new page -->
+    <app-list
+      [list]="comicsByGenreId ? comicsByGenreId.comics : []"
+      [currentPage]="comicsByGenreId ? comicsByGenreId.currentPage : 0"
+      [totalPages]="comicsByGenreId ? comicsByGenreId.totalPages : 0"
+      (pageChanged)="onPageChanged($event)"
+    ></app-list>
+  </div>
 </main>

@@ -1,10 +1,13 @@
 import { ActionReducerMap } from '@ngrx/store';
-import { State, genresReducer } from '../home/genres';
+import { GenreState, genresReducer } from '../home/genres';
+import { ComicState, comicReducer } from '../home/comic';
 
 export interface AppState {
-  genre: State;
+  genre: GenreState;
+  comic: ComicState;
 }
 
 export const appReducer: ActionReducerMap<AppState, any> = {
   genre: genresReducer,
+  comic: comicReducer,
 };
