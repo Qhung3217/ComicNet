@@ -22,6 +22,7 @@ import { ArrowLeftIconComponent } from 'src/app/shared/icons/arrow-left-icon/arr
 import { LoadingSpinnerComponent } from 'src/app/shared/components/loading-spinner/loading-spinner.component';
 import { ClickToggleClassDirective } from 'src/app/shared/directives/dropdown/click-toggle-class/click-toggle-class.directive';
 import { ClickRemoveClassDirective } from 'src/app/shared/directives/dropdown/click-remove-class/click-remove-class.directive';
+import { RouterActiveClassDirective } from 'src/app/shared/directives/router-active-class/router-active-class.directive';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { ClickRemoveClassDirective } from 'src/app/shared/directives/dropdown/cl
     ClickToggleClassDirective,
     //use to remove class of specific element when this component and this component's children are clicked
     ClickRemoveClassDirective,
+    RouterActiveClassDirective,
 
     /* --------------- icons -------------- */
     HotIconComponent,

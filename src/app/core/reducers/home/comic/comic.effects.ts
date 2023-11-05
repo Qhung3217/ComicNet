@@ -15,7 +15,9 @@ export class ComicEffects {
       ofType(FETCH_COMICS_BY_GENRE_ID),
       withLatestFrom(this.store.select('genre'), this.store.select('comic')),
       switchMap(([actionData, genreState, comicState]) => {
-        const params = new HttpParams().set('page', comicState.currentPage);
+        const params = new HttpParams()
+          .set('page', comicState.currentPage)
+          .set('status', comicState.status);
         return this.http.get<ComicsResponse>(
           BASE_URL + 'genres/' + genreState.genreSelected!.id,
           {

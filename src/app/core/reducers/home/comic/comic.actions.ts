@@ -5,6 +5,9 @@ export const FETCH_COMICS_BY_GENRE_ID =
   '[FETCH_COMICS_BY_GENRE_ID] Fetch comics by genre id';
 export const SET_COMIC_RESPONSE = '[SET_COMIC_RESPONSE] Set comic response';
 export const SET_CURRENT_PAGE = '[SET_CURRENT_PAGE] Set current page';
+export const SET_STATUS = '[SET_STATUS] Set status';
+export const SET_STATUS_AND_CURRENT_PAGE =
+  '[SET_STATUS_AND_CURRENCE_PAGE] Set status and current page';
 
 export class FetchComicsByGenreId implements Action {
   readonly type = FETCH_COMICS_BY_GENRE_ID;
@@ -20,5 +23,22 @@ export class SetCurrentPage implements Action {
   readonly type = SET_CURRENT_PAGE;
   constructor(public payload: number) {}
 }
+export class SetStatus implements Action {
+  readonly type = SET_STATUS;
+  constructor(public payload: string) {}
+}
+export class SetStatusAndCurrentPage implements Action {
+  readonly type = SET_STATUS_AND_CURRENT_PAGE;
+  constructor(
+    public payload: {
+      status: string;
+      currentPage: number;
+    }
+  ) {}
+}
 
-export type ComicAction = SetComicResponse | SetCurrentPage;
+export type ComicAction =
+  | SetComicResponse
+  | SetCurrentPage
+  | SetStatus
+  | SetStatusAndCurrentPage;
