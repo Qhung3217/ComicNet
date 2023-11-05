@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Subscription, distinctUntilChanged, map } from 'rxjs';
+import { Subscription, distinctUntilChanged, map, tap } from 'rxjs';
 import { GenreDetail } from 'src/app/core/interfaces/base/genre-detail.interface';
 import { AppState } from 'src/app/core/reducers/app';
 import {
@@ -24,9 +24,11 @@ export class GenrePageComponent implements OnInit, OnDestroy {
   genreSelected?: GenreDetail;
   comicsByGenreId?: ComicState;
   subcriptions: Subscription[] = [];
+  isLoading = true;
   constructor(private store: Store<AppState>, private route: ActivatedRoute) {}
   ngOnInit(): void {
-    this.initialSetup();
+    this.setGenres();
+    this.setComicsByGenreId();
   }
   ngOnDestroy(): void {
     this.subcriptions.forEach((sub) => sub?.unsubscribe());
@@ -35,7 +37,7 @@ export class GenrePageComponent implements OnInit, OnDestroy {
     this.store.dispatch(new SetCurrentPage(page));
     this.store.dispatch(new FetchComicsByGenreId());
   }
-  private initialSetup() {
+  private setGenres() {
     this.subcriptions.push(
       this.store
         .select('genre')
@@ -55,13 +57,16 @@ export class GenrePageComponent implements OnInit, OnDestroy {
   private setGenreSelected(genres: GenreDetail[]) {
     this.subcriptions.push(
       this.route.params.subscribe((params: Params) => {
+        this.isLoading = true;
+        console.log('params changed trigger loading', this.isLoading);
+
         let genreId = Object.values(params)[0];
         console.log('genreId', genreId, params);
         this.genreSelected = genres.find((genre) => genre.id === genreId);
         if (this.genreSelected) {
+          console.log('genreSelected', this.isLoading);
           this.store.dispatch(new SetGenreSelected(this.genreSelected));
           this.store.dispatch(new FetchComicsByGenreId());
-          this.setComicsByGenreId();
         }
       })
     );
@@ -70,8 +75,13 @@ export class GenrePageComponent implements OnInit, OnDestroy {
     this.subcriptions.push(
       this.store
         .select('comic')
-        .pipe(distinctUntilChanged())
+        .pipe(
+          distinctUntilChanged(),
+          tap(() => (this.isLoading = false))
+        )
         .subscribe((comicState) => {
+          console.log('loading in set comics:', this.isLoading);
+
           this.comicsByGenreId = { ...comicState };
         })
     );
