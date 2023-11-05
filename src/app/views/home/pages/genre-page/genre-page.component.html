@@ -55,9 +55,12 @@
         <li *ngFor="let genre of genres">
           <a
             [routerLink]="['/the-loai', genre.id]"
-            routerLinkActive="genre-active"
+            [queryParams]="{ page: 1 }"
+            appRouterActiveClass
+            classActive="genre-active"
+            [stringInclude]="'/the-loai/' + genre.id"
             class="px-5 py-3 w-max text-base block rounded"
-            queryParamsHandling="preserve"
+            queryParamsHandling="merge"
             >{{ genre.name }}</a
           >
         </li>
@@ -84,9 +87,11 @@
         <li>
           <a
             routerLink="."
-            [queryParams]="{ status: 'all' }"
-            [routerLinkActiveOptions]="{ exact: true }"
-            routerLinkActive="genre-active"
+            [queryParams]="{ status: 'all', page: 1 }"
+            appRouterActiveClass
+            classActive="genre-active"
+            stringInclude="status=all"
+            queryParamsHandling="merge"
             class="px-3 py-2 text-xs w-max sm:text-base block rounded"
             >Tất cả</a
           >
@@ -94,9 +99,11 @@
         <li>
           <a
             routerLink="."
-            [queryParams]="{ status: 'completed' }"
-            routerLinkActive="genre-active"
-            [routerLinkActiveOptions]="{ exact: true }"
+            [queryParams]="{ status: 'completed', page: 1 }"
+            appRouterActiveClass
+            classActive="genre-active"
+            stringInclude="status=completed"
+            queryParamsHandling="merge"
             class="px-3 py-2 text-xs w-max sm:text-base block rounded"
             >Hoàn thành</a
           >
@@ -104,9 +111,11 @@
         <li>
           <a
             routerLink="."
-            [queryParams]="{ status: 'ongoing' }"
-            routerLinkActive="genre-active"
-            [routerLinkActiveOptions]="{ exact: true }"
+            [queryParams]="{ status: 'ongoing', page: 1 }"
+            appRouterActiveClass
+            classActive="genre-active"
+            stringInclude="status=ongoing"
+            queryParamsHandling="merge"
             class="px-3 py-2 text-xs w-max sm:text-base block rounded"
             >Đang tiến hành</a
           >

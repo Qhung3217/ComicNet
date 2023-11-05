@@ -41,6 +41,9 @@
           *ngIf="p.getCurrent() !== page.value"
           appScrollTo
           class="block"
+          routerLink="."
+          [queryParams]="{ page: page.value }"
+          queryParamsHandling="merge"
         >
           <span
             class="flex w-9 aspect-square items-center justify-center cursor-pointer hover:bg-slate-300"
