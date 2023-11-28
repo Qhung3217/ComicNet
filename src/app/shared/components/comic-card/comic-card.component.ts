@@ -6,6 +6,7 @@ import { HeartIconComponent } from '../../icons/heart-icon/heart-icon.component'
 import { Comic } from 'src/app/core/interfaces/base/comic.interface';
 import { GenresToStringPipe } from '../../pipes/genres-to-string/genres-to-string.pipe';
 import { DEFAULT_IMAGE_URL } from 'src/app/core/constants/image';
+import { ComicRecommend } from 'src/app/core/interfaces/base/comic-recommend.interface';
 
 @Component({
   selector: 'app-comic-card',
@@ -24,9 +25,9 @@ import { DEFAULT_IMAGE_URL } from 'src/app/core/constants/image';
   styleUrls: ['./comic-card.component.scss'],
 })
 export class ComicCardComponent implements OnInit {
-  @Input() isSimpleCard: boolean = false;
+  @Input() category: 'comic' | 'comic-recommend' = 'comic';
   @Input() cardTag: string = '';
-  @Input() comic?: Comic;
+  @Input() comic?: any;
   @Input() lazy: boolean = true;
   thumbnail: string = '';
   ngOnInit(): void {

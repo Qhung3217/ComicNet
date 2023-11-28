@@ -1,14 +1,14 @@
-import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, Input, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { SwiperModule } from 'swiper/angular';
 import SwiperCore, {
+  Autoplay,
+  Grid,
   Lazy,
   Navigation,
   SwiperOptions,
-  Grid,
-  Autoplay,
 } from 'swiper';
+import { SwiperModule } from 'swiper/angular';
 import { ComicCardComponent } from '../comic-card/comic-card.component';
 
 SwiperCore.use([Navigation, Lazy, Grid, Autoplay]);
@@ -21,7 +21,7 @@ SwiperCore.use([Navigation, Lazy, Grid, Autoplay]);
 })
 export class SlideListComponent implements OnInit {
   @Input('navigation') navigation: boolean = true;
-  @Input('slideList') slideList = [];
+  @Input('slideList') slideList: any[] = [];
   swiperConfig!: SwiperOptions;
   constructor() {}
   ngOnInit() {
