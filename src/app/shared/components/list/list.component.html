@@ -25,7 +25,7 @@
       <div class="" [class]="{ hidden: p.isFirstPage() }">
         <a
           *ngIf="!p.isFirstPage()"
-          (click)="p.previous()"
+          (click)="onPrevPage(p)"
           class="w-9 aspect-square rounded-full block cursor-pointer bg-slate-100 hover:bg-slate-300"
         >
           <app-arrow-left-icon></app-arrow-left-icon>
@@ -64,7 +64,7 @@
       <div class="" [class]="{ hidden: p.isLastPage() }">
         <a
           *ngIf="!p.isLastPage()"
-          (click)="p.next()"
+          (click)="onNextPage(p)"
           class="w-9 aspect-square rounded-full block cursor-pointer bg-slate-100 rotate-180 hover:bg-slate-300"
         >
           <app-arrow-left-icon></app-arrow-left-icon>
