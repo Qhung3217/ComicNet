@@ -3,12 +3,15 @@ import {
   ComicAction,
   SET_COMIC_RESPONSE,
   SET_CURRENT_PAGE,
+  SET_RECOMMEND_COMICS,
   SET_STATUS,
   SET_STATUS_AND_CURRENT_PAGE,
 } from './comic.actions';
+import { ComicRecommend } from 'src/app/core/interfaces/base/comic-recommend.interface';
 
 export interface ComicState {
   comics: Comic[];
+  recommendComics: ComicRecommend[];
   totalPages: number;
   currentPage: number;
   status: string;
@@ -16,6 +19,7 @@ export interface ComicState {
 
 const initialState = {
   comics: [],
+  recommendComics: [],
   totalPages: 1,
   currentPage: 1,
   status: 'all',
@@ -32,6 +36,11 @@ export function comicReducer(
         comics: [...action.payload.comics],
         totalPages: action.payload.total_pages,
         currentPage: action.payload.current_page,
+      };
+    case SET_RECOMMEND_COMICS:
+      return {
+        ...state,
+        recommendComics: [...action.payload],
       };
     case SET_CURRENT_PAGE:
       return {

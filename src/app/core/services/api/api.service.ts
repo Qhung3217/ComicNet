@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BASE_URL } from '../../constants/server-api';
 import { ComicsResponse } from '../../interfaces/api-response/comics-response.interface';
 import { GenreDetail } from '../../interfaces/base/genre-detail.interface';
+import { ComicRecommend } from '../../interfaces/base/comic-recommend.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +20,10 @@ export class ApiService {
     return this.http.get<ComicsResponse>(BASE_URL + 'genres/' + id, {
       params: params,
     });
+  }
+
+  getRecommendComics() {
+    return this.http.get<ComicRecommend[]>(BASE_URL + 'recommend-comics');
   }
 
   /* --------------- ///////////// -------------- */

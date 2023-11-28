@@ -5,7 +5,13 @@ import { map, switchMap, withLatestFrom } from 'rxjs';
 import { ComicsResponse } from 'src/app/core/interfaces/api-response/comics-response.interface';
 import { ApiService } from 'src/app/core/services/api/api.service';
 import { AppState } from '../../app';
-import { FETCH_COMICS_BY_GENRE_ID, SetComicResponse } from './comic.actions';
+import {
+  FETCH_COMICS_BY_GENRE_ID,
+  FETCH_RECOMMEND_COMICS,
+  SetComicResponse,
+  SetRecommendComics,
+} from './comic.actions';
+import { ComicRecommend } from 'src/app/core/interfaces/base/comic-recommend.interface';
 
 @Injectable()
 export class ComicEffects {
@@ -21,6 +27,14 @@ export class ComicEffects {
         )
       ),
       map((response: ComicsResponse) => new SetComicResponse(response))
+    )
+  );
+
+  fetchRecommendComics = createEffect(() =>
+    this.action$.pipe(
+      ofType(FETCH_RECOMMEND_COMICS),
+      switchMap(() => this.apiService.getRecommendComics()),
+      map((response: ComicRecommend[]) => new SetRecommendComics(response))
     )
   );
 
