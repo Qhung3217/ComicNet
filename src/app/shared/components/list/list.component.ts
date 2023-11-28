@@ -1,20 +1,22 @@
+import { CommonModule } from '@angular/common';
 import {
   Component,
   EventEmitter,
   Input,
   OnChanges,
-  OnInit,
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ComicCardComponent } from '../comic-card/comic-card.component';
-import { NgxPaginationModule } from 'ngx-pagination';
+import { Router, RouterModule } from '@angular/router';
+import {
+  NgxPaginationModule,
+  PaginationControlsDirective,
+} from 'ngx-pagination';
 import { Comic } from 'src/app/core/interfaces/base/comic.interface';
-import { ArrowLeftIconComponent } from '../../icons/arrow-left-icon/arrow-left-icon.component';
-import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.component';
 import { ScrollToDirective } from '../../directives/scroll-to/scroll-to.directive';
-import { RouterModule } from '@angular/router';
+import { ArrowLeftIconComponent } from '../../icons/arrow-left-icon/arrow-left-icon.component';
+import { ComicCardComponent } from '../comic-card/comic-card.component';
+import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.component';
 
 @Component({
   selector: 'app-list',
@@ -38,6 +40,7 @@ export class ListComponent implements OnChanges {
   @Output() pageChanged = new EventEmitter<number>();
   isLoading = false;
 
+  constructor(private router: Router) {}
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['list']) {
       this.isLoading = false;
@@ -47,5 +50,19 @@ export class ListComponent implements OnChanges {
     this.currentPage = page;
     this.isLoading = true;
     this.pageChanged.emit(page);
+  }
+  onNextPage(p: PaginationControlsDirective) {
+    this.router.navigate([], {
+      queryParams: { page: p.getCurrent() + 1 },
+      queryParamsHandling: 'merge',
+    });
+    p.next();
+  }
+  onPrevPage(p: PaginationControlsDirective) {
+    this.router.navigate([], {
+      queryParams: { page: p.getCurrent() - 1 },
+      queryParamsHandling: 'merge',
+    });
+    p.previous();
   }
 }
