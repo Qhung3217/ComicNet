@@ -1,17 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { map, switchMap, withLatestFrom } from 'rxjs';
+import { forkJoin, map, switchMap, withLatestFrom } from 'rxjs';
 import { ComicsResponse } from 'src/app/core/interfaces/api-response/comics-response.interface';
 import { ApiService } from 'src/app/core/services/api/api.service';
 import { AppState } from '../../app';
 import {
   FETCH_COMICS_BY_GENRE_ID,
-  FETCH_RECOMMEND_COMICS,
+  FETCH_DATA_HOME_PAGE,
   SetComicResponse,
-  SetRecommendComics,
+  SetDataHomePage,
 } from './comic.actions';
-import { ComicRecommend } from 'src/app/core/interfaces/base/comic-recommend.interface';
 
 @Injectable()
 export class ComicEffects {
@@ -30,11 +29,36 @@ export class ComicEffects {
     )
   );
 
-  fetchRecommendComics = createEffect(() =>
+  fetchDataHomePage = createEffect(() =>
     this.action$.pipe(
-      ofType(FETCH_RECOMMEND_COMICS),
-      switchMap(() => this.apiService.getRecommendComics()),
-      map((response: ComicRecommend[]) => new SetRecommendComics(response))
+      ofType(FETCH_DATA_HOME_PAGE),
+      switchMap(() => {
+        const recommends = this.apiService.getRecommendComics();
+        const populars = this.apiService.getPopularComics();
+        const updateds = this.apiService.getRecentUpdatedComics();
+        const completeds = this.apiService.getCompletedComics();
+        const boys = this.apiService.getBoyComics();
+        const girls = this.apiService.getGirlComics();
+        return forkJoin([
+          recommends,
+          populars,
+          updateds,
+          completeds,
+          boys,
+          girls,
+        ]);
+      }),
+      map(
+        ([recommends, populars, updateds, completeds, boys, girls]) =>
+          new SetDataHomePage({
+            recommendComics: recommends,
+            popularComics: populars,
+            completedComics: updateds,
+            updatedComics: completeds,
+            boyComics: boys,
+            girlComics: girls,
+          })
+      )
     )
   );
 

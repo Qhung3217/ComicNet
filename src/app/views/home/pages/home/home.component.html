@@ -1,18 +1,19 @@
 <main class="max-w-7xl m-auto px-3 py-5">
-  <app-section-recommend></app-section-recommend>
-  <app-section-comic-panel title="Truyện nổi bật"
-    ><app-hot-icon></app-hot-icon
-  ></app-section-comic-panel>
-  <app-section-comic-panel title="Truyện hoàn thành"
-    ><app-check-wavy-icon></app-check-wavy-icon
-  ></app-section-comic-panel>
-  <app-section-comic-panel title="Mới cập nhật"
-    ><app-update-icon></app-update-icon
-  ></app-section-comic-panel>
-  <app-section-comic-panel title="Truyện nam"
-    ><app-male-icon></app-male-icon
-  ></app-section-comic-panel>
-  <app-section-comic-panel title="Truyện nữ"
-    ><app-female-icon></app-female-icon
-  ></app-section-comic-panel>
+  <app-section-recommend [recommendComics]="recommendComics">
+  </app-section-recommend>
+  <app-section-comic-panel title="Truyện nổi bật" [comics]="popularComics">
+    <app-hot-icon></app-hot-icon>
+  </app-section-comic-panel>
+  <app-section-comic-panel title="Truyện hoàn thành" [comics]="completedComics">
+    <app-check-wavy-icon></app-check-wavy-icon>
+  </app-section-comic-panel>
+  <app-section-comic-panel title="Mới cập nhật" [comics]="updatedComics">
+    <app-update-icon></app-update-icon>
+  </app-section-comic-panel>
+  <app-section-comic-panel title="Truyện nam" [comics]="boyComics">
+    <app-male-icon></app-male-icon>
+  </app-section-comic-panel>
+  <app-section-comic-panel title="Truyện nữ" [comics]="girlComics">
+    <app-female-icon></app-female-icon>
+  </app-section-comic-panel>
 </main>

@@ -22,6 +22,7 @@ SwiperCore.use([Navigation, Lazy, Grid, Autoplay]);
 export class SlideListComponent implements OnInit {
   @Input('navigation') navigation: boolean = true;
   @Input('slideList') slideList: any[] = [];
+  @Input('category') category: 'comic' | 'comic-recommend' = 'comic';
   swiperConfig!: SwiperOptions;
   constructor() {}
   ngOnInit() {

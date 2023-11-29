@@ -1,5 +1,5 @@
 <swiper [config]="swiperConfig">
   <ng-template swiperSlide *ngFor="let item of slideList">
-    <app-comic-card category="comic-recommend" [comic]="item"></app-comic-card>
+    <app-comic-card [category]="category" [comic]="item"></app-comic-card>
   </ng-template>
 </swiper>

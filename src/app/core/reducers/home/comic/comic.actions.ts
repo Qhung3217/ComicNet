@@ -4,11 +4,11 @@ import { ComicRecommend } from 'src/app/core/interfaces/base/comic-recommend.int
 
 export const FETCH_COMICS_BY_GENRE_ID =
   '[FETCH_COMICS_BY_GENRE_ID] Fetch comics by genre id';
-export const FETCH_RECOMMEND_COMICS =
-  '[FETCH_RECOMMEND_COMICS] Fetch recommend comics';
+export const FETCH_DATA_HOME_PAGE =
+  '[FETCH_DATA_HOME_PAGE] Fetch data home page';
+
 export const SET_COMIC_RESPONSE = '[SET_COMIC_RESPONSE] Set comic response';
-export const SET_RECOMMEND_COMICS =
-  '[SET_RECOMMEND_COMICS] Set recommend comics';
+export const SET_DATA_HOME_PAGE = '[SET_DATA_HOME_PAGE] Set data home page';
 export const SET_CURRENT_PAGE = '[SET_CURRENT_PAGE] Set current page';
 export const SET_STATUS = '[SET_STATUS] Set status';
 export const SET_STATUS_AND_CURRENT_PAGE =
@@ -19,8 +19,8 @@ export class FetchComicsByGenreId implements Action {
   constructor() {}
 }
 
-export class FetchRecommendComics implements Action {
-  readonly type = FETCH_RECOMMEND_COMICS;
+export class FetchDataHomePage implements Action {
+  readonly type = FETCH_DATA_HOME_PAGE;
   constructor() {}
 }
 
@@ -29,9 +29,18 @@ export class SetComicResponse implements Action {
   constructor(public payload: ComicsResponse) {}
 }
 
-export class SetRecommendComics implements Action {
-  readonly type = SET_RECOMMEND_COMICS;
-  constructor(public payload: ComicRecommend[]) {}
+export class SetDataHomePage implements Action {
+  readonly type = SET_DATA_HOME_PAGE;
+  constructor(
+    public payload: {
+      recommendComics: ComicRecommend[];
+      popularComics: ComicsResponse;
+      completedComics: ComicsResponse;
+      updatedComics: ComicsResponse;
+      boyComics: ComicsResponse;
+      girlComics: ComicsResponse;
+    }
+  ) {}
 }
 
 export class SetCurrentPage implements Action {
@@ -54,7 +63,7 @@ export class SetStatusAndCurrentPage implements Action {
 
 export type ComicAction =
   | SetComicResponse
-  | SetRecommendComics
   | SetCurrentPage
   | SetStatus
-  | SetStatusAndCurrentPage;
+  | SetStatusAndCurrentPage
+  | SetDataHomePage;
