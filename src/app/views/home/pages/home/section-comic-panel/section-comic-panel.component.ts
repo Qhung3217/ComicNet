@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Comic } from 'src/app/core/interfaces/base/comic.interface';
 
 @Component({
   selector: 'app-section-comic-panel',
@@ -7,4 +8,5 @@ import { Component, Input } from '@angular/core';
 })
 export class SectionComicPanelComponent {
   @Input('title') title: string = 'Section Title';
+  @Input('comics') comics: Comic[] = [];
 }
