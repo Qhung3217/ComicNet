@@ -1,28 +1,41 @@
-import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, Input, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { SwiperModule } from 'swiper/angular';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import SwiperCore, {
+  Autoplay,
+  Grid,
   Lazy,
   Navigation,
   SwiperOptions,
-  Grid,
-  Autoplay,
 } from 'swiper';
+import { SwiperModule } from 'swiper/angular';
 import { ComicCardComponent } from '../comic-card/comic-card.component';
 
 SwiperCore.use([Navigation, Lazy, Grid, Autoplay]);
 @Component({
   selector: 'app-slide-list',
   standalone: true,
-  imports: [CommonModule, RouterModule, SwiperModule, ComicCardComponent],
+  imports: [
+    CommonModule,
+    RouterModule,
+    SwiperModule,
+    NgxSkeletonLoaderModule,
+    ComicCardComponent,
+  ],
   templateUrl: './slide-list.component.html',
   styleUrls: ['./slide-list.component.scss'],
 })
 export class SlideListComponent implements OnInit {
   @Input('navigation') navigation: boolean = true;
-  @Input('slideList') slideList = [];
+  @Input('slideList') slideList: any[] = [];
+  @Input('category') category: 'comic' | 'comic-recommend' = 'comic';
   swiperConfig!: SwiperOptions;
+  skeletionLoadingTheme = {
+    'border-radius': '5px',
+    border: '1px solid white',
+    'padding-top': '130%',
+  };
   constructor() {}
   ngOnInit() {
     this.swiperConfig = {
