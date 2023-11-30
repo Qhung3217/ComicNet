@@ -26,7 +26,7 @@ export class MorePageComponent implements OnInit, OnDestroy {
     | 'Truyện nam'
     | 'Truyện nữ' = 'Truyện nỗi bật';
   page: number = 1;
-  subcriptions: Subscription[] = [];
+  subscriptions: Subscription[] = [];
   isLoading = false;
   comics: Comic[] = [];
   totalPages: number = 1;
@@ -45,7 +45,7 @@ export class MorePageComponent implements OnInit, OnDestroy {
   }
 
   private retrievePageFromUrl() {
-    this.subcriptions.push(
+    this.subscriptions.push(
       this.route.queryParams.subscribe((params: Params) => {
         const page = +params['page'];
         if (page) {
@@ -89,53 +89,23 @@ export class MorePageComponent implements OnInit, OnDestroy {
   private getData() {
     switch (this.title) {
       case 'Truyện nỗi bật':
-        this.subcriptions.push(
-          this.store.select('comic').subscribe((state) => {
-            this.comics = [...state.promotionComics.popularComics.comics];
-            this.page = state.promotionComics.popularComics.currentPage;
-            this.totalPages = state.promotionComics.popularComics.totalPages;
-          })
-        );
+        this.getPopularData();
         return;
 
       case 'Truyện hoàn thành':
-        this.subcriptions.push(
-          this.store.select('comic').subscribe((state) => {
-            this.comics = [...state.promotionComics.completedComics.comics];
-            this.page = state.promotionComics.completedComics.currentPage;
-            this.totalPages = state.promotionComics.completedComics.totalPages;
-          })
-        );
+        this.getCompletedData();
         return;
 
       case 'Truyện mới cập nhật':
-        this.subcriptions.push(
-          this.store.select('comic').subscribe((state) => {
-            this.comics = [...state.promotionComics.updatedComics.comics];
-            this.page = state.promotionComics.updatedComics.currentPage;
-            this.totalPages = state.promotionComics.updatedComics.totalPages;
-          })
-        );
+        this.getUpdatedData();
         return;
 
       case 'Truyện nam':
-        this.subcriptions.push(
-          this.store.select('comic').subscribe((state) => {
-            this.comics = [...state.promotionComics.boyComics.comics];
-            this.page = state.promotionComics.boyComics.currentPage;
-            this.totalPages = state.promotionComics.boyComics.totalPages;
-          })
-        );
+        this.getBoyData();
         return;
 
       case 'Truyện nữ':
-        this.subcriptions.push(
-          this.store.select('comic').subscribe((state) => {
-            this.comics = [...state.promotionComics.girlComics.comics];
-            this.page = state.promotionComics.girlComics.currentPage;
-            this.totalPages = state.promotionComics.girlComics.totalPages;
-          })
-        );
+        this.getGirlData();
         return;
 
       default:
@@ -208,7 +178,134 @@ export class MorePageComponent implements OnInit, OnDestroy {
     alert('Oops! Something went wrong, please try again');
     this.router.navigate(['/']);
   }
+
+  private getPopularData() {
+    this.subscriptions.push(
+      this.store
+        .select('comic', 'promotionComics', 'popularComics', 'comics')
+        .subscribe((comics) => {
+          this.comics = [...comics];
+        })
+    );
+    this.subscriptions.push(
+      this.store
+        .select('comic', 'promotionComics', 'popularComics', 'currentPage')
+        .subscribe((currentPage) => {
+          this.page = currentPage;
+        })
+    );
+    this.subscriptions.push(
+      this.store
+        .select('comic', 'promotionComics', 'popularComics', 'totalPages')
+        .subscribe((totalPages) => {
+          this.totalPages = totalPages;
+        })
+    );
+  }
+
+  private getCompletedData() {
+    this.subscriptions.push(
+      this.store
+        .select('comic', 'promotionComics', 'completedComics', 'comics')
+        .subscribe((comics) => {
+          this.comics = [...comics];
+        })
+    );
+    this.subscriptions.push(
+      this.store
+        .select('comic', 'promotionComics', 'completedComics', 'currentPage')
+        .subscribe((currentPage) => {
+          this.page = currentPage;
+        })
+    );
+    this.subscriptions.push(
+      this.store
+        .select('comic', 'promotionComics', 'completedComics', 'totalPages')
+        .subscribe((totalPages) => {
+          this.totalPages = totalPages;
+        })
+    );
+  }
+
+  private getUpdatedData() {
+    this.subscriptions.push(
+      this.store
+        .select('comic', 'promotionComics', 'updatedComics', 'comics')
+        .subscribe((comics) => {
+          this.comics = [...comics];
+        })
+    );
+
+    this.subscriptions.push(
+      this.store
+        .select('comic', 'promotionComics', 'updatedComics', 'currentPage')
+        .subscribe((currentPage) => {
+          this.page = currentPage;
+        })
+    );
+
+    this.subscriptions.push(
+      this.store
+        .select('comic', 'promotionComics', 'updatedComics', 'totalPages')
+        .subscribe((totalPages) => {
+          this.totalPages = totalPages;
+        })
+    );
+  }
+
+  private getBoyData() {
+    this.subscriptions.push(
+      this.store
+        .select('comic', 'promotionComics', 'boyComics', 'comics')
+        .subscribe((comics) => {
+          this.comics = [...comics];
+        })
+    );
+
+    this.subscriptions.push(
+      this.store
+        .select('comic', 'promotionComics', 'boyComics', 'currentPage')
+        .subscribe((currentPage) => {
+          this.page = currentPage;
+        })
+    );
+
+    this.subscriptions.push(
+      this.store
+        .select('comic', 'promotionComics', 'boyComics', 'totalPages')
+        .subscribe((totalPages) => {
+          this.totalPages = totalPages;
+        })
+    );
+  }
+
+  private getGirlData() {
+    this.subscriptions.push(
+      this.store
+        .select('comic', 'promotionComics', 'girlComics', 'comics')
+        .subscribe((comics) => {
+          this.comics = [...comics];
+        })
+    );
+
+    this.subscriptions.push(
+      this.store
+        .select('comic', 'promotionComics', 'girlComics', 'currentPage')
+        .subscribe((currentPage) => {
+          this.page = currentPage;
+        })
+    );
+
+    this.subscriptions.push(
+      this.store
+        .select('comic', 'promotionComics', 'girlComics', 'totalPages')
+        .subscribe((totalPages) => {
+          this.totalPages = totalPages;
+        })
+    );
+  }
+
   ngOnDestroy(): void {
-    this.subcriptions.forEach((sub) => sub?.unsubscribe());
+    this.subscriptions.forEach((sub) => sub?.unsubscribe());
   }
 }

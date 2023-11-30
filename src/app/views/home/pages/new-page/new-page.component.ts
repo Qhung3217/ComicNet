@@ -50,10 +50,18 @@ export class NewPageComponent implements OnDestroy, OnInit {
 
   private getData() {
     this.subscriptions.push(
-      this.store.select('comic').subscribe((state) => {
-        this.comics = [...state.comics];
-        this.page = state.currentPage;
-        this.totalPages = state.totalPages;
+      this.store.select('comic', 'comics').subscribe((comics) => {
+        this.comics = [...comics];
+      })
+    );
+    this.subscriptions.push(
+      this.store.select('comic', 'currentPage').subscribe((currentPage) => {
+        this.page = currentPage;
+      })
+    );
+    this.subscriptions.push(
+      this.store.select('comic', 'totalPages').subscribe((totalPages) => {
+        this.totalPages = totalPages;
       })
     );
   }
