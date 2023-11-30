@@ -16,7 +16,9 @@
   </li>
   <li>
     <a
-      routerLinkActive="nav-active"
+      appRouterActiveClass
+      classActive="nav-active"
+      stringInclude="the-loai"
       routerLink="/the-loai/all"
       [queryParams]="{ status: 'all', page: 1 }"
       class="flex items-center gap-x-1 px-1 lg:px-4 py-2 rounded-full transition-colors transition-opacity active:opacity-80 lg:hover:text-primary"
