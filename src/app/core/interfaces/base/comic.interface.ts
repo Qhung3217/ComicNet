@@ -5,13 +5,13 @@ export interface Comic {
   id: string;
   title: string;
   thumbnail: string;
-  updated_at: string;
-  is_trending: boolean;
+  updatedAt: string;
+  isTrending: boolean;
   genres: Genre[];
-  short_description: string;
-  other_names: string[];
+  shortDescription: string;
+  otherNames: string[];
   status: string;
-  total_views: number;
+  totalViews: number;
   followers: number;
-  last_chapter: Chapter;
+  lastChapter: Chapter;
 }

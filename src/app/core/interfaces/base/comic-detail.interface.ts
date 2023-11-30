@@ -2,15 +2,15 @@ import { Chapter } from './chapter.interface';
 import { Genre } from './genre.interface';
 
 export interface ComicDetail {
+  id: string;
   title: string;
   thumbnail: string;
   description: string;
   authors: string;
   status: string;
   genres: Genre[];
-  total_views: number;
+  totalViews: number;
   followers: number;
   chapters: Chapter[];
-  id: string;
-  other_names: string[];
+  otherNames: string[];
 }
