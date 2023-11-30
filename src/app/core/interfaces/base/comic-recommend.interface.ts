@@ -4,6 +4,6 @@ export interface ComicRecommend {
   id: string;
   title: string;
   thumbnail: string;
-  updated_at: string;
-  lastest_chapter: Chapter;
+  updatedAt: string;
+  latestChapter: Chapter;
 }

@@ -1,19 +1,36 @@
 <main class="max-w-7xl m-auto px-3 py-5">
   <app-section-recommend [recommendComics]="recommendComics">
   </app-section-recommend>
-  <app-section-comic-panel title="Truyện nổi bật" [comics]="popularComics">
+
+  <app-section-comic-panel
+    title="Truyện nổi bật"
+    [comics]="popularComics"
+    slug="popular"
+  >
     <app-hot-icon></app-hot-icon>
   </app-section-comic-panel>
-  <app-section-comic-panel title="Truyện hoàn thành" [comics]="completedComics">
+
+  <app-section-comic-panel
+    title="Truyện hoàn thành"
+    [comics]="completedComics"
+    slug="completed"
+  >
     <app-check-wavy-icon></app-check-wavy-icon>
   </app-section-comic-panel>
-  <app-section-comic-panel title="Mới cập nhật" [comics]="updatedComics">
+
+  <app-section-comic-panel
+    title="Mới cập nhật"
+    [comics]="updatedComics"
+    slug="updated"
+  >
     <app-update-icon></app-update-icon>
   </app-section-comic-panel>
-  <app-section-comic-panel title="Truyện nam" [comics]="boyComics">
+
+  <app-section-comic-panel title="Truyện nam" [comics]="boyComics" slug="boy">
     <app-male-icon></app-male-icon>
   </app-section-comic-panel>
-  <app-section-comic-panel title="Truyện nữ" [comics]="girlComics">
+
+  <app-section-comic-panel title="Truyện nữ" [comics]="girlComics" slug="girl">
     <app-female-icon></app-female-icon>
   </app-section-comic-panel>
 </main>

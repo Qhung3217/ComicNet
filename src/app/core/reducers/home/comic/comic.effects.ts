@@ -6,10 +6,20 @@ import { ComicsResponse } from 'src/app/core/interfaces/api-response/comics-resp
 import { ApiService } from 'src/app/core/services/api/api.service';
 import { AppState } from '../../app';
 import {
+  FETCH_BOY_COMIC,
   FETCH_COMICS_BY_GENRE_ID,
+  FETCH_COMPLETED_COMIC,
   FETCH_DATA_HOME_PAGE,
+  FETCH_GIRL_COMIC,
+  FETCH_POPULAR_COMIC,
+  FETCH_UPDATED_COMIC,
+  SetBoyComic,
   SetComicResponse,
+  SetCompletedComic,
   SetDataHomePage,
+  SetGirlComic,
+  SetPopularComic,
+  SetUpdatedComic,
 } from './comic.actions';
 
 @Injectable()
@@ -61,7 +71,69 @@ export class ComicEffects {
       )
     )
   );
+  fetchPopularComic = createEffect(() =>
+    this.action$.pipe(
+      ofType(FETCH_POPULAR_COMIC),
+      withLatestFrom(this.store.select('comic')),
+      switchMap(([actionData, comicState]) =>
+        this.apiService.getPopularComics(
+          comicState.promotionComics.popularComics.currentPage
+        )
+      ),
+      map((response: ComicsResponse) => new SetPopularComic(response))
+    )
+  );
+  fetchCompletedComic = createEffect(() =>
+    this.action$.pipe(
+      ofType(FETCH_COMPLETED_COMIC),
+      withLatestFrom(this.store.select('comic')),
+      switchMap(([actionData, comicState]) =>
+        this.apiService.getCompletedComics(
+          comicState.promotionComics.completedComics.currentPage
+        )
+      ),
+      map((response: ComicsResponse) => new SetCompletedComic(response))
+    )
+  );
 
+  fetchBoyComic = createEffect(() =>
+    this.action$.pipe(
+      ofType(FETCH_BOY_COMIC),
+      withLatestFrom(this.store.select('comic')),
+      switchMap(([actionData, comicState]) =>
+        this.apiService.getBoyComics(
+          comicState.promotionComics.boyComics.currentPage
+        )
+      ),
+      map((response: ComicsResponse) => new SetBoyComic(response))
+    )
+  );
+
+  fetchGirlComic = createEffect(() =>
+    this.action$.pipe(
+      ofType(FETCH_GIRL_COMIC),
+      withLatestFrom(this.store.select('comic')),
+      switchMap(([actionData, comicState]) =>
+        this.apiService.getGirlComics(
+          comicState.promotionComics.girlComics.currentPage
+        )
+      ),
+      map((response: ComicsResponse) => new SetGirlComic(response))
+    )
+  );
+
+  fetchUpdatedComic = createEffect(() =>
+    this.action$.pipe(
+      ofType(FETCH_UPDATED_COMIC),
+      withLatestFrom(this.store.select('comic')),
+      switchMap(([actionData, comicState]) =>
+        this.apiService.getRecentUpdatedComics(
+          comicState.promotionComics.updatedComics.currentPage
+        )
+      ),
+      map((response: ComicsResponse) => new SetUpdatedComic(response))
+    )
+  );
   constructor(
     private action$: Actions,
     private apiService: ApiService,

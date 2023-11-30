@@ -1,3 +1,4 @@
+import { RouterActiveClassDirective } from 'src/app/shared/directives/router-active-class/router-active-class.directive';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
@@ -27,6 +28,7 @@ import { ClickToggleClassDirective } from 'src/app/shared/directives/dropdown/cl
 
     /* ----------------- directive ---------------- */
     ClickToggleClassDirective,
+    RouterActiveClassDirective,
 
     /* ------------------- Icons ------------------ */
     HistoryIconComponent,

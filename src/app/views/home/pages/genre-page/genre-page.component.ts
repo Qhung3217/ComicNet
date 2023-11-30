@@ -37,17 +37,13 @@ export class GenrePageComponent implements OnInit, OnDestroy {
   ) {}
   ngOnInit(): void {
     this.setGenres();
-    this.obsRouteGenreId();
     this.setStatusAndPage();
+    this.obsRouteGenreId();
     this.onRouterNavigateEnd();
     this.setComicsByGenreId();
   }
   ngOnDestroy(): void {
     this.subcriptions.forEach((sub) => sub?.unsubscribe());
-  }
-  onPageChanged(page: number): void {
-    this.store.dispatch(new SetCurrentPage(page));
-    this.store.dispatch(new FetchComicsByGenreId());
   }
 
   private onRouterNavigateEnd() {
@@ -119,7 +115,9 @@ export class GenrePageComponent implements OnInit, OnDestroy {
         else if (status !== this.comicsByGenreId?.status)
           this.store.dispatch(new SetStatus(status));
         else if (page !== this.comicsByGenreId?.currentPage)
-          this.store.dispatch(new SetCurrentPage(page));
+          this.store.dispatch(
+            new SetCurrentPage({ page: page, category: 'default' })
+          );
       })
     );
   }

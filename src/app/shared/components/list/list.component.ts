@@ -47,8 +47,8 @@ export class ListComponent implements OnChanges {
     }
   }
   onPageChanged(page: number): void {
-    this.currentPage = page;
     this.isLoading = true;
+    this.currentPage = page;
     this.pageChanged.emit(page);
   }
   onNextPage(p: PaginationControlsDirective) {

@@ -22,6 +22,7 @@ import { SectionComicPanelComponent } from './pages/home/section-comic-panel/sec
 import { SectionRecommendComponent } from './pages/home/section-recommend/section-recommend.component';
 import { NewPageComponent } from './pages/new-page/new-page.component';
 import { TopPageComponent } from './pages/top-page/top-page.component';
+import { MorePageComponent } from './pages/more-page/more-page.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { TopPageComponent } from './pages/top-page/top-page.component';
     GenrePageComponent,
     NewPageComponent,
     TopPageComponent,
+    MorePageComponent,
   ],
   imports: [
     CommonModule,

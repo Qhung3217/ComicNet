@@ -8,5 +8,6 @@ import { Comic } from 'src/app/core/interfaces/base/comic.interface';
 })
 export class SectionComicPanelComponent {
   @Input('title') title: string = 'Section Title';
+  @Input('slug') slug: string = 'slug';
   @Input('comics') comics: Comic[] = [];
 }
