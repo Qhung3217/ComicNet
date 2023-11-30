@@ -23,6 +23,7 @@ import { SectionRecommendComponent } from './pages/home/section-recommend/sectio
 import { NewPageComponent } from './pages/new-page/new-page.component';
 import { TopPageComponent } from './pages/top-page/top-page.component';
 import { MorePageComponent } from './pages/more-page/more-page.component';
+import { NewIconComponent } from 'src/app/shared/icons/new-icon/new-icon.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { MorePageComponent } from './pages/more-page/more-page.component';
     InformationIconComponent,
     UnknowIconComponent,
     ArrowLeftIconComponent,
+    NewIconComponent,
   ],
 })
 export class HomeModule {}
