@@ -7,6 +7,7 @@ import { Comic } from 'src/app/core/interfaces/base/comic.interface';
 import { GenresToStringPipe } from '../../pipes/genres-to-string/genres-to-string.pipe';
 import { DEFAULT_IMAGE_URL } from 'src/app/core/constants/image';
 import { ComicRecommend } from 'src/app/core/interfaces/base/comic-recommend.interface';
+import { ShortNumberPipe } from '../../pipes/short-number/short-number.pipe';
 
 @Component({
   selector: 'app-comic-card',
@@ -38,9 +39,11 @@ export class ComicCardComponent implements OnInit {
   }
   isUp() {
     if (!this.comic) return false;
-    const regex = /(\d+)\s+(\w+)/i;
+    const regex = /(\d+)\s+(\S+)/;
     // 1 giờ trước => ['1 giờ','1','giờ']
-    const updatedAt = regex.exec(this.comic.updated_at);
+    const updatedAt = regex.exec(this.comic.updatedAt);
+    console.log('updatedAt: ', updatedAt);
+
     if (!updatedAt) return false;
     switch (updatedAt[2]) {
       case 'giờ':
