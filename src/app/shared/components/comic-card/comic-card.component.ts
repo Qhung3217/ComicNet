@@ -18,6 +18,7 @@ import { ShortNumberPipe } from '../../pipes/short-number/short-number.pipe';
     NgOptimizedImage,
 
     GenresToStringPipe,
+    ShortNumberPipe,
 
     EyeIconComponent,
     HeartIconComponent,
