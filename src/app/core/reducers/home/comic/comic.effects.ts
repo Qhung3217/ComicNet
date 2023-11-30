@@ -11,6 +11,7 @@ import {
   FETCH_COMPLETED_COMIC,
   FETCH_DATA_HOME_PAGE,
   FETCH_GIRL_COMIC,
+  FETCH_NEW_COMIC,
   FETCH_POPULAR_COMIC,
   FETCH_UPDATED_COMIC,
   SetBoyComic,
@@ -34,6 +35,17 @@ export class ComicEffects {
           comicState.currentPage,
           comicState.status
         )
+      ),
+      map((response: ComicsResponse) => new SetComicResponse(response))
+    )
+  );
+
+  fetchNewComic = createEffect(() =>
+    this.action$.pipe(
+      ofType(FETCH_NEW_COMIC),
+      withLatestFrom(this.store.select('comic')),
+      switchMap(([actionData, comicState]) =>
+        this.apiService.getNewComic(comicState.currentPage)
       ),
       map((response: ComicsResponse) => new SetComicResponse(response))
     )

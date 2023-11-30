@@ -31,6 +31,15 @@ export class ApiService {
       .pipe(map((response) => mapJsonToComicsResponse(response)));
   }
 
+  getNewComic(page: number = 1) {
+    const params = new HttpParams().set('page', page);
+    return this.http
+      .get<ComicsResponse>(BASE_URL + 'new-comics', {
+        params: params,
+      })
+      .pipe(map((response) => mapJsonToComicsResponse(response)));
+  }
+
   getRecommendComics() {
     return this.http
       .get<ComicRecommend[]>(BASE_URL + 'recommend-comics')

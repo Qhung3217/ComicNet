@@ -1,1 +1,16 @@
-<p>new-page works!</p>
+<main class="max-w-7xl m-auto px-3 py-5">
+  <hgroup class="text-primary flex items-center gap-x-2 mt-12 mb-4">
+    <div class="w-9 h-9">
+      <app-new-icon></app-new-icon>
+    </div>
+    <h1 class="text-xl md:text-3xl font-bold text-black">
+      Truyện mới - Trang {{ page }}
+    </h1>
+  </hgroup>
+
+  <app-list
+    [list]="comics"
+    [currentPage]="page"
+    [totalPages]="totalPages"
+  ></app-list>
+</main>

@@ -43,7 +43,7 @@ export class ComicCardComponent implements OnInit {
     const regex = /(\d+)\s+(\S+)/;
     // 1 giờ trước => ['1 giờ','1','giờ']
     const updatedAt = regex.exec(this.comic.updatedAt);
-    console.log('updatedAt: ', updatedAt);
+    // console.log('updatedAt: ', updatedAt);
 
     if (!updatedAt) return false;
     switch (updatedAt[2]) {

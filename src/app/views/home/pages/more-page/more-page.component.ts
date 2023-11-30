@@ -41,6 +41,7 @@ export class MorePageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.retrieveTitleFromUrl();
+    this.getData();
   }
 
   private retrievePageFromUrl() {
@@ -56,7 +57,7 @@ export class MorePageComponent implements OnInit, OnDestroy {
             queryParams: { page: this.page },
             queryParamsHandling: 'merge',
           });
-        this.getData();
+        this.fetchData();
       })
     );
   }
@@ -88,7 +89,6 @@ export class MorePageComponent implements OnInit, OnDestroy {
   private getData() {
     switch (this.title) {
       case 'Truyện nỗi bật':
-        this.store.dispatch(new FetchPopularComic());
         this.subcriptions.push(
           this.store.select('comic').subscribe((state) => {
             this.comics = [...state.promotionComics.popularComics.comics];
@@ -99,7 +99,6 @@ export class MorePageComponent implements OnInit, OnDestroy {
         return;
 
       case 'Truyện hoàn thành':
-        this.store.dispatch(new FetchCompletedComic());
         this.subcriptions.push(
           this.store.select('comic').subscribe((state) => {
             this.comics = [...state.promotionComics.completedComics.comics];
@@ -110,7 +109,6 @@ export class MorePageComponent implements OnInit, OnDestroy {
         return;
 
       case 'Truyện mới cập nhật':
-        this.store.dispatch(new FetchUpdatedComic());
         this.subcriptions.push(
           this.store.select('comic').subscribe((state) => {
             this.comics = [...state.promotionComics.updatedComics.comics];
@@ -121,7 +119,6 @@ export class MorePageComponent implements OnInit, OnDestroy {
         return;
 
       case 'Truyện nam':
-        this.store.dispatch(new FetchBoyComic());
         this.subcriptions.push(
           this.store.select('comic').subscribe((state) => {
             this.comics = [...state.promotionComics.boyComics.comics];
@@ -132,7 +129,6 @@ export class MorePageComponent implements OnInit, OnDestroy {
         return;
 
       case 'Truyện nữ':
-        this.store.dispatch(new FetchGirlComic());
         this.subcriptions.push(
           this.store.select('comic').subscribe((state) => {
             this.comics = [...state.promotionComics.girlComics.comics];
@@ -146,41 +142,62 @@ export class MorePageComponent implements OnInit, OnDestroy {
         this.showError();
     }
   }
+  private fetchData() {
+    switch (this.title) {
+      case 'Truyện nỗi bật':
+        this.store.dispatch(new FetchPopularComic());
+        return;
+
+      case 'Truyện hoàn thành':
+        this.store.dispatch(new FetchCompletedComic());
+        return;
+
+      case 'Truyện mới cập nhật':
+        this.store.dispatch(new FetchUpdatedComic());
+        return;
+
+      case 'Truyện nam':
+        this.store.dispatch(new FetchBoyComic());
+        return;
+
+      case 'Truyện nữ':
+        this.store.dispatch(new FetchGirlComic());
+        return;
+
+      default:
+        this.showError();
+    }
+  }
   onPageChanged(page: number): void {
     switch (this.title) {
       case 'Truyện nỗi bật':
         this.store.dispatch(
           new SetCurrentPage({ page: page, category: 'popular' })
         );
-
         return;
 
       case 'Truyện hoàn thành':
         this.store.dispatch(
           new SetCurrentPage({ page: page, category: 'completed' })
         );
-
         return;
 
       case 'Truyện mới cập nhật':
         this.store.dispatch(
           new SetCurrentPage({ page: page, category: 'updated' })
         );
-
         return;
 
       case 'Truyện nam':
         this.store.dispatch(
           new SetCurrentPage({ page: page, category: 'boy' })
         );
-
         return;
 
       case 'Truyện nữ':
         this.store.dispatch(
           new SetCurrentPage({ page: page, category: 'girl' })
         );
-
         return;
 
       default:

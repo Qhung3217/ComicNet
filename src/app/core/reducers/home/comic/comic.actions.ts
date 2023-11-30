@@ -4,6 +4,7 @@ import { ComicRecommend } from 'src/app/core/interfaces/base/comic-recommend.int
 
 export const FETCH_COMICS_BY_GENRE_ID =
   '[FETCH_COMICS_BY_GENRE_ID] Fetch comics by genre id';
+export const FETCH_NEW_COMIC = '[FETCH_NEW_COMIC] Fetch new comic';
 export const FETCH_DATA_HOME_PAGE =
   '[FETCH_DATA_HOME_PAGE] Fetch data home page';
 export const FETCH_POPULAR_COMIC = '[FETCH_POPULAR_COMIC] Fetch popular comic';
@@ -27,6 +28,11 @@ export const SET_STATUS_AND_CURRENT_PAGE =
 
 export class FetchComicsByGenreId implements Action {
   readonly type = FETCH_COMICS_BY_GENRE_ID;
+  constructor() {}
+}
+
+export class FetchNewComic implements Action {
+  readonly type = FETCH_NEW_COMIC;
   constructor() {}
 }
 
