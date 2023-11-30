@@ -1,0 +1,57 @@
+<main class="max-w-7xl m-auto px-3 py-5">
+  <hgroup
+    class="text-primary flex items-center gap-x-2 mt-12 mb-4"
+    [ngSwitch]="title"
+  >
+    <div class="w-9 h-9">
+      <app-hot-icon *ngSwitchCase="'Truyện nổi bật'"></app-hot-icon>
+      <app-check-wavy-icon
+        *ngSwitchCase="'Truyện hoàn thành'"
+      ></app-check-wavy-icon>
+      <app-update-icon *ngSwitchCase="'Truyện mới cập nhật'"></app-update-icon>
+      <app-male-icon *ngSwitchCase="'Truyện nam'"></app-male-icon>
+      <app-female-icon *ngSwitchCase="'Truyện nữ'"></app-female-icon>
+    </div>
+    <h1
+      [title]="title"
+      class="text-xl md:text-3xl font-bold text-black"
+      *ngSwitchCase="'Truyện nỗi bật'"
+    >
+      Truyện nổi bật - Trang {{ page }}
+    </h1>
+    <h1
+      [title]="title"
+      class="text-xl md:text-3xl font-bold text-black"
+      *ngSwitchCase="'Truyện hoàn thành'"
+    >
+      Truyện hoàn thành - Trang {{ page }}
+    </h1>
+    <h1
+      [title]="title"
+      class="text-xl md:text-3xl font-bold text-black"
+      *ngSwitchCase="'Truyện mới cập nhật'"
+    >
+      Truyện mới cập nhật - Trang {{ page }}
+    </h1>
+    <h1
+      [title]="title"
+      class="text-xl md:text-3xl font-bold text-black"
+      *ngSwitchCase="'Truyện nam'"
+    >
+      Truyện nam - Trang {{ page }}
+    </h1>
+    <h1
+      [title]="title"
+      class="text-xl md:text-3xl font-bold text-black"
+      *ngSwitchCase="'Truyện nữ'"
+    >
+      Truyện nữ - Trang {{ page }}
+    </h1>
+  </hgroup>
+
+  <app-list
+    [list]="comics"
+    [currentPage]="page"
+    [totalPages]="totalPages"
+  ></app-list>
+</main>
