@@ -3,6 +3,7 @@ import { ComicRecommend } from 'src/app/core/interfaces/base/comic-recommend.int
 import { Comic } from 'src/app/core/interfaces/base/comic.interface';
 import {
   ComicAction,
+  RESET_COMIC_RESPONSE,
   SET_BOY_COMIC,
   SET_COMIC_RESPONSE,
   SET_COMPLETED_COMIC,
@@ -208,6 +209,14 @@ export function comicReducer(
         ...state,
         status: action.payload.status,
         currentPage: +action.payload.currentPage,
+      };
+    case RESET_COMIC_RESPONSE:
+      return {
+        ...state,
+        status: 'all',
+        currentPage: 1,
+        totalPages: 1,
+        comics: [],
       };
     default:
       return state;

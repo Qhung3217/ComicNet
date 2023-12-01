@@ -1,6 +1,9 @@
+import { TopComicRequest } from './../../../interfaces/top-comic-request.interface';
 import { Action } from '@ngrx/store';
 import { ComicsResponse } from 'src/app/core/interfaces/api-response/comics-response.interface';
 import { ComicRecommend } from 'src/app/core/interfaces/base/comic-recommend.interface';
+import { Status } from 'src/app/core/types/status.type';
+import { TopDuration } from 'src/app/core/types/top-duration.type';
 
 export const FETCH_COMICS_BY_GENRE_ID =
   '[FETCH_COMICS_BY_GENRE_ID] Fetch comics by genre id';
@@ -13,6 +16,7 @@ export const FETCH_COMPLETED_COMIC =
   '[FETCH_COMPLETED_COMIC] Fetch completed comic';
 export const FETCH_BOY_COMIC = '[FETCH_BOY_COMIC] Fetch boy comic';
 export const FETCH_GIRL_COMIC = '[FETCH_GIRL_COMIC] Fetch girl comic';
+export const FETCH_TOP_COMIC = '[FETCH_TOP_COMIC] Fetch top comic';
 
 export const SET_COMIC_RESPONSE = '[SET_COMIC_RESPONSE] Set comic response';
 export const SET_DATA_HOME_PAGE = '[SET_DATA_HOME_PAGE] Set data home page';
@@ -25,6 +29,8 @@ export const SET_CURRENT_PAGE = '[SET_CURRENT_PAGE] Set current page';
 export const SET_STATUS = '[SET_STATUS] Set status';
 export const SET_STATUS_AND_CURRENT_PAGE =
   '[SET_STATUS_AND_CURRENCE_PAGE] Set status and current page';
+export const RESET_COMIC_RESPONSE =
+  '[RESET_COMIC_RESPONSE] Reset comic response';
 
 export class FetchComicsByGenreId implements Action {
   readonly type = FETCH_COMICS_BY_GENRE_ID;
@@ -59,6 +65,17 @@ export class FetchUpdatedComic implements Action {
 export class FetchBoyComic implements Action {
   readonly type = FETCH_BOY_COMIC;
   constructor() {}
+}
+
+export class FetchTopComic implements Action {
+  readonly type = FETCH_TOP_COMIC;
+  constructor(
+    public payload: TopComicRequest = {
+      topDuration: 'all',
+      page: 1,
+      status: 'all',
+    }
+  ) {}
 }
 
 export class FetchGirlComic implements Action {
@@ -136,7 +153,10 @@ export class SetStatusAndCurrentPage implements Action {
     }
   ) {}
 }
-
+export class ResetComicResponse implements Action {
+  readonly type = RESET_COMIC_RESPONSE;
+  constructor() {}
+}
 export type ComicAction =
   | SetComicResponse
   | SetCurrentPage
@@ -147,4 +167,5 @@ export type ComicAction =
   | SetGirlComic
   | SetPopularComic
   | SetUpdatedComic
-  | SetCompletedComic;
+  | SetCompletedComic
+  | ResetComicResponse;

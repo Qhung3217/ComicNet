@@ -1,1 +1,79 @@
-<p>top-page works!</p>
+<main class="max-w-7xl m-auto px-3 py-5">
+  <nav class="flex flex-wrap gap-1.5 sm:gap-3">
+    <a
+      routerLink="all"
+      class="text-base py-2 px-3 rounded flex items-center gap-x-1"
+      routerLinkActive="tab-active"
+    >
+      <app-comic-icon class="block w-6 h-6"></app-comic-icon> Top Comics
+    </a>
+    <a
+      routerLink="ngay"
+      routerLinkActive="tab-active"
+      class="text-base py-2 px-3 rounded flex items-center gap-x-1"
+    >
+      <app-circle-letter-d-icon
+        class="block w-6 h-6"
+      ></app-circle-letter-d-icon>
+      Top Ngày
+    </a>
+    <a
+      routerLink="tuan"
+      routerLinkActive="tab-active"
+      class="text-base py-2 px-3 rounded flex items-center gap-x-1"
+    >
+      <app-circle-letter-w-icon
+        class="block w-6 h-6"
+      ></app-circle-letter-w-icon>
+      Top Tuần
+    </a>
+    <a
+      routerLink="thang"
+      routerLinkActive="tab-active"
+      class="text-base py-2 px-3 rounded flex items-center gap-x-1"
+    >
+      <app-circle-letter-m-icon
+        class="block w-6 h-6"
+      ></app-circle-letter-m-icon>
+      Top Tháng
+    </a>
+  </nav>
+  <nav
+    class="mt-3 mb-5 flex items-center gap-2.5 text-sm sm:gap-5 sm:text-base font-semibold"
+  >
+    <a
+      routerLink="."
+      [queryParams]="{
+        status: 'all'
+      }"
+      queryParamsHandling="merge"
+      routerLinkActive="status-active"
+      class="border rounded py-1 px-2.5 sm:py-1.5 sm:px-3"
+    >
+      Tất cả
+    </a>
+    <a
+      routerLink="."
+      [queryParams]="{
+        status: 'completed'
+      }"
+      queryParamsHandling="merge"
+      routerLinkActive="status-active"
+      class="border rounded py-1 px-2.5 sm:py-1.5 sm:px-3"
+    >
+      Hoàn thành
+    </a>
+    <a
+      routerLink="."
+      [queryParams]="{
+        status: 'ongoing'
+      }"
+      queryParamsHandling="merge"
+      routerLinkActive="status-active"
+      class="border rounded py-1 px-2.5 sm:py-1.5 sm:px-3"
+    >
+      Đang tiến hành
+    </a>
+  </nav>
+  <router-outlet></router-outlet>
+</main>
