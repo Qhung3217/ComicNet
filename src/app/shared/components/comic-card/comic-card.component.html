@@ -1,7 +1,7 @@
 <div
   class="relative rounded-md overflow-hidden border lg:hover:border-primary transition-colors"
 >
-  <a [routerLink]="[comic?.id]" class="relative w-full aspect-[2/3] block">
+  <a [routerLink]="['/', comic?.id]" class="relative w-full aspect-[2/3] block">
     <img
       [ngSrc]="thumbnail"
       [alt]="comic ? comic.title : 'Default image'"
@@ -14,7 +14,9 @@
   <div
     class="absolute bottom-0 w-full bg-gradient-to-b from-transparent from-0% to-60% to-black flex flex-col justify-end items-stretch px-4 py-2"
   >
-    <a routerLink="" [class]="{ 'mb-2': category === 'comic-recommend' }"
+    <a
+      [routerLink]="['/', comic?.id]"
+      [class]="{ 'mb-2': category === 'comic-recommend' }"
       ><abbr
         [title]="comic?.title"
         class="no-underline capitalize text-white text-lg font-bold lg:hover:underline decoration-solid lg:hover:text-[#a671e0] line-clamp-2 transition-colors duration-100 ease-linear"

@@ -33,6 +33,7 @@ import { CircleLetterDIconComponent } from 'src/app/shared/icons/circle-letter-d
 import { CircleLetterMIconComponent } from 'src/app/shared/icons/circle-letter-m-icon/circle-letter-m-icon.component';
 import { CircleLetterWIconComponent } from 'src/app/shared/icons/circle-letter-w-icon/circle-letter-w-icon.component';
 import { ComicIconComponent } from 'src/app/shared/icons/comic-icon/comic-icon.component';
+import { DetailPageComponent } from './pages/detail-page/detail-page.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { ComicIconComponent } from 'src/app/shared/icons/comic-icon/comic-icon.c
     TopDailyComponent,
     TopMonthlyComponent,
     TopWeeklyComponent,
+    DetailPageComponent,
   ],
   imports: [
     CommonModule,

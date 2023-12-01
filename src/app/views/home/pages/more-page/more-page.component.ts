@@ -66,19 +66,19 @@ export class MorePageComponent implements OnInit, OnDestroy {
     console.log('category: ', category);
 
     switch (category) {
-      case 'completed':
+      case 'truyen-hoan-thanh':
         this.title = 'Truyện hoàn thành';
         return;
-      case 'popular':
+      case 'truyen-noi-bat':
         this.title = 'Truyện nỗi bật';
         return;
-      case 'updated':
+      case 'truyen-cap-nhat':
         this.title = 'Truyện mới cập nhật';
         return;
-      case 'boy':
+      case 'truyen-nam':
         this.title = 'Truyện nam';
         return;
-      case 'girl':
+      case 'truyen-nu':
         this.title = 'Truyện nữ';
         return;
       default:

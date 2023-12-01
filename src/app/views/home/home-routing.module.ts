@@ -25,7 +25,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'all', pathMatch: 'full' },
     ],
   },
-  { path: ':category', component: MorePageComponent },
+  { path: 'truyen/:category', component: MorePageComponent },
 ];
 
 @NgModule({
