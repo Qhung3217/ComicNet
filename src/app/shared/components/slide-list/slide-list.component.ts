@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import SwiperCore, {
   Autoplay,
   Grid,
@@ -11,6 +10,7 @@ import SwiperCore, {
 } from 'swiper';
 import { SwiperModule } from 'swiper/angular';
 import { ComicCardComponent } from '../comic-card/comic-card.component';
+import { SkeletonLoadingComponent } from './../skeleton-loading/skeleton-loading.component';
 
 SwiperCore.use([Navigation, Lazy, Grid, Autoplay]);
 @Component({
@@ -20,7 +20,7 @@ SwiperCore.use([Navigation, Lazy, Grid, Autoplay]);
     CommonModule,
     RouterModule,
     SwiperModule,
-    NgxSkeletonLoaderModule,
+    SkeletonLoadingComponent,
     ComicCardComponent,
   ],
   templateUrl: './slide-list.component.html',
@@ -31,11 +31,7 @@ export class SlideListComponent implements OnInit {
   @Input('slideList') slideList: any[] = [];
   @Input('category') category: 'comic' | 'comic-recommend' = 'comic';
   swiperConfig!: SwiperOptions;
-  skeletionLoadingTheme = {
-    'border-radius': '5px',
-    border: '1px solid white',
-    'padding-top': '130%',
-  };
+
   constructor() {}
   ngOnInit() {
     this.swiperConfig = {

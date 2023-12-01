@@ -13,7 +13,9 @@ import {
   FETCH_GIRL_COMIC,
   FETCH_NEW_COMIC,
   FETCH_POPULAR_COMIC,
+  FETCH_TOP_COMIC,
   FETCH_UPDATED_COMIC,
+  FetchTopComic,
   SetBoyComic,
   SetComicResponse,
   SetCompletedComic,
@@ -144,6 +146,13 @@ export class ComicEffects {
         )
       ),
       map((response: ComicsResponse) => new SetUpdatedComic(response))
+    )
+  );
+  fetchTopComic = createEffect(() =>
+    this.action$.pipe(
+      ofType<FetchTopComic>(FETCH_TOP_COMIC),
+      switchMap((action) => this.apiService.getTopComic(action.payload)),
+      map((response: ComicsResponse) => new SetComicResponse(response))
     )
   );
   constructor(

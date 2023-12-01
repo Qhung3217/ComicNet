@@ -1,0 +1,3 @@
+<app-skeleton-loading *ngIf="comics.length === 0"></app-skeleton-loading>
+<app-list [list]="comics" [currentPage]="page" [totalPages]="totalPages">
+</app-list>

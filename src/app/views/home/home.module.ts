@@ -1,3 +1,4 @@
+import { SkeletonLoadingComponent } from './../../shared/components/skeleton-loading/skeleton-loading.component';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ListComponent } from 'src/app/shared/components/list/list.component';
@@ -13,6 +14,7 @@ import { FemaleIconComponent } from 'src/app/shared/icons/female-icon/female-ico
 import { HotIconComponent } from 'src/app/shared/icons/hot-icon/hot-icon.component';
 import { InformationIconComponent } from 'src/app/shared/icons/information-icon/information-icon.component';
 import { MaleIconComponent } from 'src/app/shared/icons/male-icon/male-icon.component';
+import { NewIconComponent } from 'src/app/shared/icons/new-icon/new-icon.component';
 import { UnknowIconComponent } from 'src/app/shared/icons/unknow-icon/unknow-icon.component';
 import { UpdateIconComponent } from 'src/app/shared/icons/update-icon/update-icon.component';
 import { HomeRoutingModule } from './home-routing.module';
@@ -20,10 +22,17 @@ import { GenrePageComponent } from './pages/genre-page/genre-page.component';
 import { HomeComponent } from './pages/home/home.component';
 import { SectionComicPanelComponent } from './pages/home/section-comic-panel/section-comic-panel.component';
 import { SectionRecommendComponent } from './pages/home/section-recommend/section-recommend.component';
-import { NewPageComponent } from './pages/new-page/new-page.component';
-import { TopPageComponent } from './pages/top-page/top-page.component';
 import { MorePageComponent } from './pages/more-page/more-page.component';
-import { NewIconComponent } from 'src/app/shared/icons/new-icon/new-icon.component';
+import { NewPageComponent } from './pages/new-page/new-page.component';
+import { TopAllComponent } from './pages/top-page/top-all/top-all.component';
+import { TopDailyComponent } from './pages/top-page/top-daily/top-daily.component';
+import { TopMonthlyComponent } from './pages/top-page/top-monthly/top-monthly.component';
+import { TopPageComponent } from './pages/top-page/top-page.component';
+import { TopWeeklyComponent } from './pages/top-page/top-weekly/top-weekly.component';
+import { CircleLetterDIconComponent } from 'src/app/shared/icons/circle-letter-d-icon/circle-letter-d-icon.component';
+import { CircleLetterMIconComponent } from 'src/app/shared/icons/circle-letter-m-icon/circle-letter-m-icon.component';
+import { CircleLetterWIconComponent } from 'src/app/shared/icons/circle-letter-w-icon/circle-letter-w-icon.component';
+import { ComicIconComponent } from 'src/app/shared/icons/comic-icon/comic-icon.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +43,10 @@ import { NewIconComponent } from 'src/app/shared/icons/new-icon/new-icon.compone
     NewPageComponent,
     TopPageComponent,
     MorePageComponent,
+    TopAllComponent,
+    TopDailyComponent,
+    TopMonthlyComponent,
+    TopWeeklyComponent,
   ],
   imports: [
     CommonModule,
@@ -43,6 +56,7 @@ import { NewIconComponent } from 'src/app/shared/icons/new-icon/new-icon.compone
     SlideListComponent,
     ListComponent,
     LoadingSpinnerComponent,
+    SkeletonLoadingComponent,
 
     /* ----------------- directive ---------------- */
     //use to toggle class of specific element when this component and this component's children is clicked
@@ -62,6 +76,10 @@ import { NewIconComponent } from 'src/app/shared/icons/new-icon/new-icon.compone
     UnknowIconComponent,
     ArrowLeftIconComponent,
     NewIconComponent,
+    CircleLetterDIconComponent,
+    CircleLetterMIconComponent,
+    CircleLetterWIconComponent,
+    ComicIconComponent,
   ],
 })
 export class HomeModule {}

@@ -1,30 +1,4 @@
-<div class="flex gap-2 overflow-hidden" *ngIf="slideList.length === 0">
-  <ngx-skeleton-loader
-    count="1"
-    [theme]="skeletionLoadingTheme"
-    class="flex-[1_0_calc(50%-8px)] sm:flex-[1_0_calc(33.333%-8px)] md:flex-[1_0_calc(25%-8px)] lg:flex-[1_0_calc(20%-8px)]"
-  ></ngx-skeleton-loader>
-  <ngx-skeleton-loader
-    count="1"
-    [theme]="skeletionLoadingTheme"
-    class="flex-[1_0_calc(50%-8px)] sm:flex-[1_0_calc(33.333%-8px)] md:flex-[1_0_calc(25%-8px)] lg:flex-[1_0_calc(20%-8px)]"
-  ></ngx-skeleton-loader>
-  <ngx-skeleton-loader
-    count="1"
-    [theme]="skeletionLoadingTheme"
-    class="flex-[1_0_calc(50%-8px)] sm:flex-[1_0_calc(33.333%-8px)] md:flex-[1_0_calc(25%-8px)] lg:flex-[1_0_calc(20%-8px)]"
-  ></ngx-skeleton-loader>
-  <ngx-skeleton-loader
-    count="1"
-    [theme]="skeletionLoadingTheme"
-    class="flex-[1_0_calc(50%-8px)] sm:flex-[1_0_calc(33.333%-8px)] md:flex-[1_0_calc(25%-8px)] lg:flex-[1_0_calc(20%-8px)]"
-  ></ngx-skeleton-loader>
-  <ngx-skeleton-loader
-    count="1"
-    [theme]="skeletionLoadingTheme"
-    class="flex-[1_0_calc(50%-8px)] sm:flex-[1_0_calc(33.333%-8px)] md:flex-[1_0_calc(25%-8px)] lg:flex-[1_0_calc(20%-8px)]"
-  ></ngx-skeleton-loader>
-</div>
+<app-skeleton-loading *ngIf="slideList.length === 0"></app-skeleton-loading>
 <swiper [config]="swiperConfig" *ngIf="slideList.length > 0">
   <ng-template swiperSlide *ngFor="let item of slideList">
     <app-comic-card [category]="category" [comic]="item"></app-comic-card>

@@ -11,6 +11,8 @@ import {
   mapJsonToComicsResponse,
 } from '../../mappers/comic.mapper';
 import { mapJsonArrayToGenreDetails } from '../../mappers/genre.mapper';
+import { TopComicRequest } from '../../interfaces/top-comic-request.interface';
+import { Status } from '../../types/status.type';
 
 @Injectable({
   providedIn: 'root',
@@ -89,6 +91,40 @@ export class ApiService {
         params: params,
       })
       .pipe(map((response) => mapJsonToComicsResponse(response)));
+  }
+
+  getTopComic(payload: TopComicRequest) {
+    const params = new HttpParams()
+      .set('page', payload.page)
+      .set('status', payload.status);
+    switch (payload.topDuration) {
+      case 'all':
+        return this.http
+          .get<ComicsResponse>(BASE_URL + 'top', {
+            params: params,
+          })
+          .pipe(map((response) => mapJsonToComicsResponse(response)));
+      case 'daily':
+        return this.http
+          .get<ComicsResponse>(BASE_URL + 'top/daily', {
+            params: params,
+          })
+          .pipe(map((response) => mapJsonToComicsResponse(response)));
+      case 'weekly':
+        return this.http
+          .get<ComicsResponse>(BASE_URL + 'top/weekly', {
+            params: params,
+          })
+          .pipe(map((response) => mapJsonToComicsResponse(response)));
+      case 'monthly':
+        return this.http
+          .get<ComicsResponse>(BASE_URL + 'top/monthly', {
+            params: params,
+          })
+          .pipe(map((response) => mapJsonToComicsResponse(response)));
+      default:
+        throw new Error('Wrong request condition: ' + payload.topDuration);
+    }
   }
   /* --------------- ///////////// -------------- */
 
