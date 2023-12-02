@@ -1,0 +1,3 @@
+.press-state:not([disabled]) {
+  @apply active:opacity-70 transition-all;
+}

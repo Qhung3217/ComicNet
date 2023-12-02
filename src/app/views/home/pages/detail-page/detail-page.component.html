@@ -1,0 +1,122 @@
+<main
+  class="px-3 pt-12 pb-5 bg-gradient-to-b from-[#d2b8ef] from-0% to-[250px]"
+>
+  <div class="max-w-5xl m-auto">
+    <div
+      class="border-transparent border-4 rounded-xl sm:flex items-start gap-x-6 md:p-4 md:border-white"
+    >
+      <figure
+        class="border-primary border aspect-[2/3] overflow-hidden sm:min-w-[190px] md:min-w-[224px] w-56 mx-auto rounded"
+      >
+        <img
+          [src]="comic?.thumbnail"
+          [alt]="comic ? comic.title : 'Default image'"
+          (error)="(DEFAULT_IMAGE)"
+          class="block w-full h-full object-cover"
+        />
+      </figure>
+      <div class="mt-5 sm:mt-0">
+        <hgroup>
+          <h1 class="text-3xl font-extrabold">{{ comic?.title }}</h1>
+          <h4 class="text-sm font-semibold mt-1 mb-3">
+            {{ comic && (comic.otherNames | arrayStringToString) }}
+          </h4>
+        </hgroup>
+        <aside class="my-1">
+          <nav class="flex items-center gap-2 flex-wrap">
+            <a
+              routerLink="genre"
+              class="text-sm font-bold py-0.5 px-2 border-2 border-purple-300 rounded capitalize hover:bg-purple-300 press-state"
+              *ngFor="let genre of comic?.genres"
+            >
+              {{ genre.name }}
+            </a>
+          </nav>
+        </aside>
+        <aside class="font-semibold">
+          Author: <span class="text-pink-400">{{ comic?.authors }}</span>
+        </aside>
+        <div class="flex items-center gap-x-4">
+          <aside class="flex items-center font-bold gap-1">
+            <app-eye-icon class="block w-5 h-5 text-sky-500"></app-eye-icon
+            >{{ comic?.totalViews | number : "1.0-0" }}
+          </aside>
+          <aside class="flex items-center font-bold gap-1">
+            <app-heart-fill-icon
+              class="block w-5 h-5 text-rose-500"
+            ></app-heart-fill-icon
+            >{{ comic?.followers | number : "1.0-0" }}
+          </aside>
+        </div>
+        <div class="mt-2">
+          <p
+            [ngClass]="{
+              'line-clamp-5': !isShowMore,
+              'line-clamp-none': isShowMore
+            }"
+          >
+            {{ comic?.description }}
+          </p>
+          <span
+            class="font-semibold underline lg:hover:underline lg:no-underline cursor-pointer press-state"
+            (click)="isShowMore ? (isShowMore = false) : (isShowMore = true)"
+          >
+            <span *ngIf="!isShowMore">Xem thêm </span>
+            <span *ngIf="isShowMore">Rút gọn</span>
+          </span>
+        </div>
+        <div class="flex items-center gap-3 mt-5 sm:text-lg">
+          <a
+            routerLink="chapter/1"
+            class="flex items-center gap-1 py-2 px-2 sm:px-6 bg-primary text-white font-bold rounded w-fit press-state"
+          >
+            <app-row-first-icon class="h-6 w-6 block"></app-row-first-icon>
+            Đọc từ đầu
+          </a>
+          <a
+            routerLink="chapter/1"
+            class="flex items-center gap-1 py-2 px-2 sm:px-6 bg-primary text-white font-bold rounded w-fit press-state"
+          >
+            <app-row-last-icon class="h-6 w-6 block"></app-row-last-icon>
+            Đọc mới nhất
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="mt-5">
+      <h2
+        class="text-lg font-bold flex items-center gap-1 text-primary py-1 border-b sm:text-xl"
+      >
+        <app-book-open-icon class="block w-5 h-5"></app-book-open-icon> Chương
+      </h2>
+      <ul class="my-5 flex gap-3 font-semibold flex-wrap text-sm select-none">
+        <li
+          class="py-0.5 px-2 rounded-full bg-gray-100 cursor-pointer press-state"
+          [ngClass]="{
+            'active-chapter-group': chapterGroupIndexSelected == i
+          }"
+          [attr.disabled]="chapterGroupIndexSelected == i"
+          *ngFor="let chapterGroup of chapterGroups; let i = index"
+          (click)="handleChapterGroupClick(i)"
+        >
+          {{ chapterGroup }}
+        </li>
+        <!-- <li
+          class="py-0.5 px-2 rounded-full bg-gray-100 cursor-pointer press-state"
+        >
+          51 - 100
+        </li> -->
+      </ul>
+      <nav
+        class="grid grid-cols-2 gap-4 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6"
+      >
+        <a
+          [routerLink]="[chapter.id]"
+          class="py-2 px-3 border rounded md:hover:bg-purple-100 transition-colors press-state"
+          *ngFor="let chapter of renderChapters()"
+          >{{ chapter.name }}</a
+        >
+      </nav>
+    </div>
+  </div>
+</main>
