@@ -7,6 +7,7 @@ import { GenreDetail } from '../../interfaces/base/genre-detail.interface';
 import { ComicRecommend } from '../../interfaces/base/comic-recommend.interface';
 import {
   mapJsonArrayToComicRecommend,
+  mapJsonToComicDetail,
   mapJsonToComicRecommend,
   mapJsonToComicsResponse,
 } from '../../mappers/comic.mapper';
@@ -91,6 +92,12 @@ export class ApiService {
         params: params,
       })
       .pipe(map((response) => mapJsonToComicsResponse(response)));
+  }
+
+  getComicDetail(slug: string) {
+    return this.http
+      .get<ComicsResponse>(BASE_URL + 'comics/' + slug)
+      .pipe(map((response) => mapJsonToComicDetail(response)));
   }
 
   getTopComic(payload: TopComicRequest) {

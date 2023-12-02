@@ -1,9 +1,8 @@
-import { TopComicRequest } from './../../../interfaces/top-comic-request.interface';
 import { Action } from '@ngrx/store';
 import { ComicsResponse } from 'src/app/core/interfaces/api-response/comics-response.interface';
 import { ComicRecommend } from 'src/app/core/interfaces/base/comic-recommend.interface';
-import { Status } from 'src/app/core/types/status.type';
-import { TopDuration } from 'src/app/core/types/top-duration.type';
+import { TopComicRequest } from './../../../interfaces/top-comic-request.interface';
+import { ComicDetail } from 'src/app/core/interfaces/base/comic-detail.interface';
 
 export const FETCH_COMICS_BY_GENRE_ID =
   '[FETCH_COMICS_BY_GENRE_ID] Fetch comics by genre id';
@@ -17,6 +16,7 @@ export const FETCH_COMPLETED_COMIC =
 export const FETCH_BOY_COMIC = '[FETCH_BOY_COMIC] Fetch boy comic';
 export const FETCH_GIRL_COMIC = '[FETCH_GIRL_COMIC] Fetch girl comic';
 export const FETCH_TOP_COMIC = '[FETCH_TOP_COMIC] Fetch top comic';
+export const FETCH_COMIC_DETAIL = '[FETCH_COMIC_DETAIL] Fetch comic detail';
 
 export const SET_COMIC_RESPONSE = '[SET_COMIC_RESPONSE] Set comic response';
 export const SET_DATA_HOME_PAGE = '[SET_DATA_HOME_PAGE] Set data home page';
@@ -31,6 +31,7 @@ export const SET_STATUS_AND_CURRENT_PAGE =
   '[SET_STATUS_AND_CURRENCE_PAGE] Set status and current page';
 export const RESET_COMIC_RESPONSE =
   '[RESET_COMIC_RESPONSE] Reset comic response';
+export const SET_COMIC_DETAIL = '[SET_COMIC_DETAIL] Set comic detail';
 
 export class FetchComicsByGenreId implements Action {
   readonly type = FETCH_COMICS_BY_GENRE_ID;
@@ -81,6 +82,11 @@ export class FetchTopComic implements Action {
 export class FetchGirlComic implements Action {
   readonly type = FETCH_GIRL_COMIC;
   constructor() {}
+}
+
+export class FetchComicDetail implements Action {
+  readonly type = FETCH_COMIC_DETAIL;
+  constructor(public payload: string) {}
 }
 
 export class SetComicResponse implements Action {
@@ -157,6 +163,12 @@ export class ResetComicResponse implements Action {
   readonly type = RESET_COMIC_RESPONSE;
   constructor() {}
 }
+
+export class SetComicDetail implements Action {
+  readonly type = SET_COMIC_DETAIL;
+  constructor(public payload: ComicDetail) {}
+}
+
 export type ComicAction =
   | SetComicResponse
   | SetCurrentPage
@@ -168,4 +180,5 @@ export type ComicAction =
   | SetPopularComic
   | SetUpdatedComic
   | SetCompletedComic
-  | ResetComicResponse;
+  | ResetComicResponse
+  | SetComicDetail;

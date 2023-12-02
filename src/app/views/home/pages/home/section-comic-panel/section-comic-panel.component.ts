@@ -8,6 +8,11 @@ import { Comic } from 'src/app/core/interfaces/base/comic.interface';
 })
 export class SectionComicPanelComponent {
   @Input('title') title: string = 'Section Title';
-  @Input('slug') slug: string = 'slug';
+  @Input('slug') slug:
+    | 'truyen-noi-bat'
+    | 'truyen-hoan-thanh'
+    | 'truyen-cap-nhat'
+    | 'truyen-nam'
+    | 'truyen-nu' = 'truyen-noi-bat';
   @Input('comics') comics: Comic[] = [];
 }

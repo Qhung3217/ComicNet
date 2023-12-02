@@ -5,7 +5,7 @@
   <app-section-comic-panel
     title="Truyện nổi bật"
     [comics]="popularComics"
-    slug="popular"
+    slug="truyen-noi-bat"
   >
     <app-hot-icon></app-hot-icon>
   </app-section-comic-panel>
@@ -13,7 +13,7 @@
   <app-section-comic-panel
     title="Truyện hoàn thành"
     [comics]="completedComics"
-    slug="completed"
+    slug="truyen-hoan-thanh"
   >
     <app-check-wavy-icon></app-check-wavy-icon>
   </app-section-comic-panel>
@@ -21,16 +21,24 @@
   <app-section-comic-panel
     title="Mới cập nhật"
     [comics]="updatedComics"
-    slug="updated"
+    slug="truyen-cap-nhat"
   >
     <app-update-icon></app-update-icon>
   </app-section-comic-panel>
 
-  <app-section-comic-panel title="Truyện nam" [comics]="boyComics" slug="boy">
+  <app-section-comic-panel
+    title="Truyện nam"
+    [comics]="boyComics"
+    slug="truyen-nam"
+  >
     <app-male-icon></app-male-icon>
   </app-section-comic-panel>
 
-  <app-section-comic-panel title="Truyện nữ" [comics]="girlComics" slug="girl">
+  <app-section-comic-panel
+    title="Truyện nữ"
+    [comics]="girlComics"
+    slug="truyen-nu"
+  >
     <app-female-icon></app-female-icon>
   </app-section-comic-panel>
 </main>

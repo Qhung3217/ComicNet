@@ -1,16 +1,20 @@
-import { NgModule, isDevMode } from '@angular/core';
-import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
+import { NgModule, isDevMode, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppRoutingModule } from './app-routing.module';
-import { appReducer, appEffects } from './core/reducers/app';
 import { AppComponent } from './app.component';
+import { appEffects, appReducer } from './core/reducers/app';
 import { FooterComponent } from './views/base/footer/footer.component';
 import { HeaderModule } from './views/base/header/header.module';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { registerLocaleData } from '@angular/common';
+import localeVi from '@angular/common/locales/vi';
 
+// Register the Vietnamese locale data
+registerLocaleData(localeVi, 'vi');
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -23,7 +27,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     EffectsModule.forRoot(appEffects),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
-  providers: [],
+  providers: [{ provide: LOCALE_ID, useValue: 'vi' }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
