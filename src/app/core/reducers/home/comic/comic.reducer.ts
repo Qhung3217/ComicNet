@@ -5,6 +5,7 @@ import {
   ComicAction,
   RESET_COMIC_RESPONSE,
   SET_BOY_COMIC,
+  SET_COMIC_DETAIL,
   SET_COMIC_RESPONSE,
   SET_COMPLETED_COMIC,
   SET_CURRENT_PAGE,
@@ -15,12 +16,14 @@ import {
   SET_STATUS_AND_CURRENT_PAGE,
   SET_UPDATED_COMIC,
 } from './comic.actions';
+import { ComicDetail } from 'src/app/core/interfaces/base/comic-detail.interface';
 
 export interface ComicState {
   comics: Comic[];
   totalPages: number;
   currentPage: number;
   status: string;
+  comicDetail: ComicDetail | null;
   promotionComics: {
     recommendComics: ComicRecommend[];
     popularComics: ComicsResponse;
@@ -36,6 +39,7 @@ const initialState = {
   totalPages: 1,
   currentPage: 1,
   status: 'all',
+  comicDetail: null,
   promotionComics: {
     recommendComics: [],
     popularComics: {
@@ -217,6 +221,11 @@ export function comicReducer(
         currentPage: 1,
         totalPages: 1,
         comics: [],
+      };
+    case SET_COMIC_DETAIL:
+      return {
+        ...state,
+        comicDetail: { ...action.payload },
       };
     default:
       return state;

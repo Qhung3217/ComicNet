@@ -8,6 +8,7 @@ import { AppState } from '../../app';
 import {
   FETCH_BOY_COMIC,
   FETCH_COMICS_BY_GENRE_ID,
+  FETCH_COMIC_DETAIL,
   FETCH_COMPLETED_COMIC,
   FETCH_DATA_HOME_PAGE,
   FETCH_GIRL_COMIC,
@@ -15,8 +16,10 @@ import {
   FETCH_POPULAR_COMIC,
   FETCH_TOP_COMIC,
   FETCH_UPDATED_COMIC,
+  FetchComicDetail,
   FetchTopComic,
   SetBoyComic,
+  SetComicDetail,
   SetComicResponse,
   SetCompletedComic,
   SetDataHomePage,
@@ -24,6 +27,7 @@ import {
   SetPopularComic,
   SetUpdatedComic,
 } from './comic.actions';
+import { ComicDetail } from 'src/app/core/interfaces/base/comic-detail.interface';
 
 @Injectable()
 export class ComicEffects {
@@ -155,6 +159,15 @@ export class ComicEffects {
       map((response: ComicsResponse) => new SetComicResponse(response))
     )
   );
+
+  fetchComicDetail = createEffect(() =>
+    this.action$.pipe(
+      ofType<FetchComicDetail>(FETCH_COMIC_DETAIL),
+      switchMap((action) => this.apiService.getComicDetail(action.payload)),
+      map((response: ComicDetail) => new SetComicDetail(response))
+    )
+  );
+
   constructor(
     private action$: Actions,
     private apiService: ApiService,
