@@ -6,7 +6,7 @@
       class="border-transparent border-4 rounded-xl sm:flex items-start gap-x-6 md:p-4 md:border-white"
     >
       <figure
-        class="border-primary border aspect-[2/3] overflow-hidden sm:min-w-[190px] md:min-w-[224px] w-56 mx-auto rounded"
+        class="border-primary border aspect-[2/3] overflow-hidden sm:min-w-[190px] md:min-w-[224px] w-56 mx-auto rounded md:mx-0"
       >
         <img
           [src]="comic?.thumbnail"
@@ -25,7 +25,7 @@
         <aside class="my-1">
           <nav class="flex items-center gap-2 flex-wrap">
             <a
-              routerLink="genre"
+              [routerLink]="['/the-loai', genre.id]"
               class="text-sm font-bold py-0.5 px-2 border-2 border-purple-300 rounded capitalize hover:bg-purple-300 press-state"
               *ngFor="let genre of comic?.genres"
             >

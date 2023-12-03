@@ -15,6 +15,7 @@ import {
   FetchGenres,
   SetGenreSelected,
 } from 'src/app/core/reducers/home/genres';
+import { Status } from 'src/app/core/types/status.type';
 
 @Component({
   selector: 'app-genre-page',
@@ -108,6 +109,7 @@ export class GenrePageComponent implements OnInit, OnDestroy {
       this.route.queryParams.subscribe((params) => {
         const page = +params['page'];
         const status = params['status'];
+        this.maintainParams(page, status);
         if (
           status !== this.comicsByGenreId?.status &&
           page !== this.comicsByGenreId?.currentPage
@@ -125,15 +127,56 @@ export class GenrePageComponent implements OnInit, OnDestroy {
       })
     );
   }
+  private maintainParams(page: number, status: Status) {
+    switch (status) {
+      case 'all':
+        status = 'all';
+        break;
+      case 'completed':
+        status = 'completed';
+        break;
+      case 'ongoing':
+        status = 'ongoing';
+        break;
+      default:
+        status = 'all';
+    }
+
+    if (!page)
+      this.router.navigate([], {
+        queryParams: {
+          status: status,
+          page: page ? page : 1,
+        },
+        queryParamsHandling: 'merge',
+      });
+  }
   private setGenreSelected() {
+    /**
+     * Genre id of comic detail api not match 100% with genre id of genres api
+     */
     this.genreSelected = this.genres?.find(
-      (genre) => genre.id === this.genreId
+      (genre) =>
+        genre.id === this.genreId || genre.id.includes(this.genreId as string)
     );
+
     if (this.genreSelected) {
-      this.store.dispatch(new SetGenreSelected(this.genreSelected));
-      if (!this.comicsByGenreId || this.comicsByGenreId.comics.length === 0) {
-        this.isLoading = true;
-        this.store.dispatch(new FetchComicsByGenreId());
+      if (this.genreSelected.id !== this.genreId) {
+        /**
+         * Handle the case where genre id not match with genre id of genres api
+         */
+        this.router.navigate(['/the-loai/', this.genreSelected.id], {
+          queryParams: {
+            page: 1,
+            status: 'all',
+          },
+        });
+      } else {
+        this.store.dispatch(new SetGenreSelected(this.genreSelected));
+        if (!this.comicsByGenreId || this.comicsByGenreId.comics.length === 0) {
+          this.isLoading = true;
+          this.store.dispatch(new FetchComicsByGenreId());
+        }
       }
     }
   }
