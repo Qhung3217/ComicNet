@@ -32,11 +32,6 @@ import { GenrePageComponent } from './pages/genre-page/genre-page.component';
 import { HomeComponent } from './pages/home/home.component';
 import { SectionComicPanelComponent } from './pages/home/section-comic-panel/section-comic-panel.component';
 import { SectionRecommendComponent } from './pages/home/section-recommend/section-recommend.component';
-import { TopAllComponent } from './pages/top-page/top-all/top-all.component';
-import { TopDailyComponent } from './pages/top-page/top-daily/top-daily.component';
-import { TopMonthlyComponent } from './pages/top-page/top-monthly/top-monthly.component';
-import { TopPageComponent } from './pages/top-page/top-page.component';
-import { TopWeeklyComponent } from './pages/top-page/top-weekly/top-weekly.component';
 
 @NgModule({
   declarations: [
@@ -44,11 +39,6 @@ import { TopWeeklyComponent } from './pages/top-page/top-weekly/top-weekly.compo
     SectionRecommendComponent,
     SectionComicPanelComponent,
     GenrePageComponent,
-    TopPageComponent,
-    TopAllComponent,
-    TopDailyComponent,
-    TopMonthlyComponent,
-    TopWeeklyComponent,
   ],
   imports: [
     CommonModule,
