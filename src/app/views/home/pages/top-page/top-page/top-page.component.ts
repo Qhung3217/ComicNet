@@ -42,7 +42,17 @@ export class TopPageComponent implements OnInit, OnDestroy {
             status: status,
             page: page ? page : 1,
           },
+          queryParamsHandling: 'merge',
         });
+    });
+  }
+
+  changeStatus(status: Status) {
+    this.router.navigate([], {
+      queryParams: {
+        status,
+        page: 1,
+      },
     });
   }
 }

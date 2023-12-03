@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Subscription, Observable } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { Comic } from 'src/app/core/interfaces/base/comic.interface';
 import { AppState } from 'src/app/core/reducers/app';
 import {

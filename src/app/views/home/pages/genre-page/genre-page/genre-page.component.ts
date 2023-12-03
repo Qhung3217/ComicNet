@@ -42,6 +42,7 @@ export class GenrePageComponent implements OnInit, OnDestroy {
     this.onRouterNavigateEnd();
     this.setComicsByGenreId();
   }
+
   ngOnDestroy(): void {
     this.subcriptions.forEach((sub) => sub?.unsubscribe());
   }
@@ -52,8 +53,10 @@ export class GenrePageComponent implements OnInit, OnDestroy {
         // console.log('router all event ', event);
         if (event instanceof NavigationEnd) {
           console.log('router event ', event, this.genreSelected);
-          if (this.genreSelected)
+          if (this.genreSelected) {
+            this.removeComics();
             this.store.dispatch(new FetchComicsByGenreId());
+          }
         }
       })
     );
@@ -112,9 +115,10 @@ export class GenrePageComponent implements OnInit, OnDestroy {
           this.store.dispatch(
             new SetStatusAndCurrentPage({ status: status, currentPage: page })
           );
-        else if (status !== this.comicsByGenreId?.status)
+        else if (status !== this.comicsByGenreId?.status) {
+          this.removeComics();
           this.store.dispatch(new SetStatus(status));
-        else if (page !== this.comicsByGenreId?.currentPage)
+        } else if (page !== this.comicsByGenreId?.currentPage)
           this.store.dispatch(
             new SetCurrentPage({ page: page, category: 'default' })
           );
@@ -132,5 +136,8 @@ export class GenrePageComponent implements OnInit, OnDestroy {
         this.store.dispatch(new FetchComicsByGenreId());
       }
     }
+  }
+  private removeComics() {
+    if (this.comicsByGenreId) this.comicsByGenreId.comics = [];
   }
 }
