@@ -28,7 +28,6 @@ import { SkeletonLoadingComponent } from './../../shared/components/skeleton-loa
 import { RowLastIconComponent } from './../../shared/icons/row-last-icon/row-last-icon.component';
 import { ArrayStringToStringPipe } from './../../shared/pipes/array-string-to-string/array-string-to-string.pipe';
 import { HomeRoutingModule } from './home-routing.module';
-import { DetailPageComponent } from './pages/detail-page/detail-page.component';
 import { GenrePageComponent } from './pages/genre-page/genre-page.component';
 import { HomeComponent } from './pages/home/home.component';
 import { SectionComicPanelComponent } from './pages/home/section-comic-panel/section-comic-panel.component';
@@ -54,7 +53,6 @@ import { TopWeeklyComponent } from './pages/top-page/top-weekly/top-weekly.compo
     TopDailyComponent,
     TopMonthlyComponent,
     TopWeeklyComponent,
-    DetailPageComponent,
   ],
   imports: [
     CommonModule,

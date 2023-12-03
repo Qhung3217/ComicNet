@@ -10,7 +10,7 @@ import { TopDailyComponent } from './pages/top-page/top-daily/top-daily.componen
 import { TopMonthlyComponent } from './pages/top-page/top-monthly/top-monthly.component';
 import { TopPageComponent } from './pages/top-page/top-page.component';
 import { TopWeeklyComponent } from './pages/top-page/top-weekly/top-weekly.component';
-import { DetailPageComponent } from './pages/detail-page/detail-page.component';
+import { DetailPageComponent } from './pages/detail-page/detail-page/detail-page.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -30,8 +30,10 @@ const routes: Routes = [
   { path: 'truyen/:category', component: MorePageComponent },
   {
     path: ':comic-slug',
-    component: DetailPageComponent,
-    resolve: [FetchComicDetailResolver],
+    loadChildren: () =>
+      import('./pages/detail-page/detail-page.module').then(
+        (m) => m.DetailPageModule
+      ),
   },
 ];
 
