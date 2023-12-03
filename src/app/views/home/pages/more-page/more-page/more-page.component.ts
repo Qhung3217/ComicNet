@@ -35,12 +35,11 @@ export class MorePageComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private store: Store<AppState>,
     private router: Router
-  ) {
-    this.retrievePageFromUrl();
-  }
+  ) {}
 
   ngOnInit(): void {
     this.retrieveTitleFromUrl();
+    this.retrievePageFromUrl();
     this.getData();
   }
 
