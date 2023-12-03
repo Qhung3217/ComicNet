@@ -32,7 +32,6 @@ import { GenrePageComponent } from './pages/genre-page/genre-page.component';
 import { HomeComponent } from './pages/home/home.component';
 import { SectionComicPanelComponent } from './pages/home/section-comic-panel/section-comic-panel.component';
 import { SectionRecommendComponent } from './pages/home/section-recommend/section-recommend.component';
-import { NewPageComponent } from './pages/new-page/new-page.component';
 import { TopAllComponent } from './pages/top-page/top-all/top-all.component';
 import { TopDailyComponent } from './pages/top-page/top-daily/top-daily.component';
 import { TopMonthlyComponent } from './pages/top-page/top-monthly/top-monthly.component';
@@ -45,7 +44,6 @@ import { TopWeeklyComponent } from './pages/top-page/top-weekly/top-weekly.compo
     SectionRecommendComponent,
     SectionComicPanelComponent,
     GenrePageComponent,
-    NewPageComponent,
     TopPageComponent,
     TopAllComponent,
     TopDailyComponent,

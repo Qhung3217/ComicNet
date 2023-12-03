@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { GenrePageComponent } from './pages/genre-page/genre-page.component';
 import { HomeComponent } from './pages/home/home.component';
-import { NewPageComponent } from './pages/new-page/new-page.component';
+import { NewPageComponent } from './pages/new-page/new-page/new-page.component';
 import { TopAllComponent } from './pages/top-page/top-all/top-all.component';
 import { TopDailyComponent } from './pages/top-page/top-daily/top-daily.component';
 import { TopMonthlyComponent } from './pages/top-page/top-monthly/top-monthly.component';
@@ -12,7 +12,11 @@ import { TopWeeklyComponent } from './pages/top-page/top-weekly/top-weekly.compo
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'the-loai/:genre?status=all&page=1', component: GenrePageComponent },
-  { path: 'truyen-moi', component: NewPageComponent },
+  {
+    path: 'truyen-moi',
+    loadChildren: () =>
+      import('./pages/new-page/new-page.module').then((m) => m.NewPageModule),
+  },
   {
     path: 'top',
     component: TopPageComponent,
