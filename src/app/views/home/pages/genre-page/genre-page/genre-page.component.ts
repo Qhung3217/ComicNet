@@ -7,6 +7,7 @@ import { AppState } from 'src/app/core/reducers/app';
 import {
   ComicState,
   FetchComicsByGenreId,
+  ResetComicResponse,
   SetCurrentPage,
   SetStatus,
   SetStatusAndCurrentPage,
@@ -46,6 +47,8 @@ export class GenrePageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subcriptions.forEach((sub) => sub?.unsubscribe());
+    if (this.comicsByGenreId && this.comicsByGenreId?.comics.length > 0)
+      this.store.dispatch(new ResetComicResponse());
   }
 
   private onRouterNavigateEnd() {
@@ -152,31 +155,15 @@ export class GenrePageComponent implements OnInit, OnDestroy {
       });
   }
   private setGenreSelected() {
-    /**
-     * Genre id of comic detail api not match 100% with genre id of genres api
-     */
     this.genreSelected = this.genres?.find(
-      (genre) =>
-        genre.id === this.genreId || genre.id.includes(this.genreId as string)
+      (genre) => genre.id === this.genreId
     );
 
     if (this.genreSelected) {
-      if (this.genreSelected.id !== this.genreId) {
-        /**
-         * Handle the case where genre id not match with genre id of genres api
-         */
-        this.router.navigate(['/the-loai/', this.genreSelected.id], {
-          queryParams: {
-            page: 1,
-            status: 'all',
-          },
-        });
-      } else {
-        this.store.dispatch(new SetGenreSelected(this.genreSelected));
-        if (!this.comicsByGenreId || this.comicsByGenreId.comics.length === 0) {
-          this.isLoading = true;
-          this.store.dispatch(new FetchComicsByGenreId());
-        }
+      this.store.dispatch(new SetGenreSelected(this.genreSelected));
+      if (!this.comicsByGenreId || this.comicsByGenreId.comics.length === 0) {
+        this.isLoading = true;
+        this.store.dispatch(new FetchComicsByGenreId());
       }
     }
   }
