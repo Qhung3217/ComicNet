@@ -9,6 +9,7 @@ import { EyeIconComponent } from 'src/app/shared/icons/eye-icon/eye-icon.compone
 import { HeartFillIconComponent } from 'src/app/shared/icons/heart-fill-icon/heart-fill-icon.component';
 import { RowFirstIconComponent } from 'src/app/shared/icons/row-first-icon/row-first-icon.component';
 import { RowLastIconComponent } from 'src/app/shared/icons/row-last-icon/row-last-icon.component';
+import { ToggleButtonReadMoreDirective } from './directives/toggle-button-read-more/toggle-button-read-more.directive';
 
 const routes: Routes = [
   {
@@ -19,7 +20,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [DetailPageComponent],
+  declarations: [DetailPageComponent, ToggleButtonReadMoreDirective],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
