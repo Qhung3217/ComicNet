@@ -48,7 +48,7 @@
             >{{ comic?.followers | number : "1.0-0" }}
           </aside>
         </div>
-        <div class="mt-2">
+        <div class="mt-2" appToggleButtonReadMore>
           <p
             [ngClass]="{
               'line-clamp-5': !isShowMore,
@@ -58,10 +58,10 @@
             {{ comic?.description }}
           </p>
           <span
+            id="readMoreBtn"
             class="font-semibold underline lg:hover:underline lg:no-underline cursor-pointer press-state"
             (click)="isShowMore ? (isShowMore = false) : (isShowMore = true)"
           >
-            <!-- TODO: hidden these button if paragraph have already fully show -->
             <span *ngIf="!isShowMore">Xem thêm </span>
             <span *ngIf="isShowMore">Rút gọn</span>
           </span>
