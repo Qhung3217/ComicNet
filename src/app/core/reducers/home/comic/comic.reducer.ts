@@ -1,10 +1,13 @@
 import { ComicsResponse } from 'src/app/core/interfaces/api-response/comics-response.interface';
+import { SingleChapterResponse } from 'src/app/core/interfaces/api-response/single-chapter-response.interface';
+import { ComicDetail } from 'src/app/core/interfaces/base/comic-detail.interface';
 import { ComicRecommend } from 'src/app/core/interfaces/base/comic-recommend.interface';
 import { Comic } from 'src/app/core/interfaces/base/comic.interface';
 import {
   ComicAction,
   RESET_COMIC_RESPONSE,
   SET_BOY_COMIC,
+  SET_CHAPTER_RESPONSE,
   SET_COMIC_DETAIL,
   SET_COMIC_RESPONSE,
   SET_COMPLETED_COMIC,
@@ -16,7 +19,6 @@ import {
   SET_STATUS_AND_CURRENT_PAGE,
   SET_UPDATED_COMIC,
 } from './comic.actions';
-import { ComicDetail } from 'src/app/core/interfaces/base/comic-detail.interface';
 
 export interface ComicState {
   comics: Comic[];
@@ -24,6 +26,7 @@ export interface ComicState {
   currentPage: number;
   status: string;
   comicDetail: ComicDetail | null;
+  chapterResponse: SingleChapterResponse | null;
   promotionComics: {
     recommendComics: ComicRecommend[];
     popularComics: ComicsResponse;
@@ -40,6 +43,7 @@ const initialState = {
   currentPage: 1,
   status: 'all',
   comicDetail: null,
+  chapterResponse: null,
   promotionComics: {
     recommendComics: [],
     popularComics: {
@@ -226,6 +230,11 @@ export function comicReducer(
       return {
         ...state,
         comicDetail: { ...action.payload },
+      };
+    case SET_CHAPTER_RESPONSE:
+      return {
+        ...state,
+        chapterResponse: { ...action.payload },
       };
     default:
       return state;

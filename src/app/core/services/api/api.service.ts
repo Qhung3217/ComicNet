@@ -14,6 +14,9 @@ import {
 import { mapJsonArrayToGenreDetails } from '../../mappers/genre.mapper';
 import { TopComicRequest } from '../../interfaces/top-comic-request.interface';
 import { Status } from '../../types/status.type';
+import { ChapterRequest } from '../../interfaces/chapter-request.interface';
+import { mapJsonToSingleChapterResponse } from '../../mappers/chapter.mappter';
+import { SingleChapterResponse } from '../../interfaces/api-response/single-chapter-response.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -143,6 +146,24 @@ export class ApiService {
     return this.http
       .get<GenreDetail[]>(BASE_URL + 'genres')
       .pipe(map((response) => mapJsonArrayToGenreDetails(response)));
+  }
+
+  /* --------------- ///////////// -------------- */
+
+  /* -------------------------------------------- */
+  /*                  CHAPTER APIs                */
+  /* -------------------------------------------- */
+
+  getChapter(request: ChapterRequest) {
+    return this.http
+      .get<SingleChapterResponse>(
+        BASE_URL +
+          'comics/' +
+          request.comicId +
+          '/chapters/' +
+          request.chapterId
+      )
+      .pipe(map((response) => mapJsonToSingleChapterResponse(response)));
   }
 
   /* --------------- ///////////// -------------- */

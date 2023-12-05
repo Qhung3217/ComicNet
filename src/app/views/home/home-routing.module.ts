@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
@@ -31,6 +31,13 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/more-page/more-page.module').then(
         (m) => m.MorePageModule
+      ),
+  },
+  {
+    path: ':comic-slug/:chapter-id',
+    loadChildren: () =>
+      import('./pages/chapter-page/chapter-page.module').then(
+        (m) => m.ChapterPageModule
       ),
   },
   {
