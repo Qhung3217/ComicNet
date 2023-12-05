@@ -1,8 +1,10 @@
 import { Action } from '@ngrx/store';
 import { ComicsResponse } from 'src/app/core/interfaces/api-response/comics-response.interface';
-import { ComicRecommend } from 'src/app/core/interfaces/base/comic-recommend.interface';
-import { TopComicRequest } from './../../../interfaces/top-comic-request.interface';
 import { ComicDetail } from 'src/app/core/interfaces/base/comic-detail.interface';
+import { ComicRecommend } from 'src/app/core/interfaces/base/comic-recommend.interface';
+import { SingleChapterResponse } from './../../../interfaces/api-response/single-chapter-response.interface';
+import { TopComicRequest } from './../../../interfaces/top-comic-request.interface';
+import { ChapterRequest } from 'src/app/core/interfaces/chapter-request.interface';
 
 export const FETCH_COMICS_BY_GENRE_ID =
   '[FETCH_COMICS_BY_GENRE_ID] Fetch comics by genre id';
@@ -17,6 +19,7 @@ export const FETCH_BOY_COMIC = '[FETCH_BOY_COMIC] Fetch boy comic';
 export const FETCH_GIRL_COMIC = '[FETCH_GIRL_COMIC] Fetch girl comic';
 export const FETCH_TOP_COMIC = '[FETCH_TOP_COMIC] Fetch top comic';
 export const FETCH_COMIC_DETAIL = '[FETCH_COMIC_DETAIL] Fetch comic detail';
+export const FETCH_CHAPTER = '[FETCH_CHAPTER] Fetch chapter';
 
 export const SET_COMIC_RESPONSE = '[SET_COMIC_RESPONSE] Set comic response';
 export const SET_DATA_HOME_PAGE = '[SET_DATA_HOME_PAGE] Set data home page';
@@ -32,6 +35,8 @@ export const SET_STATUS_AND_CURRENT_PAGE =
 export const RESET_COMIC_RESPONSE =
   '[RESET_COMIC_RESPONSE] Reset comic response';
 export const SET_COMIC_DETAIL = '[SET_COMIC_DETAIL] Set comic detail';
+export const SET_CHAPTER_RESPONSE =
+  '[SET_CHAPTER_RESPONSE] Set chapter response';
 
 export class FetchComicsByGenreId implements Action {
   readonly type = FETCH_COMICS_BY_GENRE_ID;
@@ -87,6 +92,11 @@ export class FetchGirlComic implements Action {
 export class FetchComicDetail implements Action {
   readonly type = FETCH_COMIC_DETAIL;
   constructor(public payload: string) {}
+}
+
+export class FetchChapter implements Action {
+  readonly type = FETCH_CHAPTER;
+  constructor(public payload: ChapterRequest) {}
 }
 
 export class SetComicResponse implements Action {
@@ -169,6 +179,11 @@ export class SetComicDetail implements Action {
   constructor(public payload: ComicDetail) {}
 }
 
+export class SetChapter implements Action {
+  readonly type = SET_CHAPTER_RESPONSE;
+  constructor(public payload: SingleChapterResponse) {}
+}
+
 export type ComicAction =
   | SetComicResponse
   | SetCurrentPage
@@ -181,4 +196,5 @@ export type ComicAction =
   | SetUpdatedComic
   | SetCompletedComic
   | ResetComicResponse
-  | SetComicDetail;
+  | SetComicDetail
+  | SetChapter;

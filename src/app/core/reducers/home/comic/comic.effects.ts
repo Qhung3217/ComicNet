@@ -1,3 +1,4 @@
+import { SingleChapterResponse } from './../../../interfaces/api-response/single-chapter-response.interface';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -7,6 +8,7 @@ import { ApiService } from 'src/app/core/services/api/api.service';
 import { AppState } from '../../app';
 import {
   FETCH_BOY_COMIC,
+  FETCH_CHAPTER,
   FETCH_COMICS_BY_GENRE_ID,
   FETCH_COMIC_DETAIL,
   FETCH_COMPLETED_COMIC,
@@ -16,9 +18,11 @@ import {
   FETCH_POPULAR_COMIC,
   FETCH_TOP_COMIC,
   FETCH_UPDATED_COMIC,
+  FetchChapter,
   FetchComicDetail,
   FetchTopComic,
   SetBoyComic,
+  SetChapter,
   SetComicDetail,
   SetComicResponse,
   SetCompletedComic,
@@ -165,6 +169,14 @@ export class ComicEffects {
       ofType<FetchComicDetail>(FETCH_COMIC_DETAIL),
       switchMap((action) => this.apiService.getComicDetail(action.payload)),
       map((response: ComicDetail) => new SetComicDetail(response))
+    )
+  );
+
+  fetchChapter = createEffect(() =>
+    this.action$.pipe(
+      ofType<FetchChapter>(FETCH_CHAPTER),
+      switchMap((action) => this.apiService.getChapter(action.payload)),
+      map((response: SingleChapterResponse) => new SetChapter(response))
     )
   );
 
