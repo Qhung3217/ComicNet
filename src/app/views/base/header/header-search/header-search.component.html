@@ -1,15 +1,63 @@
 <div
-  class="flex justify-between items-center text-black border px-3 py-2 rounded-full focus-within:border-primary transition-colors duration-200"
+  class="flex justify-between items-center text-black border px-3 py-2 rounded-full focus-within:border-primary transition-colors duration-200 relative"
 >
   <input
     type="text"
     name="searchKey"
     placeholder="Tìm truyện/tác giả"
     class="text-sm flex-1 outline-none appearance-none"
+    (ngModelChange)="onInputChange($event)"
+    [ngModel]="query"
+    (keyup)="onKeyup()"
+    (focus)="showSearchSuggestion = true"
+    (blur)="showSearchSuggestion = false"
+    autocomplete="off"
+    #input
   />
+  <div
+    class="absolute bottom-0 inset-x-0 mx-auto w-10/12 search-loading-indicator rounded-full shadow translate-y-1/2 transition"
+    [ngClass]="{
+      'block h-1 opacity-1 visible': showLoading,
+      'hidden opacity-0 invisible': !showLoading
+    }"
+  ></div>
   <button
     class="block w-10 h-4 flex-shrink-0 cursor-pointer pl-3 active:opacity-70 active:text-primary transition-colors duration-200"
+    *ngIf="query === ''"
   >
     <app-search-icon></app-search-icon>
   </button>
+  <button
+    class="block w-10 h-5 flex-shrink-0 cursor-pointer pl-3 active:opacity-70 active:text-primary transition-colors duration-200"
+    (click)="onRemoveQuery()"
+    *ngIf="query !== ''"
+  >
+    <app-x-icon class="block w-3 h-3 mr-2 ml-auto"></app-x-icon>
+  </button>
+  <ul
+    class="z-10 absolute top-11 left-1/2 -translate-x-1/2 w-full lg:w-72 h-max max-h-80 shadow-md overflow-auto rounded bg-white"
+    [ngClass]="{
+      hidden: !showSearchSuggestion,
+      block: showSearchSuggestion && query !== ''
+    }"
+  >
+    <li *ngFor="let comic of comics; let i = index">
+      <app-search-comic-card
+        [comic]="comic"
+        [brief]="true"
+        [lazy]="i < 4"
+        (mousedown)="onClickSuggest($event)"
+      ></app-search-comic-card>
+    </li>
+    <li
+      *ngIf="showViewMore && comics.length > 0"
+      (mousedown)="onClickSuggest($event)"
+    >
+      <a
+        routerLink="search"
+        class="text-xs text-primary text-center block py-1 font-bold press-state hover:bg-purple-200"
+        >Xem thêm ...</a
+      >
+    </li>
+  </ul>
 </div>
