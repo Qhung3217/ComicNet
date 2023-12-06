@@ -20,11 +20,11 @@ import {
 })
 export class MorePageComponent implements OnInit, OnDestroy {
   @Input() title:
-    | 'Truyện nỗi bật'
+    | 'Truyện nổi bật'
     | 'Truyện hoàn thành'
     | 'Truyện mới cập nhật'
     | 'Truyện nam'
-    | 'Truyện nữ' = 'Truyện nỗi bật';
+    | 'Truyện nữ' = 'Truyện nổi bật';
   page: number = 1;
   subscriptions: Subscription[] = [];
   isLoading = false;
@@ -40,7 +40,6 @@ export class MorePageComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.retrieveTitleFromUrl();
     this.retrievePageFromUrl();
-    this.getData();
   }
 
   private retrievePageFromUrl() {
@@ -61,33 +60,58 @@ export class MorePageComponent implements OnInit, OnDestroy {
     );
   }
   private retrieveTitleFromUrl() {
-    const category = this.route.snapshot.paramMap.get('category');
-    console.log('category: ', category);
+    this.subscriptions.push(
+      this.route.params.subscribe((params: Params) => {
+        const category = Object.values(params)[0];
+        console.log('category: ', category);
 
-    switch (category) {
-      case 'truyen-hoan-thanh':
-        this.title = 'Truyện hoàn thành';
-        return;
-      case 'truyen-noi-bat':
-        this.title = 'Truyện nỗi bật';
-        return;
-      case 'truyen-cap-nhat':
-        this.title = 'Truyện mới cập nhật';
-        return;
-      case 'truyen-nam':
-        this.title = 'Truyện nam';
-        return;
-      case 'truyen-nu':
-        this.title = 'Truyện nữ';
-        return;
-      default:
-        this.showError();
-    }
+        switch (category) {
+          case 'truyen-hoan-thanh':
+            this.title = 'Truyện hoàn thành';
+            this.fetchData();
+
+            this.initialValue();
+            this.getData();
+            return;
+          case 'truyen-noi-bat':
+            this.title = 'Truyện nổi bật';
+            this.fetchData();
+            this.initialValue();
+            this.getData();
+            return;
+          case 'truyen-cap-nhat':
+            this.title = 'Truyện mới cập nhật';
+            this.fetchData();
+            this.initialValue();
+            this.getData();
+            return;
+          case 'truyen-nam':
+            this.title = 'Truyện nam';
+            this.fetchData();
+            this.initialValue();
+            this.getData();
+            return;
+          case 'truyen-nu':
+            this.title = 'Truyện nữ';
+            this.fetchData();
+            this.initialValue();
+            this.getData();
+            return;
+          default:
+            this.showError();
+        }
+      })
+    );
+  }
+  private initialValue() {
+    this.comics = [];
+    this.page = 1;
+    this.totalPages = 1;
   }
 
   private getData() {
     switch (this.title) {
-      case 'Truyện nỗi bật':
+      case 'Truyện nổi bật':
         this.getPopularData();
         return;
 
@@ -113,7 +137,7 @@ export class MorePageComponent implements OnInit, OnDestroy {
   }
   private fetchData() {
     switch (this.title) {
-      case 'Truyện nỗi bật':
+      case 'Truyện nổi bật':
         this.store.dispatch(new FetchPopularComic());
         return;
 
@@ -139,7 +163,7 @@ export class MorePageComponent implements OnInit, OnDestroy {
   }
   onPageChanged(page: number): void {
     switch (this.title) {
-      case 'Truyện nỗi bật':
+      case 'Truyện nổi bật':
         this.store.dispatch(
           new SetCurrentPage({ page: page, category: 'popular' })
         );
