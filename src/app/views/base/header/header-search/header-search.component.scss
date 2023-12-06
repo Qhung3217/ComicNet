@@ -1,0 +1,29 @@
+.search-loading-indicator {
+  background: linear-gradient(
+    to right,
+    #4ade80,
+    #00d0b9,
+    #00bcf2,
+    #00a0ff,
+    #0076ff,
+    #385ef2,
+    #5441e0,
+    #6a12cb,
+    #6a12cb,
+    #6a12cb,
+    #6a12cb,
+    #6a12cb
+  );
+  background-size: 600% 100%;
+  animation: gradient 500ms linear infinite alternate;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0%;
+  }
+
+  100% {
+    background-position: 100%;
+  }
+}

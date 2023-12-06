@@ -1,0 +1,93 @@
+<main class="max-w-7xl m-auto px-3 py-5 relative">
+  <hgroup class="text-center text-3xl sm:text-4xl mb-5">
+    <h1 class="font-bold">Tìm truyện tranh</h1>
+    <h2 class="text-base sm:text-lg font-medium">
+      Từ khóa: <span class="text-primary text-xl sm:text-2xl">{{ query }}</span>
+    </h2>
+  </hgroup>
+  <div class="relative min-h-[80px]">
+    <app-skeleton-loading *ngIf="comics.length === 0"></app-skeleton-loading>
+    <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 mb-[50px]">
+      <app-search-comic-card
+        [comic]="item"
+        [lazy]="i < 5 ? false : true"
+        *ngFor="
+          let i = index;
+          let item;
+          of: comics
+            | paginate
+              : {
+                  itemsPerPage: 36,
+                  currentPage: page,
+                  totalItems: totalPages * 36
+                }
+        "
+      ></app-search-comic-card>
+    </div>
+    <pagination-template
+      #p="paginationApi"
+      [maxSize]="5"
+      *ngIf="comics.length > 0"
+    >
+      <div class="flex items-center gap-x-2.5 justify-center">
+        <div class="" [class]="{ hidden: p.isFirstPage() }">
+          <a
+            *ngIf="!p.isFirstPage()"
+            routerLink=""
+            [queryParams]="{
+              page: p.previous()
+            }"
+            queryParamsHandling="merge"
+            class="w-9 aspect-square rounded-full block cursor-pointer bg-slate-100 hover:bg-slate-300"
+          >
+            <app-arrow-left-icon></app-arrow-left-icon>
+          </a>
+        </div>
+
+        <div
+          *ngFor="let page of p.pages"
+          class="text-base rounded-full border bg-slate-100 overflow-hidden"
+        >
+          <a
+            (click)="p.setCurrent(page.value)"
+            *ngIf="p.getCurrent() !== page.value"
+            appScrollTo
+            class="block"
+            routerLink="."
+            [queryParams]="{ page: page.value }"
+            queryParamsHandling="merge"
+          >
+            <span
+              class="flex w-9 aspect-square items-center justify-center cursor-pointer hover:bg-slate-300"
+              >{{ page.label }}</span
+            >
+          </a>
+          <div
+            *ngIf="p.getCurrent() === page.value"
+            class="bg-primary text-white"
+          >
+            <span
+              class="w-9 aspect-square rounded-full flex items-center justify-center"
+              >{{ page.label }}</span
+            >
+          </div>
+        </div>
+
+        <div class="" [class]="{ hidden: p.isLastPage() }">
+          <a
+            *ngIf="!p.isLastPage()"
+            routerLink=""
+            [queryParams]="{
+              page: p.next()
+            }"
+            queryParamsHandling="merge"
+            class="w-9 aspect-square rounded-full block cursor-pointer bg-slate-100 rotate-180 hover:bg-slate-300"
+          >
+            <app-arrow-left-icon></app-arrow-left-icon>
+          </a>
+        </div>
+      </div>
+    </pagination-template>
+  </div>
+</main>

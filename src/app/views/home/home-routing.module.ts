@@ -27,6 +27,13 @@ const routes: Routes = [
       import('./pages/top-page/top-page.module').then((m) => m.TopPageModule),
   },
   {
+    path: 'tim-truyen',
+    loadChildren: () =>
+      import('./pages/search-page/search-page.module').then(
+        (m) => m.SearchPageModule
+      ),
+  },
+  {
     path: 'truyen',
     loadChildren: () =>
       import('./pages/more-page/more-page.module').then(

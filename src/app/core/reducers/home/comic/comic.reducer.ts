@@ -6,6 +6,7 @@ import { Comic } from 'src/app/core/interfaces/base/comic.interface';
 import {
   ComicAction,
   RESET_COMIC_RESPONSE,
+  RESET_SEARCH_COMIC,
   SET_BOY_COMIC,
   SET_CHAPTER_RESPONSE,
   SET_COMIC_DETAIL,
@@ -15,6 +16,7 @@ import {
   SET_DATA_HOME_PAGE,
   SET_GIRL_COMIC,
   SET_POPULAR_COMIC,
+  SET_SEARCH_COMIC,
   SET_STATUS,
   SET_STATUS_AND_CURRENT_PAGE,
   SET_UPDATED_COMIC,
@@ -24,6 +26,7 @@ export interface ComicState {
   comics: Comic[];
   totalPages: number;
   currentPage: number;
+  searchComics: ComicsResponse;
   status: string;
   comicDetail: ComicDetail | null;
   chapterResponse: SingleChapterResponse | null;
@@ -41,6 +44,11 @@ const initialState = {
   comics: [],
   totalPages: 1,
   currentPage: 1,
+  searchComics: {
+    comics: [],
+    totalPages: 1,
+    currentPage: 1,
+  },
   status: 'all',
   comicDetail: null,
   chapterResponse: null,
@@ -235,6 +243,20 @@ export function comicReducer(
       return {
         ...state,
         chapterResponse: { ...action.payload },
+      };
+    case SET_SEARCH_COMIC:
+      return {
+        ...state,
+        searchComics: { ...action.payload },
+      };
+    case RESET_SEARCH_COMIC:
+      return {
+        ...state,
+        searchComics: {
+          currentPage: 1,
+          totalPages: 1,
+          comics: [],
+        },
       };
     default:
       return state;

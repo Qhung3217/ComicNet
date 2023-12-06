@@ -1,4 +1,4 @@
-import { ToggleButtonReadMoreDirective } from './toggle-button-read-more.directive';
+import ToggleButtonReadMoreDirective from './toggle-button-read-more.directive';
 
 describe('ToggleButtonReadMoreDirective', () => {
   it('should create an instance', () => {

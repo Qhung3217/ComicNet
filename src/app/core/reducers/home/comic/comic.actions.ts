@@ -5,6 +5,7 @@ import { ComicRecommend } from 'src/app/core/interfaces/base/comic-recommend.int
 import { SingleChapterResponse } from './../../../interfaces/api-response/single-chapter-response.interface';
 import { TopComicRequest } from './../../../interfaces/top-comic-request.interface';
 import { ChapterRequest } from 'src/app/core/interfaces/chapter-request.interface';
+import { SearchRequest } from 'src/app/core/interfaces/search-request.interface';
 
 export const FETCH_COMICS_BY_GENRE_ID =
   '[FETCH_COMICS_BY_GENRE_ID] Fetch comics by genre id';
@@ -20,6 +21,9 @@ export const FETCH_GIRL_COMIC = '[FETCH_GIRL_COMIC] Fetch girl comic';
 export const FETCH_TOP_COMIC = '[FETCH_TOP_COMIC] Fetch top comic';
 export const FETCH_COMIC_DETAIL = '[FETCH_COMIC_DETAIL] Fetch comic detail';
 export const FETCH_CHAPTER = '[FETCH_CHAPTER] Fetch chapter';
+export const FETCH_SEARCH_COMIC = '[FETCH_SEARCH_COMIC] Fetch search comic';
+export const FETCH_DATA_SEARCH_COMIC_PAGE =
+  '[FETCH_DATA_SEARCH_COMIC_PAGE] Fetch data search comic page';
 
 export const SET_COMIC_RESPONSE = '[SET_COMIC_RESPONSE] Set comic response';
 export const SET_DATA_HOME_PAGE = '[SET_DATA_HOME_PAGE] Set data home page';
@@ -37,6 +41,8 @@ export const RESET_COMIC_RESPONSE =
 export const SET_COMIC_DETAIL = '[SET_COMIC_DETAIL] Set comic detail';
 export const SET_CHAPTER_RESPONSE =
   '[SET_CHAPTER_RESPONSE] Set chapter response';
+export const SET_SEARCH_COMIC = '[SET_SEARCH_COMIC] Set search comic';
+export const RESET_SEARCH_COMIC = '[RESET_SEARCH_COMIC] Reset search comic';
 
 export class FetchComicsByGenreId implements Action {
   readonly type = FETCH_COMICS_BY_GENRE_ID;
@@ -97,6 +103,16 @@ export class FetchComicDetail implements Action {
 export class FetchChapter implements Action {
   readonly type = FETCH_CHAPTER;
   constructor(public payload: ChapterRequest) {}
+}
+
+export class FetchSearchComic implements Action {
+  readonly type = FETCH_SEARCH_COMIC;
+  constructor(public payload: SearchRequest) {}
+}
+
+export class FetchDataSearchComicPage implements Action {
+  readonly type = FETCH_DATA_SEARCH_COMIC_PAGE;
+  constructor(public payload: SearchRequest) {}
 }
 
 export class SetComicResponse implements Action {
@@ -184,6 +200,15 @@ export class SetChapter implements Action {
   constructor(public payload: SingleChapterResponse) {}
 }
 
+export class SetSearchComic implements Action {
+  readonly type = SET_SEARCH_COMIC;
+  constructor(public payload: ComicsResponse) {}
+}
+
+export class ResetSearchComic implements Action {
+  readonly type = RESET_SEARCH_COMIC;
+  constructor() {}
+}
 export type ComicAction =
   | SetComicResponse
   | SetCurrentPage
@@ -197,4 +222,6 @@ export type ComicAction =
   | SetCompletedComic
   | ResetComicResponse
   | SetComicDetail
-  | SetChapter;
+  | SetChapter
+  | SetSearchComic
+  | ResetSearchComic;
