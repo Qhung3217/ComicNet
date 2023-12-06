@@ -13,6 +13,7 @@ import {
   FETCH_COMIC_DETAIL,
   FETCH_COMPLETED_COMIC,
   FETCH_DATA_HOME_PAGE,
+  FETCH_DATA_SEARCH_COMIC_PAGE,
   FETCH_GIRL_COMIC,
   FETCH_NEW_COMIC,
   FETCH_POPULAR_COMIC,
@@ -21,6 +22,7 @@ import {
   FETCH_UPDATED_COMIC,
   FetchChapter,
   FetchComicDetail,
+  FetchDataSearchComicPage,
   FetchSearchComic,
   FetchTopComic,
   SetBoyComic,
@@ -188,6 +190,14 @@ export class ComicEffects {
       ofType<FetchSearchComic>(FETCH_SEARCH_COMIC),
       switchMap((action) => this.apiService.searchComic(action.payload)),
       map((response: ComicsResponse) => new SetSearchComic(response))
+    )
+  );
+
+  fetchDataSearchComicPage = createEffect(() =>
+    this.action$.pipe(
+      ofType<FetchDataSearchComicPage>(FETCH_DATA_SEARCH_COMIC_PAGE),
+      switchMap((action) => this.apiService.searchComic(action.payload)),
+      map((response: ComicsResponse) => new SetComicResponse(response))
     )
   );
 

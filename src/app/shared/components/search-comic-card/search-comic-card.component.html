@@ -25,10 +25,10 @@
   </figure>
   <div>
     <h1
-      class="capitalize"
+      class="capitalize font-bold"
       [ngClass]="{
         'text-lg leading-5': !brief,
-        'font-bold text-sm': brief
+        'text-sm': brief
       }"
     >
       {{ comic.title }}
@@ -38,7 +38,7 @@
           'font-normal': brief
         }"
       >
-        ({{ brief ? comic.status : "Chapter " + comic.lastChapter.name }})
+        ({{ brief ? comic.status : comic.lastChapter.name }})
       </span>
     </h1>
     <!-- <h4 class="text-sm font-bold text-emerald-500 flex items-center gap-1">

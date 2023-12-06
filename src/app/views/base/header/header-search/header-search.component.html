@@ -45,7 +45,7 @@
       <app-search-comic-card
         [comic]="comic"
         [brief]="true"
-        [lazy]="i < 4"
+        [lazy]="i < 4 ? false : true"
         (mousedown)="onClickSuggest($event)"
       ></app-search-comic-card>
     </li>
@@ -54,7 +54,11 @@
       (mousedown)="onClickSuggest($event)"
     >
       <a
-        routerLink="search"
+        routerLink="/tim-truyen"
+        [queryParams]="{
+          query: queryEncode,
+          page: 1,
+        }"
         class="text-xs text-primary text-center block py-1 font-bold press-state hover:bg-purple-200"
         >Xem thêm ...</a
       >

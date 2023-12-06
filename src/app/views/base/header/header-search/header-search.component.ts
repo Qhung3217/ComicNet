@@ -26,12 +26,16 @@ export class HeaderSearchComponent implements OnChanges {
   @ViewChild('input') inputElef!: ElementRef;
   showSearchSuggestion = false;
   showLoading = true;
+  queryEncode: string = '';
   constructor() {}
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['comics']) {
       console.log('onChange ' + this.showLoading + ' ' + new Date());
 
       this.showLoading = false;
+    }
+    if (changes['query'] && changes['query'].currentValue !== '') {
+      this.queryEncode = encodeURI(this.query);
     }
   }
 

@@ -22,6 +22,8 @@ export const FETCH_TOP_COMIC = '[FETCH_TOP_COMIC] Fetch top comic';
 export const FETCH_COMIC_DETAIL = '[FETCH_COMIC_DETAIL] Fetch comic detail';
 export const FETCH_CHAPTER = '[FETCH_CHAPTER] Fetch chapter';
 export const FETCH_SEARCH_COMIC = '[FETCH_SEARCH_COMIC] Fetch search comic';
+export const FETCH_DATA_SEARCH_COMIC_PAGE =
+  '[FETCH_DATA_SEARCH_COMIC_PAGE] Fetch data search comic page';
 
 export const SET_COMIC_RESPONSE = '[SET_COMIC_RESPONSE] Set comic response';
 export const SET_DATA_HOME_PAGE = '[SET_DATA_HOME_PAGE] Set data home page';
@@ -105,6 +107,11 @@ export class FetchChapter implements Action {
 
 export class FetchSearchComic implements Action {
   readonly type = FETCH_SEARCH_COMIC;
+  constructor(public payload: SearchRequest) {}
+}
+
+export class FetchDataSearchComicPage implements Action {
+  readonly type = FETCH_DATA_SEARCH_COMIC_PAGE;
   constructor(public payload: SearchRequest) {}
 }
 
