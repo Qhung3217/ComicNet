@@ -17,6 +17,7 @@ import { Status } from '../../types/status.type';
 import { ChapterRequest } from '../../interfaces/chapter-request.interface';
 import { mapJsonToSingleChapterResponse } from '../../mappers/chapter.mappter';
 import { SingleChapterResponse } from '../../interfaces/api-response/single-chapter-response.interface';
+import { SearchRequest } from '../../interfaces/search-request.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -101,6 +102,18 @@ export class ApiService {
     return this.http
       .get<ComicsResponse>(BASE_URL + 'comics/' + slug)
       .pipe(map((response) => mapJsonToComicDetail(response)));
+  }
+
+  searchComic(request: SearchRequest) {
+    const params = new HttpParams()
+      .set('q', request.query)
+      .set('page', request.page);
+
+    return this.http
+      .get<ComicsResponse[]>(BASE_URL + 'search', {
+        params,
+      })
+      .pipe(map((response) => mapJsonToComicsResponse(response)));
   }
 
   getTopComic(payload: TopComicRequest) {
