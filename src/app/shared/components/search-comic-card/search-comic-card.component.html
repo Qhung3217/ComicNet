@@ -1,0 +1,62 @@
+<a
+  [routerLink]="[comic.id]"
+  class="flex"
+  [ngClass]="{
+    'gap-2 p-2 border-b hover:bg-gray-200 duration-100 cursor-pointer': brief,
+    'flex-col sm:flex-row gap-4 rounded-lg border border-gray-100 bg-gray-50 p-4':
+      !brief
+  }"
+>
+  <figure
+    class="rounded overflow-hidden border border-primary relative flex-shrink-0"
+    [ngClass]="{
+      'w-16 h-24': brief,
+      'aspect-[2/3] w-44 mx-auto sm:w-auto sm:mx-0 sm:h-36': !brief
+    }"
+  >
+    <img
+      [ngSrc]="comic.thumbnail"
+      [alt]="comic.title"
+      class="object-cover w-full h-full block"
+      fill
+      [priority]="!lazy"
+      appImageLoadFailed
+    />
+  </figure>
+  <div>
+    <h1
+      class="capitalize"
+      [ngClass]="{
+        'text-lg leading-5': !brief,
+        'font-bold text-sm': brief
+      }"
+    >
+      {{ comic.title }}
+      <span
+        [ngClass]="{
+          'text-sm text-gray-500': !brief,
+          'font-normal': brief
+        }"
+      >
+        ({{ brief ? comic.status : "Chapter " + comic.lastChapter.name }})
+      </span>
+    </h1>
+    <!-- <h4 class="text-sm font-bold text-emerald-500 flex items-center gap-1">
+      {{comic}}
+    </h4> -->
+    <p class="line-clamp-2 text-sm font-semibold" *ngIf="!brief">
+      {{ comic.shortDescription }}
+    </p>
+    <p class="text-xs font-semibold" *ngIf="brief">
+      {{ genreString }}
+    </p>
+    <ul class="text-sm flex items-center flex-wrap gap-2 mt-1" *ngIf="!brief">
+      <li
+        class="bg-cyan-100 text-cyan-800 text-xs px-2.5 py-0.5 rounded-full"
+        *ngFor="let genre of comic.genres"
+      >
+        {{ genre.name }}
+      </li>
+    </ul>
+  </div>
+</a>
