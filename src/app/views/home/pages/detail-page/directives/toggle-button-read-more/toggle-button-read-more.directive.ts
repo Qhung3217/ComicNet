@@ -1,19 +1,34 @@
 import {
+  AfterViewChecked,
   AfterViewInit,
   Directive,
   ElementRef,
-  OnInit,
   Renderer2,
 } from '@angular/core';
 
 @Directive({
   selector: '[appToggleButtonReadMore]',
 })
-export class ToggleButtonReadMoreDirective implements AfterViewInit {
+export default class ToggleButtonReadMoreDirective
+  implements AfterViewInit, AfterViewChecked
+{
   constructor(private elRef: ElementRef, private renderer: Renderer2) {}
+  ngAfterViewChecked(): void {
+    this.isShowButton();
+  }
+
   ngAfterViewInit(): void {
+    this.isShowButton();
+  }
+
+  private isShowButton() {
     const element = this.elRef.nativeElement as HTMLElement;
     const paragraphElemenet = element.querySelector('p');
+    // console.log(
+    //   element,
+    //   paragraphElemenet!.scrollHeight,
+    //   paragraphElemenet!.clientHeight
+    // );
 
     if (
       paragraphElemenet &&
@@ -21,6 +36,9 @@ export class ToggleButtonReadMoreDirective implements AfterViewInit {
     ) {
       const btnElement = element.querySelector('#readMoreBtn');
       this.renderer.addClass(btnElement, 'hidden');
+    } else {
+      const btnElement = element.querySelector('#readMoreBtn');
+      this.renderer.removeClass(btnElement, 'hidden');
     }
   }
 }

@@ -27,6 +27,7 @@ export class DetailPageComponent implements OnDestroy, OnInit {
       .select('comic', 'comicDetail')
       .subscribe((comicDetail) => {
         if (comicDetail) {
+          this.initialValue();
           this.comic = { ...comicDetail };
           this.calcChapterGroupQuantity();
           this.chapters = [...comicDetail.chapters].reverse();
@@ -45,6 +46,11 @@ export class DetailPageComponent implements OnDestroy, OnInit {
     const start = end - this.CHAPTER_INDEX_SPACING;
     // console.log(this.chapterGroupIndexSelected, start, end);
     return this.chapters.slice(start, end);
+  }
+  private initialValue() {
+    this.chapterGroups = [];
+    this.chapterGroupIndexSelected = 0;
+    this.isShowMore = false;
   }
   private calcChapterGroupQuantity() {
     const chapterGroupQuantity = Math.ceil(
