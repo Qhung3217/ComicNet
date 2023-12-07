@@ -22,6 +22,7 @@ export class ChapterPageComponent implements OnInit, OnDestroy {
   searchChapterNumber: number | null = null;
   showChaptersModal = false;
   showLoadingSpinner = true;
+  searchTimeout: any;
   subscription: Subscription[] = [];
   constructor(private store: Store<AppState>, private route: ActivatedRoute) {}
 
@@ -35,17 +36,21 @@ export class ChapterPageComponent implements OnInit, OnDestroy {
   }
 
   onSearchChapterNumberChanged() {
-    if (this.searchChapterNumber != null) {
-      const retrieveChapterNumberRegex = /(\d+)(\.\d+)?/;
-      const matchChapters = this.chapterResponse?.chapters.filter((chapter) => {
-        const chapterNumber = retrieveChapterNumberRegex.exec(chapter.name);
-        // console.log(chapterNumber);
+    if (this.searchTimeout) clearTimeout(this.searchTimeout);
+    this.searchTimeout = setTimeout(() => {
+      if (this.searchChapterNumber != null) {
+        const retrieveChapterNumberRegex = /(\d+)(\.\d+)?/;
+        const matchChapters = this.chapterResponse?.chapters.filter(
+          (chapter) => {
+            const chapterNumber = retrieveChapterNumberRegex.exec(chapter.name);
 
-        if (!chapterNumber) return false;
-        else return +chapterNumber[1] === this.searchChapterNumber;
-      });
-      this.chapterRender = matchChapters ? matchChapters : [];
-    } else this.chapterRender = [...this.chapterResponse!.chapters];
+            if (!chapterNumber) return false;
+            else return +chapterNumber[1] === this.searchChapterNumber;
+          }
+        );
+        this.chapterRender = matchChapters ? matchChapters : [];
+      } else this.chapterRender = [...this.chapterResponse!.chapters];
+    }, 200);
   }
 
   private setChapterRequest() {
@@ -53,7 +58,6 @@ export class ChapterPageComponent implements OnInit, OnDestroy {
       this.route.params.subscribe((params) => {
         const chapterId = +params['chapter-id'];
         const comicId = params['comic-slug'];
-        console.log(chapterId, comicId);
 
         if (
           chapterId !== this.chapterRequest.chapterId ||
@@ -95,11 +99,7 @@ export class ChapterPageComponent implements OnInit, OnDestroy {
     const currentChapterIndex = chapters.findIndex(
       (chapter) => chapter.id == this.chapterRequest.chapterId
     );
-    console.log(
-      'currentChapter: ',
-      currentChapterIndex,
-      this.chapterRequest.chapterId
-    );
+
     /**
      * Chapter number: Newest -> Oldest
      * Array index: 0 -> N

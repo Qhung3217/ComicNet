@@ -1,5 +1,6 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { SmallLoadingSpinnerComponent } from 'src/app/shared/components/small-loading-spinner/small-loading-spinner.component';
@@ -11,8 +12,6 @@ import { LeftIconComponent } from 'src/app/shared/icons/left-icon/left-icon.comp
 import { ListIconComponent } from 'src/app/shared/icons/list-icon/list-icon.component';
 import { XIconComponent } from 'src/app/shared/icons/x-icon/x-icon.component';
 import { ChapterPageComponent } from './chapter-page/chapter-page.component';
-import { FormsModule } from '@angular/forms';
-import { SearchIconComponent } from 'src/app/shared/icons/search-icon/search-icon.component';
 
 const routes: Routes = [{ path: '', component: ChapterPageComponent }];
 
@@ -38,7 +37,6 @@ const routes: Routes = [{ path: '', component: ChapterPageComponent }];
     ArrowLeftIconComponent,
     LeftIconComponent,
     XIconComponent,
-    SearchIconComponent,
   ],
   exports: [],
   providers: [],

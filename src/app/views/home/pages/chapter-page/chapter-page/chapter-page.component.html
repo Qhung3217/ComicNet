@@ -106,12 +106,9 @@
               type="number"
               placeholder="Nhập số chapter, ví dụ: 100"
               [(ngModel)]="searchChapterNumber"
-              (change)="onSearchChapterNumberChanged()"
+              (keyup)="onSearchChapterNumberChanged()"
               class="rounded-md py-1 px-3 block w-6/12 min-w-fit shadow-[inset_0_0_4px_3px_rgba(0,0,0,0.1)] focus:outline-primary"
             />
-            <button class="bg-primary p-1.5 rounded-md text-white press-state">
-              <app-search-icon class="h-4 w-4 block"></app-search-icon>
-            </button>
           </div>
           <button
             class="cursor-pointer press-state hidden sm:block"
