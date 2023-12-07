@@ -13,6 +13,7 @@ import { CircleLetterMIconComponent } from 'src/app/shared/icons/circle-letter-m
 import { CircleLetterWIconComponent } from 'src/app/shared/icons/circle-letter-w-icon/circle-letter-w-icon.component';
 import { ComicIconComponent } from 'src/app/shared/icons/comic-icon/comic-icon.component';
 import { ListComponent } from 'src/app/shared/components/list/list.component';
+import { ButtonScrollToTopComponent } from 'src/app/shared/components/button-scroll-to-top/button-scroll-to-top.component';
 
 const routes: Routes = [
   {
@@ -43,6 +44,7 @@ const routes: Routes = [
     /* -------------- SHARE COMPONENT ------------- */
     ListComponent,
     SkeletonLoadingComponent,
+    ButtonScrollToTopComponent,
 
     /* ----------------- DIRECTIVE ---------------- */
     RouterActiveClassDirective,

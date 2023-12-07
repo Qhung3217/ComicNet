@@ -1,17 +1,17 @@
 import { HttpClientModule } from '@angular/common/http';
-import { NgModule, isDevMode, LOCALE_ID } from '@angular/core';
+import { LOCALE_ID, NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
+import { registerLocaleData } from '@angular/common';
+import localeVi from '@angular/common/locales/vi';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { appEffects, appReducer } from './core/reducers/app';
 import { FooterComponent } from './views/base/footer/footer.component';
 import { HeaderModule } from './views/base/header/header.module';
-import { registerLocaleData } from '@angular/common';
-import localeVi from '@angular/common/locales/vi';
 
 // Register the Vietnamese locale data
 registerLocaleData(localeVi, 'vi');

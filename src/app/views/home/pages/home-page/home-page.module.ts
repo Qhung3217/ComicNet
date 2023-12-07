@@ -10,6 +10,7 @@ import { HotIconComponent } from 'src/app/shared/icons/hot-icon/hot-icon.compone
 import { MaleIconComponent } from 'src/app/shared/icons/male-icon/male-icon.component';
 import { UpdateIconComponent } from 'src/app/shared/icons/update-icon/update-icon.component';
 import { SlideListComponent } from 'src/app/shared/components/slide-list/slide-list.component';
+import { ButtonScrollToTopComponent } from 'src/app/shared/components/button-scroll-to-top/button-scroll-to-top.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,7 @@ const routes: Routes = [
 
     /* -------------- SHARE COMPONENT ------------- */
     SlideListComponent,
+    ButtonScrollToTopComponent,
 
     /* ------------------- ICON ------------------- */
     HotIconComponent,
