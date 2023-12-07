@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LOCALE_ID, NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { EffectsModule } from '@ngrx/effects';
@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { appEffects, appReducer } from './core/reducers/app';
 import { FooterComponent } from './views/base/footer/footer.component';
 import { HeaderModule } from './views/base/header/header.module';
+import { CatchErrorInterceptor } from './core/interceptors/catch-error/catch-error.interceptor';
 
 // Register the Vietnamese locale data
 registerLocaleData(localeVi, 'vi');
@@ -27,7 +28,16 @@ registerLocaleData(localeVi, 'vi');
     EffectsModule.forRoot(appEffects),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
-  providers: [{ provide: LOCALE_ID, useValue: 'vi' }],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'vi' },
+    [
+      {
+        provide: HTTP_INTERCEPTORS,
+        useClass: CatchErrorInterceptor,
+        multi: true,
+      },
+    ],
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

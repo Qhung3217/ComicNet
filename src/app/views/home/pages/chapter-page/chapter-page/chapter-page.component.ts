@@ -79,6 +79,14 @@ export class ChapterPageComponent implements OnInit, OnDestroy {
           this.chapterRender = [...response.chapters];
           this.chapterResponse = { ...response };
           this.showLoadingSpinner = false;
+          if (
+            this.chapterResponse.images.length === 0 &&
+            this.chapterResponse.comicName === ''
+          ) {
+            if (this.chapterResponse.chapters.length > 0)
+              this.chapterResponse.chapterName = 'Chương lỗi!';
+            alert('Có lỗi xảy ra! Vui lòng thử lại sau');
+          }
         }
       })
     );

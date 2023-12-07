@@ -26,7 +26,7 @@ export const FetchComicDetailResolver: ResolveFn<ComicDetail | null> = (
           store.dispatch(new FetchComicDetail(comicSlug));
           return action$.pipe(ofType(SET_COMIC_DETAIL), take(1));
         }
-        return of(null);
+        return of(comicDetail);
       }
       return of(comicDetail);
     })

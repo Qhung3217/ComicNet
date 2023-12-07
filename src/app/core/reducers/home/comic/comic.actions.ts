@@ -43,7 +43,8 @@ export const SET_CHAPTER_RESPONSE =
   '[SET_CHAPTER_RESPONSE] Set chapter response';
 export const SET_SEARCH_COMIC = '[SET_SEARCH_COMIC] Set search comic';
 export const RESET_SEARCH_COMIC = '[RESET_SEARCH_COMIC] Reset search comic';
-
+export const RESET_DATA_HOME_PAGE =
+  '[RESET_DATA_HOME_PAGE] Reset data home page';
 export class FetchComicsByGenreId implements Action {
   readonly type = FETCH_COMICS_BY_GENRE_ID;
   constructor() {}
@@ -209,6 +210,11 @@ export class ResetSearchComic implements Action {
   readonly type = RESET_SEARCH_COMIC;
   constructor() {}
 }
+
+export class ResetDataHomePage implements Action {
+  readonly type = RESET_DATA_HOME_PAGE;
+  constructor() {}
+}
 export type ComicAction =
   | SetComicResponse
   | SetCurrentPage
@@ -224,4 +230,5 @@ export type ComicAction =
   | SetComicDetail
   | SetChapter
   | SetSearchComic
-  | ResetSearchComic;
+  | ResetSearchComic
+  | ResetDataHomePage;

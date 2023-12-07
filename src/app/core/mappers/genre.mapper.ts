@@ -8,6 +8,7 @@ export function mapJsonToGenre(jsonData: any): Genre {
   };
 }
 export function mapJsonArrayToGenres(jsonArray: any[]): Genre[] {
+  if (!jsonArray) return [];
   return jsonArray.map((jsonData) => mapJsonToGenre(jsonData));
 }
 export function mapJsonToGenreDetail(jsonData: any): GenreDetail {
@@ -18,5 +19,6 @@ export function mapJsonToGenreDetail(jsonData: any): GenreDetail {
   };
 }
 export function mapJsonArrayToGenreDetails(jsonArray: any[]): GenreDetail[] {
+  if (!jsonArray) return [];
   return jsonArray.map((jsonData) => mapJsonToGenreDetail(jsonData));
 }

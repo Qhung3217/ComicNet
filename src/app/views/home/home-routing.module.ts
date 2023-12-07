@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { ExtraOptions, RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
@@ -41,6 +41,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'error',
+    loadChildren: () =>
+      import('./pages/error-page/error-page.module').then(
+        (m) => m.ErrorPageModule
+      ),
+  },
+  {
     path: ':comic-slug/:chapter-id',
     loadChildren: () =>
       import('./pages/chapter-page/chapter-page.module').then(
@@ -53,6 +60,12 @@ const routes: Routes = [
       import('./pages/detail-page/detail-page.module').then(
         (m) => m.DetailPageModule
       ),
+  },
+
+  {
+    path: '**',
+    redirectTo: 'error',
+    pathMatch: 'full',
   },
 ];
 

@@ -10,6 +10,7 @@ import {
   FetchGirlComic,
   FetchPopularComic,
   FetchUpdatedComic,
+  ResetDataHomePage,
   SetCurrentPage,
 } from 'src/app/core/reducers/home/comic';
 
@@ -330,5 +331,6 @@ export class MorePageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.forEach((sub) => sub?.unsubscribe());
+    this.store.dispatch(new ResetDataHomePage());
   }
 }

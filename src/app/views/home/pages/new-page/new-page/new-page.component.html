@@ -7,6 +7,7 @@
       Truyện mới - Trang {{ page }}
     </h1>
   </hgroup>
+  <app-skeleton-loading *ngIf="comics.length === 0"></app-skeleton-loading>
 
   <app-list
     [list]="comics"
