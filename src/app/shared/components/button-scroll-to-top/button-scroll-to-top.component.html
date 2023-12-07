@@ -1,0 +1,14 @@
+<div
+  class="fixed bottom-0 right-2 sm:right-6 block p-2 bg-gray-50 shadow-md rounded-full hover:shadow-xl duration-150 hover:border cursor-pointer z-50 active:bg-purple-200 active:border-purple-200"
+  [ngClass]="{
+    'invisible pointer-events-none opacity-0': !showButtonToTop,
+    'visible pointer-events-auto opacity-1 bottom-2 sm:bottom-6':
+      showButtonToTop
+  }"
+  (click)="scrollToTop()"
+  title="Quay về đầu trang"
+>
+  <app-jetpack-icon
+    class="text-primary w-6 h-6 sm:w-8 sm:h-8 block"
+  ></app-jetpack-icon>
+</div>
