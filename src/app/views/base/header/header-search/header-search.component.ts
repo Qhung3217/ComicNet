@@ -30,8 +30,6 @@ export class HeaderSearchComponent implements OnChanges {
   constructor() {}
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['comics']) {
-      console.log('onChange ' + this.showLoading + ' ' + new Date());
-
       this.showLoading = false;
     }
     if (changes['query'] && changes['query'].currentValue !== '') {
@@ -40,8 +38,6 @@ export class HeaderSearchComponent implements OnChanges {
   }
 
   onInputChange(event: any) {
-    console.log('input change ' + this.showLoading + ' ' + new Date());
-
     this.showLoading = true;
     this.queryChange.emit(event);
   }

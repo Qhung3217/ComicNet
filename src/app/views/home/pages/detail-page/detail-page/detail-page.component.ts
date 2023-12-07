@@ -44,7 +44,6 @@ export class DetailPageComponent implements OnDestroy, OnInit {
     const end =
       (this.chapterGroupIndexSelected + 1) * this.CHAPTER_INDEX_SPACING;
     const start = end - this.CHAPTER_INDEX_SPACING;
-    // console.log(this.chapterGroupIndexSelected, start, end);
     return this.chapters.slice(start, end);
   }
   private initialValue() {

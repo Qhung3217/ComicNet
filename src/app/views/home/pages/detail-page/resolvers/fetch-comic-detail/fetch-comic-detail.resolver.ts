@@ -17,7 +17,6 @@ export const FetchComicDetailResolver: ResolveFn<ComicDetail | null> = (
   const comicSlug = route.paramMap.get('comic-slug');
   const store: Store<AppState> = inject(Store<AppState>);
   const action$: Actions = inject(Actions);
-  console.log(comicSlug);
   return store.select('comic', 'comicDetail').pipe(
     take(1),
     switchMap((comicDetail) => {

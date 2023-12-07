@@ -11,7 +11,6 @@ export class ScrollToDirective {
       '#' + this.idElement,
       true
     );
-    console.log(targetElement);
 
     if (targetElement)
       targetElement.scrollIntoView({

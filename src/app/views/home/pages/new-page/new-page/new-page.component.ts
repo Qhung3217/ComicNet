@@ -37,7 +37,6 @@ export class NewPageComponent implements OnDestroy, OnInit {
         if (page) {
           this.page = page;
           this.onPageChanged(this.page);
-          console.log(page);
         } else
           this.router.navigate([], {
             queryParams: { page: this.page },

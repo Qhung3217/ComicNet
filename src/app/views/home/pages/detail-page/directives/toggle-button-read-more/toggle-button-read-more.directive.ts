@@ -24,11 +24,6 @@ export default class ToggleButtonReadMoreDirective
   private isShowButton() {
     const element = this.elRef.nativeElement as HTMLElement;
     const paragraphElemenet = element.querySelector('p');
-    // console.log(
-    //   element,
-    //   paragraphElemenet!.scrollHeight,
-    //   paragraphElemenet!.clientHeight
-    // );
 
     if (
       paragraphElemenet &&

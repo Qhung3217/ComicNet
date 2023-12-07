@@ -22,7 +22,6 @@ export class ClickToggleClassDirective implements OnInit {
   @HostListener('click') handleClick() {
     if (!this.appClickToggleClass || !this.enable) return;
     this.elfToggle = this.getElementToggleClass(this.elRef.nativeElement);
-    console.log(this.elfToggle);
     this.toggleClasses(this.elfToggle);
   }
   @HostListener('window:resize') onResize() {

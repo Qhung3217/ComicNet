@@ -56,9 +56,7 @@ export class GenrePageComponent implements OnInit, OnDestroy {
   private onRouterNavigateEnd() {
     this.subcriptions.push(
       this.router.events.subscribe((event) => {
-        // console.log('router all event ', event);
         if (event instanceof NavigationEnd) {
-          console.log('router event ', event, this.genreSelected);
           if (this.genreSelected) {
             this.removeComics();
             this.store.dispatch(new FetchComicsByGenreId());
@@ -77,7 +75,6 @@ export class GenrePageComponent implements OnInit, OnDestroy {
         )
         .subscribe((genres) => {
           if (genres && genres.length > 0) {
-            console.log('fetchSub callback');
             this.genres = [...genres];
             this.setGenreSelected();
           } else this.store.dispatch(new FetchGenres());
@@ -89,7 +86,6 @@ export class GenrePageComponent implements OnInit, OnDestroy {
       this.route.params.subscribe((params: Params) => {
         this.isLoading = true;
         this.genreId = Object.values(params)[0];
-        console.log('genreId', this.genreId, params);
         this.setGenreSelected();
       })
     );
@@ -103,8 +99,6 @@ export class GenrePageComponent implements OnInit, OnDestroy {
           tap(() => (this.isLoading = false))
         )
         .subscribe((comicState) => {
-          console.log('loading in set comics:', this.isLoading);
-
           this.comicsByGenreId = { ...comicState };
         })
     );
@@ -169,8 +163,6 @@ export class GenrePageComponent implements OnInit, OnDestroy {
         this.store.dispatch(new FetchComicsByGenreId());
       }
     } else {
-      console.log(this.genreSelected, this.genreId);
-
       this.errorService.errorCode = 404;
       this.errorService.message = 'Thể loại không tồn tại';
       this.errorService.redirectToErrorPage();

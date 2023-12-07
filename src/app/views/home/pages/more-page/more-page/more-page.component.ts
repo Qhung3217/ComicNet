@@ -50,7 +50,6 @@ export class MorePageComponent implements OnInit, OnDestroy {
         if (page) {
           this.page = page;
           this.onPageChanged(this.page);
-          console.log(page);
         } else
           this.router.navigate([], {
             queryParams: { page: this.page },
@@ -64,7 +63,6 @@ export class MorePageComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.route.params.subscribe((params: Params) => {
         const category = Object.values(params)[0];
-        console.log('category: ', category);
 
         switch (category) {
           case 'truyen-hoan-thanh':

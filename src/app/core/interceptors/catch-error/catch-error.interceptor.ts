@@ -1,15 +1,14 @@
-import { Injectable } from '@angular/core';
 import {
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpInterceptor,
   HttpErrorResponse,
+  HttpEvent,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest,
 } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
-import { ErrorService } from '../../services/error/error.service';
-import { Router } from '@angular/router';
 import { ErrorMessage } from '../../interfaces/error-message.interface';
+import { ErrorService } from '../../services/error/error.service';
 
 @Injectable()
 export class CatchErrorInterceptor implements HttpInterceptor {
@@ -19,10 +18,6 @@ export class CatchErrorInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    console.log(request);
-    // if (request.headers.get('content-type') === 'text/html')
-    //   return next.handle(request);
-
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
         const errorResponse: ErrorMessage = this.handleError(error);
@@ -34,7 +29,6 @@ export class CatchErrorInterceptor implements HttpInterceptor {
   }
 
   private handleError(errRes: HttpErrorResponse) {
-    console.log(errRes);
     let errorMessage: ErrorMessage = {
       errorCode: errRes.status,
       message: 'An unknown error occurred',

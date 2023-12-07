@@ -35,12 +35,6 @@ export class RouterActiveClassDirective implements OnInit, OnDestroy {
     this.subscription?.unsubscribe();
   }
   private isActiveClass() {
-    // console.log(
-    //   this.router.url,
-    //   this.router.url.includes(this.stringInclude),
-    //   this.elRef.nativeElement
-    // );
-
     if (this.router.url.includes(this.stringInclude))
       this.renderer.addClass(this.elRef.nativeElement, this.classActive);
     else this.renderer.removeClass(this.elRef.nativeElement, this.classActive);
