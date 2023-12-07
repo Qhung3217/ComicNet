@@ -6,6 +6,7 @@ import { Comic } from 'src/app/core/interfaces/base/comic.interface';
 import {
   ComicAction,
   RESET_COMIC_RESPONSE,
+  RESET_DATA_HOME_PAGE,
   RESET_SEARCH_COMIC,
   SET_BOY_COMIC,
   SET_CHAPTER_RESPONSE,
@@ -256,6 +257,13 @@ export function comicReducer(
           currentPage: 1,
           totalPages: 1,
           comics: [],
+        },
+      };
+    case RESET_DATA_HOME_PAGE:
+      return {
+        ...state,
+        promotionComics: {
+          ...initialState.promotionComics,
         },
       };
     default:

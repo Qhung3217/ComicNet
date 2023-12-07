@@ -16,6 +16,7 @@ import {
   FetchGenres,
   SetGenreSelected,
 } from 'src/app/core/reducers/home/genres';
+import { ErrorService } from 'src/app/core/services/error/error.service';
 import { Status } from 'src/app/core/types/status.type';
 
 @Component({
@@ -35,7 +36,8 @@ export class GenrePageComponent implements OnInit, OnDestroy {
   constructor(
     private store: Store<AppState>,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private errorService: ErrorService
   ) {}
   ngOnInit(): void {
     this.setGenres();
@@ -155,6 +157,7 @@ export class GenrePageComponent implements OnInit, OnDestroy {
       });
   }
   private setGenreSelected() {
+    if (!this.genres || this.genres.length === 0) return;
     this.genreSelected = this.genres?.find(
       (genre) => genre.id === this.genreId
     );
@@ -165,6 +168,12 @@ export class GenrePageComponent implements OnInit, OnDestroy {
         this.isLoading = true;
         this.store.dispatch(new FetchComicsByGenreId());
       }
+    } else {
+      console.log(this.genreSelected, this.genreId);
+
+      this.errorService.errorCode = 404;
+      this.errorService.message = 'Thể loại không tồn tại';
+      this.errorService.redirectToErrorPage();
     }
   }
   private removeComics() {

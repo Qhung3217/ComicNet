@@ -4,7 +4,10 @@ import { Subscription } from 'rxjs';
 import { ComicRecommend } from 'src/app/core/interfaces/base/comic-recommend.interface';
 import { Comic } from 'src/app/core/interfaces/base/comic.interface';
 import { AppState } from 'src/app/core/reducers/app';
-import { FetchDataHomePage } from 'src/app/core/reducers/home/comic';
+import {
+  FetchDataHomePage,
+  ResetDataHomePage,
+} from 'src/app/core/reducers/home/comic';
 
 @Component({
   selector: 'app-home',
@@ -42,5 +45,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.subscription?.unsubscribe();
+    this.store.dispatch(new ResetDataHomePage());
   }
 }

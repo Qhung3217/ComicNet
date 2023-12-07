@@ -39,6 +39,7 @@ export function mapJsonToComic(jsonData: any): Comic {
   };
 }
 export function mapJsonArrayToComics(jsonArray: any[]): Comic[] {
+  if (!jsonArray) return [];
   return jsonArray.map((jsonData) => mapJsonToComic(jsonData));
 }
 
@@ -70,6 +71,7 @@ export function mapJsonToComicRecommend(jsonData: any): ComicRecommend {
 export function mapJsonArrayToComicRecommend(
   jsonArray: any[]
 ): ComicRecommend[] {
+  if (!jsonArray) return [];
   return jsonArray.map((jsonData) => mapJsonToComicRecommend(jsonData));
 }
 export function mapJsonToComicsResponse(jsonData: any): ComicsResponse {

@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ListComponent } from 'src/app/shared/components/list/list.component';
 import { NewIconComponent } from 'src/app/shared/icons/new-icon/new-icon.component';
 import { ButtonScrollToTopComponent } from 'src/app/shared/components/button-scroll-to-top/button-scroll-to-top.component';
+import { SkeletonLoadingComponent } from 'src/app/shared/components/skeleton-loading/skeleton-loading.component';
 
 const routes: Routes = [{ path: '', component: NewPageComponent }];
 
@@ -16,6 +17,7 @@ const routes: Routes = [{ path: '', component: NewPageComponent }];
     /* -------------- SHARE COMPONENT ------------- */
     ListComponent,
     ButtonScrollToTopComponent,
+    SkeletonLoadingComponent,
 
     /* ------------------- ICON ------------------- */
     NewIconComponent,

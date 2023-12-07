@@ -1,0 +1,39 @@
+<main
+  class="w-full m-auto px-3 pt-12 pb-5 bg-gray-100 h-full min-h-screen"
+  [ngSwitch]="type"
+>
+  <hgroup
+    class="justify-center w-full flex gap-2 flex-col items-center"
+    *ngSwitchCase="'default'"
+  >
+    <h1 class="text-9xl font-bold">404</h1>
+    <h3 class="text-xl font-medium">
+      <span class="text-red-500">Opps!</span> Không tìm thấy trang.
+    </h3>
+    <aside class="text-base text-gray-500">
+      Trang bạn đang tìm kiếm không tồn tại.
+    </aside>
+    <a
+      routerLink="/"
+      class="px-2.5 py-2 bg-primary text-white rounded press-state hover:opacity-80"
+      >Về trang chủ</a
+    >
+  </hgroup>
+  <hgroup
+    class="justify-center w-full flex gap-2 flex-col items-center"
+    *ngSwitchCase="'other'"
+  >
+    <h1 class="text-9xl font-bold">{{ errorService.errorCode }}</h1>
+    <h3 class="text-xl font-medium">
+      <span class="text-red-500">Opps!</span> {{ errorService.message }}
+    </h3>
+    <aside class="text-base text-gray-500">
+      {{ errorService.moreInfor }}
+    </aside>
+    <a
+      routerLink="/"
+      class="px-2.5 py-2 bg-primary text-white rounded press-state hover:opacity-80"
+      >Về trang chủ</a
+    >
+  </hgroup>
+</main>

@@ -9,6 +9,7 @@ export function mapJsonToChapter(jsonData: any): Chapter {
   };
 }
 export function mapJsonArrayToChapters(jsonArray: any[]): Chapter[] {
+  if (!jsonArray) return [];
   return jsonArray.map((jsonData) => mapJsonToChapter(jsonData));
 }
 export function mapJsonToChapterImage(jsonData: any): ChapterImage {
@@ -19,6 +20,7 @@ export function mapJsonToChapterImage(jsonData: any): ChapterImage {
   };
 }
 export function mapJsonArrayToChapterImages(jsonArray: any[]): ChapterImage[] {
+  if (!jsonArray) return [];
   return jsonArray.map((jsonData) => mapJsonToChapterImage(jsonData));
 }
 
