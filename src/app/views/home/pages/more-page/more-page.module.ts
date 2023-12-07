@@ -9,6 +9,7 @@ import { UpdateIconComponent } from 'src/app/shared/icons/update-icon/update-ico
 import { SkeletonLoadingComponent } from './../../../../shared/components/skeleton-loading/skeleton-loading.component';
 import { MorePageComponent } from './more-page/more-page.component';
 import { ListComponent } from 'src/app/shared/components/list/list.component';
+import { ButtonScrollToTopComponent } from 'src/app/shared/components/button-scroll-to-top/button-scroll-to-top.component';
 
 const routes: Routes = [{ path: ':category', component: MorePageComponent }];
 
@@ -21,6 +22,7 @@ const routes: Routes = [{ path: ':category', component: MorePageComponent }];
     /* ------------- SHARE COMPONENTS ------------- */
     SkeletonLoadingComponent,
     ListComponent,
+    ButtonScrollToTopComponent,
 
     /* ------------------- ICON ------------------- */
     HotIconComponent,

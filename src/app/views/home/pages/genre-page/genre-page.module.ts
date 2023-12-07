@@ -12,6 +12,7 @@ import { CategoryIconComponent } from 'src/app/shared/icons/category-icon/catego
 import { InformationIconComponent } from 'src/app/shared/icons/information-icon/information-icon.component';
 import { UnknowIconComponent } from 'src/app/shared/icons/unknow-icon/unknow-icon.component';
 import { GenrePageComponent } from './genre-page/genre-page.component';
+import { ButtonScrollToTopComponent } from 'src/app/shared/components/button-scroll-to-top/button-scroll-to-top.component';
 
 const routes: Routes = [
   { path: ':genre?status=all&page=1', component: GenrePageComponent },
@@ -26,6 +27,7 @@ const routes: Routes = [
     /* ------------- SHARED COMPONENET ------------ */
     ListComponent,
     SkeletonLoadingComponent,
+    ButtonScrollToTopComponent,
 
     /* ----------------- DIRECTIVE ---------------- */
     //use to toggle class of specific element when this component and this component's children is clicked

@@ -10,6 +10,7 @@ import { HeartFillIconComponent } from 'src/app/shared/icons/heart-fill-icon/hea
 import { RowFirstIconComponent } from 'src/app/shared/icons/row-first-icon/row-first-icon.component';
 import { RowLastIconComponent } from 'src/app/shared/icons/row-last-icon/row-last-icon.component';
 import ToggleButtonReadMoreDirective from './directives/toggle-button-read-more/toggle-button-read-more.directive';
+import { ButtonScrollToTopComponent } from 'src/app/shared/components/button-scroll-to-top/button-scroll-to-top.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,9 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
+
+    /* -------------- SHARE COMPONENT ------------- */
+    ButtonScrollToTopComponent,
 
     /* ------------------- PIPE ------------------- */
     ArrayStringToStringPipe,

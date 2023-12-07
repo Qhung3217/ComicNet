@@ -8,6 +8,7 @@ import { SearchComicCardComponent } from 'src/app/shared/components/search-comic
 import { ArrowLeftIconComponent } from 'src/app/shared/icons/arrow-left-icon/arrow-left-icon.component';
 import { SearchPageComponent } from './search-page/search-page.component';
 import { SkeletonLoadingComponent } from 'src/app/shared/components/skeleton-loading/skeleton-loading.component';
+import { ButtonScrollToTopComponent } from 'src/app/shared/components/button-scroll-to-top/button-scroll-to-top.component';
 
 const routes: Routes = [{ path: '', component: SearchPageComponent }];
 
@@ -22,6 +23,7 @@ const routes: Routes = [{ path: '', component: SearchPageComponent }];
     LoadingSpinnerComponent,
     SearchComicCardComponent,
     SkeletonLoadingComponent,
+    ButtonScrollToTopComponent,
     /* ------------------- ICON ------------------- */
     ArrowLeftIconComponent,
   ],
