@@ -9,6 +9,7 @@ import {
   ResetComicResponse,
   SetCurrentPage,
 } from 'src/app/core/reducers/home/comic';
+import { SeoService } from 'src/app/core/services/seo/seo.service';
 
 @Component({
   selector: 'app-search-page',
@@ -25,7 +26,8 @@ export class SearchPageComponent implements OnInit, OnDestroy {
   constructor(
     private store: Store<AppState>,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private seoService: SeoService
   ) {}
 
   ngOnInit(): void {
@@ -45,6 +47,7 @@ export class SearchPageComponent implements OnInit, OnDestroy {
           this.query = query;
           this.page = page;
           if (query !== '') {
+            this.seoData();
             this.isLoading = true;
             this.store.dispatch(
               new FetchDataSearchComicPage({
@@ -52,7 +55,14 @@ export class SearchPageComponent implements OnInit, OnDestroy {
                 page,
               })
             );
-          } else this.comics = [];
+          } else {
+            this.router.navigate(['/the-loai/all'], {
+              queryParams: {
+                page: 1,
+                status: 'all',
+              },
+            });
+          }
         } else
           this.router.navigate([], {
             queryParams: {
@@ -80,5 +90,12 @@ export class SearchPageComponent implements OnInit, OnDestroy {
         this.totalPages = totalPages;
       })
     );
+  }
+
+  private seoData() {
+    const title = 'Tìm truyện tranh - ' + this.query + ' - Trang ' + this.page;
+    const des =
+      'Khám phá một thế giới truyện tranh được tùy chỉnh theo sở thích của bạn! Khám phá kết quả tìm kiếm của chúng tôi cho từ khóa bạn nhập. Đắm chìm mình vào những câu chuyện cuốn hút, nghệ thuật đẹp mắt và những cuộc phiêu lưu hồi hộp. Tìm kiếm truyện tranh hoàn hảo phù hợp với sở thích của bạn. Bắt đầu hành trình của bạn ngay bây giờ! #Comics #SearchResults';
+    this.seoService.setSeoData(title, des);
   }
 }

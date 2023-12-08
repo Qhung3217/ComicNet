@@ -17,6 +17,7 @@ import {
   SetGenreSelected,
 } from 'src/app/core/reducers/home/genres';
 import { ErrorService } from 'src/app/core/services/error/error.service';
+import { SeoService } from 'src/app/core/services/seo/seo.service';
 import { Status } from 'src/app/core/types/status.type';
 
 @Component({
@@ -33,11 +34,13 @@ export class GenrePageComponent implements OnInit, OnDestroy {
   isLoading = true;
   isActiveLinkInStatus = false;
   isGenreActive = false;
+  page = 1;
   constructor(
     private store: Store<AppState>,
     private route: ActivatedRoute,
     private router: Router,
-    private errorService: ErrorService
+    private errorService: ErrorService,
+    private seoService: SeoService
   ) {}
   ngOnInit(): void {
     this.setGenres();
@@ -100,6 +103,7 @@ export class GenrePageComponent implements OnInit, OnDestroy {
         )
         .subscribe((comicState) => {
           this.comicsByGenreId = { ...comicState };
+          this.seoData();
         })
     );
   }
@@ -112,11 +116,12 @@ export class GenrePageComponent implements OnInit, OnDestroy {
         if (
           status !== this.comicsByGenreId?.status &&
           page !== this.comicsByGenreId?.currentPage
-        )
+        ) {
+          this.page = page;
           this.store.dispatch(
             new SetStatusAndCurrentPage({ status: status, currentPage: page })
           );
-        else if (status !== this.comicsByGenreId?.status) {
+        } else if (status !== this.comicsByGenreId?.status) {
           this.removeComics();
           this.store.dispatch(new SetStatus(status));
         } else if (page !== this.comicsByGenreId?.currentPage)
@@ -170,5 +175,16 @@ export class GenrePageComponent implements OnInit, OnDestroy {
   }
   private removeComics() {
     if (this.comicsByGenreId) this.comicsByGenreId.comics = [];
+  }
+  private seoData() {
+    if (this.genreSelected) {
+      const title = this.genreSelected.name + ' - ' + 'Trang ' + this.page;
+      const des =
+        'Truyện tranh thuộc thể loại ' +
+        this.genreSelected.name +
+        ' - ' +
+        this.genreSelected.description;
+      this.seoService.setSeoData(title, des);
+    }
   }
 }

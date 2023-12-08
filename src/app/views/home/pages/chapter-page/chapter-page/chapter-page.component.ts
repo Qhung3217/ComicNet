@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
@@ -7,6 +8,7 @@ import { Chapter } from 'src/app/core/interfaces/base/chapter.interface';
 import { ChapterRequest } from 'src/app/core/interfaces/chapter-request.interface';
 import { AppState } from 'src/app/core/reducers/app';
 import { FetchChapter } from 'src/app/core/reducers/home/comic';
+import { SeoService } from 'src/app/core/services/seo/seo.service';
 
 @Component({
   selector: 'app-chapter-page',
@@ -24,7 +26,11 @@ export class ChapterPageComponent implements OnInit, OnDestroy {
   showLoadingSpinner = true;
   searchTimeout: any;
   subscription: Subscription[] = [];
-  constructor(private store: Store<AppState>, private route: ActivatedRoute) {}
+  constructor(
+    private store: Store<AppState>,
+    private route: ActivatedRoute,
+    private seoService: SeoService
+  ) {}
 
   ngOnInit(): void {
     this.setChapterRequest();
@@ -90,6 +96,13 @@ export class ChapterPageComponent implements OnInit, OnDestroy {
             if (this.chapterResponse.chapters.length > 0)
               this.chapterResponse.chapterName = 'Chương lỗi!';
             alert('Có lỗi xảy ra! Vui lòng thử lại sau');
+          } else {
+            const title =
+              this.chapterResponse.comicName +
+              ' - ' +
+              this.chapterResponse.chapterName;
+
+            this.seoService.setSeoData(title, title);
           }
         }
       })
