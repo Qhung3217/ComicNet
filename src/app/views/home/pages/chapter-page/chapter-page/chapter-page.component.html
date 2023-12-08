@@ -58,7 +58,7 @@
         </a>
       </div>
       <a
-        routerLink="/one-piece"
+        [routerLink]="['/', chapterRequest.comicId]"
         fragment="chapter"
         class="hover:text-white hover:ring hover:ring-offset-1 hover:ring-primary rounded-md hover:bg-primary press-state"
       >
