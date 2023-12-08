@@ -8,6 +8,7 @@ import {
   FetchDataHomePage,
   ResetDataHomePage,
 } from 'src/app/core/reducers/home/comic';
+import { SeoService } from 'src/app/core/services/seo/seo.service';
 
 @Component({
   selector: 'app-home',
@@ -22,11 +23,12 @@ export class HomeComponent implements OnInit, OnDestroy {
   boyComics: Comic[] = [];
   girlComics: Comic[] = [];
   subscription?: Subscription;
-  constructor(private store: Store<AppState>) {
+  constructor(private store: Store<AppState>, private seoService: SeoService) {
     this.store.dispatch(new FetchDataHomePage());
   }
   ngOnInit(): void {
     this.subscription = this.store.select('comic').subscribe((state) => {
+      this.seoData();
       if (state.promotionComics.recommendComics?.length > 0)
         this.recommendComics = [...state.promotionComics.recommendComics];
       if (state.promotionComics.popularComics.comics?.length > 0)
@@ -46,5 +48,11 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscription?.unsubscribe();
     this.store.dispatch(new ResetDataHomePage());
+  }
+  private seoData() {
+    const title = 'ComicNet | Đọc truyện tranh online';
+    const des =
+      'Khám phá những bộ manga và truyện Trung Quốc nổi bật nhất, cũng như anime và Webtoon mới được phát hành trên ComicNet. Hàng nghìn câu chuyện web manga và truyện tranh phổ biến đang chờ bạn miễn phí! Duyệt qua các thể loại đa dạng như ngôn tình, hành động (action), lãng mạn (romance), hài hước (comedy) và nhiều thể loại khác.#Comics #Adventure #Humor #Webcomics #Manga #Manhua #Manhwa';
+    this.seoService.setSeoData(title, des);
   }
 }

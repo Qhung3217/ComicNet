@@ -34,34 +34,39 @@
   >
     <app-x-icon class="block w-3 h-3 mr-2 ml-auto"></app-x-icon>
   </button>
-  <ul
-    class="z-10 absolute top-11 left-1/2 -translate-x-1/2 w-full lg:w-72 h-max max-h-80 shadow-md overflow-auto rounded bg-white"
-    [ngClass]="{
-      hidden: !showSearchSuggestion,
-      block: showSearchSuggestion && query !== ''
-    }"
+  <div
+    class="z-10 absolute top-11 left-1/2 -translate-x-1/2 w-full lg:w-72 shadow-lg rounded bg-white overflow-hidden"
   >
-    <li *ngFor="let comic of comics; let i = index">
-      <app-search-comic-card
-        [comic]="comic"
-        [brief]="true"
-        [lazy]="i < 4 ? false : true"
-        (mousedown)="onClickSuggest($event)"
-      ></app-search-comic-card>
-    </li>
-    <li
+    <ul
+      class="overflow-auto h-max max-h-80 lg:max-h-96"
+      [ngClass]="{
+        hidden: !showSearchSuggestion,
+        block: showSearchSuggestion && query !== ''
+      }"
+    >
+      <li *ngFor="let comic of comics; let i = index">
+        <app-search-comic-card
+          [comic]="comic"
+          [brief]="true"
+          [lazy]="i < 4 ? false : true"
+          (mousedown)="onClickSuggest($event)"
+        ></app-search-comic-card>
+      </li>
+    </ul>
+    <div
       *ngIf="showViewMore && comics.length > 0"
       (mousedown)="onClickSuggest($event)"
+      class="border-t-[1px]"
     >
       <a
         routerLink="/tim-truyen"
         [queryParams]="{
-          query: queryEncode,
-          page: 1,
-        }"
+            query: queryEncode,
+            page: 1,
+          }"
         class="text-xs text-primary text-center block py-1 font-bold press-state hover:bg-purple-200"
         >Xem thêm ...</a
       >
-    </li>
-  </ul>
+    </div>
+  </div>
 </div>

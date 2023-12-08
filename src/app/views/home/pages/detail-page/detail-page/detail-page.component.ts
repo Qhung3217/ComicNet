@@ -5,6 +5,7 @@ import { DEFAULT_IMAGE_URL } from 'src/app/core/constants/image';
 import { Chapter } from 'src/app/core/interfaces/base/chapter.interface';
 import { ComicDetail } from 'src/app/core/interfaces/base/comic-detail.interface';
 import { AppState } from 'src/app/core/reducers/app';
+import { SeoService } from 'src/app/core/services/seo/seo.service';
 
 @Component({
   selector: 'app-detail-page',
@@ -21,7 +22,7 @@ export class DetailPageComponent implements OnDestroy, OnInit {
   readonly DEFAULT_IMAGE = DEFAULT_IMAGE_URL;
   readonly CHAPTER_INDEX_SPACING: number = 50;
 
-  constructor(private store: Store<AppState>) {}
+  constructor(private store: Store<AppState>, private seoService: SeoService) {}
   ngOnInit(): void {
     this.subscription = this.store
       .select('comic', 'comicDetail')
@@ -31,6 +32,7 @@ export class DetailPageComponent implements OnDestroy, OnInit {
           this.comic = { ...comicDetail };
           this.calcChapterGroupQuantity();
           this.chapters = [...comicDetail.chapters].reverse();
+          this.seoData();
         } else this.showError();
       });
   }
@@ -84,5 +86,10 @@ export class DetailPageComponent implements OnDestroy, OnInit {
   private showError() {
     alert('Something went wrong! Please try again');
     // this.router.navigate(['/']);
+  }
+  private seoData() {
+    if (this.comic) {
+      this.seoService.setSeoData(this.comic.title, this.comic.description);
+    }
   }
 }

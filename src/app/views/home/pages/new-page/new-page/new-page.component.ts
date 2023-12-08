@@ -9,6 +9,7 @@ import {
   SetComicResponse,
   SetCurrentPage,
 } from 'src/app/core/reducers/home/comic';
+import { SeoService } from 'src/app/core/services/seo/seo.service';
 
 @Component({
   selector: 'app-new-page',
@@ -23,7 +24,8 @@ export class NewPageComponent implements OnDestroy, OnInit {
   constructor(
     private route: ActivatedRoute,
     private store: Store<AppState>,
-    private router: Router
+    private router: Router,
+    private seoService: SeoService
   ) {}
   ngOnInit(): void {
     this.retrievePageFromUrl();
@@ -36,6 +38,7 @@ export class NewPageComponent implements OnDestroy, OnInit {
         const page = +params['page'];
         if (page) {
           this.page = page;
+          this.seoData();
           this.onPageChanged(this.page);
         } else
           this.router.navigate([], {
@@ -69,7 +72,11 @@ export class NewPageComponent implements OnDestroy, OnInit {
       new SetCurrentPage({ page: page, category: 'default' })
     );
   }
-
+  private seoData() {
+    const des =
+      'Bắt đầu một cuộc phiêu lưu mới với trang truyện tranh mới nhất của chúng tôi! Khám phá sự hứng khởi, hài hước và nghệ thuật cuốn hút của phần mới nhất. Tham gia cùng những nhân vật trong một hành trình hoàn toàn mới. Đắm chìm vào chương mới nhất ngay bây giờ! #NewComic #Adventure #Humor #Comics';
+    this.seoService.setSeoData('Truyện mới - Trang ' + this.page, des);
+  }
   ngOnDestroy(): void {
     this.subscriptions.forEach((sub) => sub?.unsubscribe());
     this.store.dispatch(

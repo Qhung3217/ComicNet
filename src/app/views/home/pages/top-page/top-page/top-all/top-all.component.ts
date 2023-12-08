@@ -8,6 +8,7 @@ import {
   FetchTopComic,
   ResetComicResponse,
 } from 'src/app/core/reducers/home/comic';
+import { SeoService } from 'src/app/core/services/seo/seo.service';
 import { Status } from 'src/app/core/types/status.type';
 import { TopDuration } from 'src/app/core/types/top-duration.type';
 
@@ -23,7 +24,11 @@ export class TopAllComponent implements OnInit, OnDestroy {
   totalPages = 1;
   status: Status = 'all';
   subscriptions: Subscription[] = [];
-  constructor(private store: Store<AppState>, private route: ActivatedRoute) {
+  constructor(
+    private store: Store<AppState>,
+    private route: ActivatedRoute,
+    private seoService: SeoService
+  ) {
     this.fetchDataFromRoute();
   }
 
@@ -38,6 +43,7 @@ export class TopAllComponent implements OnInit, OnDestroy {
         const status = params['status'];
         if (page) {
           this.page = page;
+          this.seoData();
         }
         if (status) {
           if (status !== this.status) this.comics = [];
@@ -71,7 +77,11 @@ export class TopAllComponent implements OnInit, OnDestroy {
       })
     );
   }
-
+  private seoData() {
+    const des =
+      'Dẫn mình vào sự xuất sắc với bộ truyện tranh hàng đầu của chúng tôi! Tận hưởng những cuộc phiêu lưu hồi hộp, những nhân vật cuốn hút và nghệ thuật tuyệt vời. Trải nghiệm tốt nhất trong từng trang. #TopComics #TopMonthly #TopDaily #TopWeekl #TopAll';
+    this.seoService.setSeoData('Top Truyện Tranh - Trang ' + this.page, des);
+  }
   ngOnDestroy(): void {
     this.subscriptions.forEach((sub) => sub?.unsubscribe());
     if (this.comics.length > 0) this.store.dispatch(new ResetComicResponse());
