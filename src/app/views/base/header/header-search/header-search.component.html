@@ -36,14 +36,12 @@
   </button>
   <div
     class="z-10 absolute top-11 left-1/2 -translate-x-1/2 w-full lg:w-72 shadow-lg rounded bg-white overflow-hidden"
+    [ngClass]="{
+      hidden: !showSearchSuggestion,
+      block: showSearchSuggestion && query !== ''
+    }"
   >
-    <ul
-      class="overflow-auto h-max max-h-80 lg:max-h-96"
-      [ngClass]="{
-        hidden: !showSearchSuggestion,
-        block: showSearchSuggestion && query !== ''
-      }"
-    >
+    <ul class="overflow-auto h-max max-h-80 lg:max-h-96">
       <li *ngFor="let comic of comics; let i = index">
         <app-search-comic-card
           [comic]="comic"
