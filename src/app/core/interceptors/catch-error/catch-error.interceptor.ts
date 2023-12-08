@@ -63,7 +63,7 @@ export class CatchErrorInterceptor implements HttpInterceptor {
         errorMessage.message = errRes.error.message;
         break;
       default:
-        errorMessage.message = errRes.message;
+        errorMessage.message = errRes.statusText;
         break;
     }
 

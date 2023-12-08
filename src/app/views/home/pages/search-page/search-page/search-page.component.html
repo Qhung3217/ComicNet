@@ -36,7 +36,7 @@
             *ngIf="!p.isFirstPage()"
             routerLink=""
             [queryParams]="{
-              page: p.previous()
+              page: p.getCurrent() - 1
             }"
             queryParamsHandling="merge"
             class="w-9 aspect-square rounded-full block cursor-pointer bg-slate-100 hover:bg-slate-300"
@@ -79,7 +79,7 @@
             *ngIf="!p.isLastPage()"
             routerLink=""
             [queryParams]="{
-              page: p.next()
+              page: p.getCurrent() + 1
             }"
             queryParamsHandling="merge"
             class="w-9 aspect-square rounded-full block cursor-pointer bg-slate-100 rotate-180 hover:bg-slate-300"
